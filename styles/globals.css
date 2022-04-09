@@ -1,0 +1,24 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer base {
+  h1 {
+      font-size: 1.50em;
+  }
+  h2 {
+      font-size: 1.25em;
+  }
+  h3 {
+      font-size: 1.00em;
+  }
+  h4 {
+      font-size: 0.90em;
+  }
+  h5 {
+      font-size: 0.80em;
+  }
+  h6 {
+      font-size: 0.70em;
+  }
+}
