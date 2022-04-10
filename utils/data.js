@@ -1,7 +1,8 @@
 export const data = {
   products: [
     {
-      name: 'Mens Regular Fit Oxford Cotton Shirt',
+      name: 'Yellow Regular Fit Oxford Cotton Shirt',
+      slug: 'yellow-regular-fit-oxford-cotton-shirt',
       category: 'Shirts',
       image: '/images/shirts/shirt1/1.avif',
       brand: 'Lacrosse ',
@@ -12,7 +13,8 @@ export const data = {
       numInStock: 11,
     },
     {
-      name: 'Mens Regular Fit Premium Cotton Shirt',
+      name: 'Pink Regular Fit Premium Cotton Shirt',
+      slug: 'pink-regular-fit-premium-cotton-shirt',
       category: 'Shirts',
       image: '/images/shirts/shirt2/1.avif',
       brand: 'Lacrosse',
@@ -23,7 +25,8 @@ export const data = {
       numInStock: 4,
     },
     {
-      name: 'Mens Regular Fit Oxford Cotton Shirt',
+      name: 'Blue Regular Fit Oxford Cotton Shirt',
+      slug: 'blue-regular-fit-oxford-cotton-shirt',
       category: 'Shirts',
       image: '/images/shirts/shirt3/1.avif',
       brand: 'Lacrosse',
@@ -34,7 +37,8 @@ export const data = {
       numInStock: 4,
     },
     {
-      name: 'Mens Lacoste SPORT Lettered Bands Lightweight Tracksuit Pants',
+      name: 'Red Lacoste SPORT Lettered Bands Lightweight Tracksuit Pants',
+      slug: 'red-lacoste-sport-lettered-bands-lightweight-tracksuit-pants',
       category: 'Pants',
       image: '/images/pants/pants1/1.avif',
       brand: 'Lacrosse',
@@ -45,7 +49,8 @@ export const data = {
       numInStock: 30,
     },
     {
-      name: 'Mens Lacoste SPORT Colour-block Bands Tracktrousers',
+      name: 'Blue Lacoste SPORT Colour-block Bands Tracktrousers',
+      slug: 'blue-lacoste-sport-colour-block-bands-tracktrousers',
       category: 'Pants',
       image: '/images/pants/pants2/1.avif',
       brand: 'Lacrosse',
@@ -56,7 +61,8 @@ export const data = {
       numInStock: 10,
     },
     {
-      name: 'Mens Slim Fit Stretch Gabardine Chino Pants',
+      name: 'Brown Slim Fit Stretch Gabardine Chino Pants',
+      slug: 'brown-slim-fit-stretch-gabardine-chino-pants',
       category: 'Pants',
       image: '/images/pants/pants3/1.avif',
       brand: 'Lacrosse',
