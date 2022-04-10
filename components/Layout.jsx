@@ -5,7 +5,7 @@ import { AppBar, Toolbar, Typography, Container, Link } from '@mui/material'
 
 export default function Layout({title, children}) {
   return (
-    <div>
+    <>
       <Head>
         <title>
         {title ? `${title} | ${process.env.NEXT_PUBLIC_COMPANY_NAME}` : process.env.NEXT_PUBLIC_COMPANY_NAME}</title>
@@ -20,7 +20,7 @@ export default function Layout({title, children}) {
               {process.env.NEXT_PUBLIC_COMPANY_NAME}
             </a>
           </NextLink>
-          <div className='ml-auto space-x-4'>
+          {/* <div className='ml-auto space-x-4'>
             <NextLink href="/cart" passHref>
               <a className='hover:text-gray-200'>
                 Cart
@@ -31,17 +31,17 @@ export default function Layout({title, children}) {
                 Login
               </a>
             </NextLink>
-          </div>
+          </div> */}
         </Toolbar>
       </AppBar>
 
-      <Container className="h-full min-h-[50vh]">
+      <Container className="h-full min-h-screenNav">
         {children}
       </Container>
 
-      <footer className="flex items-center justify-center h-20 bg-[#203040] text-[#ffffff]">
+      <footer className="flex items-center justify-center h-16 bg-[#203040] text-[#ffffff]">
         <Typography>{`All rights reserved. ${process.env.NEXT_PUBLIC_COMPANY_NAME}™`}</Typography>
       </footer>
-    </div>
+    </>
   )
 }

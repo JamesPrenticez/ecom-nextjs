@@ -8,13 +8,13 @@ export default function ProductDetailsPage({product}) {
 
   return (
     <Layout title={product.name}> 
-      <div>
-        <NextLink>
+      <main className="p-6">
+        <NextLink href="/" passHref>
           <Link>
             back to products
           </Link>
         </NextLink>
-      </div>
+      </main>
     </Layout>
   )
 }

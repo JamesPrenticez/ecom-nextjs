@@ -21,6 +21,9 @@ module.exports = {
       fontFamily: {
         roboto: ['Roboto'],
       },
+      minHeight:{
+        screenNav: "calc(100vh - 8rem)", // nav 64px or 4rm + footer 64px or 4rem
+      },
     },
   },
   variants: {
