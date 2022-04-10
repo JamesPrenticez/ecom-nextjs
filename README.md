@@ -1,5 +1,5 @@
 # Ecom Template
-(Next Amazona)[https://www.youtube.com/watch?v=3kYkEVIZNZY&t=607s]
+(Next Amazona)[https://www.youtube.com/watch?v=3kYkEVIZNZY]
 53.17
 ## Packages
 - Material UI

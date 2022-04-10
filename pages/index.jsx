@@ -8,9 +8,8 @@ export default function Home() {
   return (
     <>
       <Layout>
-        <main>
-          <h1>Ecom Template</h1>
-          <h2>Products</h2>
+        <main className='p-6'>
+          <h1>Products</h1>
           <Grid container spacing={3}>
             {data.products.map((product) => (
               <Grid item md={4} key={product.name}>
