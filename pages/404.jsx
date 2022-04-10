@@ -2,7 +2,7 @@ import React from 'react'
 
 function Custom404() {
   return (
-    <div>404 - Page not found</div>
+    <div>404 - Custom Page not found</div>
   )
 }
 
