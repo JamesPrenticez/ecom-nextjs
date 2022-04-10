@@ -1,14 +1,21 @@
-import React from "react";
-
-import { data } from "../../utils/data";
+import React from 'react'
+import NextLink from 'next/link'
+import Layout from '../../components/Layout'
+import { Link } from '@mui/material'
+import { data } from '../../utils/data'
 
 export default function ProductDetailsPage({product}) {
 
   return (
-    <div> 
-      <h1>Product Details</h1>
-      <h2>{product.name}</h2>
-    </div>
+    <Layout title={product.name}> 
+      <div>
+        <NextLink>
+          <Link>
+            back to products
+          </Link>
+        </NextLink>
+      </div>
+    </Layout>
   )
 }
 
@@ -18,7 +25,7 @@ export const getStaticPaths = async () => {
       slug: product.slug
     }
   }))
-  console.log(paths)
+  //console.log(paths)
   
   return {
     paths,

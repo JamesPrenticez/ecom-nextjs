@@ -17,7 +17,7 @@ import { data } from "../utils/data";
 export default function Home() {
   return (
     <>
-      <Layout>
+      <Layout title={"Home"}>
         <main className="p-6">
           <h1>Products</h1>
           <Grid container spacing={3}>
