@@ -1,6 +1,7 @@
 # Ecom Template
 (Next Amazona)[https://www.youtube.com/watch?v=3kYkEVIZNZY]
 (Lacoste)[https://global.lacoste.com/en/lacoste/men/clothing/shirts/?page=2]
+
 ## Packages
 - Material UI
   - (Typography)[]
@@ -16,3 +17,6 @@
   - (CardActions)[]
 
 - Tailwind
+
+- (Currency API - Fixer)[https://fixer.io/]
+- (Flag Icons)[https://flagicons.lipis.dev/]

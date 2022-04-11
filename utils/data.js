@@ -74,5 +74,32 @@ export const data = {
       numReviews: 2,
       numInStock: 10,
     }
+  ],
+  countries: [
+    {
+      name: 'United States',
+      code: 'USA',
+      flag: 'images/flag/united-states'
+    },
+    {
+      name: 'Canada',
+      code: 'CA',
+      flag: 'images/flag/canada',
+    },
+    {
+      name: 'United Kingdom',
+      code: 'UK',
+      flag: 'images/flag/united-kingdom',
+    },
+    {
+      name: 'Australia',
+      code: 'AUS',
+      flag: 'images/flag/australia',
+    },
+    {
+      name: 'New Zealand',
+      code: 'NZ',
+      flag: 'images/flag/new-zealand',
+    }
   ]
 }
