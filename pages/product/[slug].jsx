@@ -27,7 +27,7 @@ export default function ProductDetailsPage({product}) {
   }
 
   return (
-    <Layout title={product.name}>
+    <Layout title={product?.name} description={product?.description}>
       <section className="p-6">
         <NextLink href="/" passHref>
           <a className="text-indigo-700">Back to products</a>
@@ -61,16 +61,16 @@ export default function ProductDetailsPage({product}) {
 
               {/* Right */}
               <div className="w-full sm:w-3/4 md:w-1/2 border border-gray-200 drop-shadow-md rounded-sm p-3 grid grid-cols-2 gap-2 items-center">
-                  {/* Price */}
-                  <bold>Price:</bold>
-                  <p>${product.price}</p>
+                {/* Price */}
+                <bold>Price:</bold>
+                <p>${product.price}</p>
 
-                  {/* Stock */}
-                  <bold>Stock:</bold>
-                  <p>only {product.numInStock} left!</p>
+                {/* Stock */}
+                <bold>Stock:</bold>
+                <p>only {product.numInStock} left!</p>
 
-                  {/* Color */}
-                  {product.color ?
+                {/* Color */}
+                {product.color &&
                   <>
                   <bold>Color:</bold>
                   <div>
@@ -87,8 +87,6 @@ export default function ProductDetailsPage({product}) {
                     </select>
                   </div>
                   </> 
-                  :
-                  null
                 }
 
                 {/* Color */}
