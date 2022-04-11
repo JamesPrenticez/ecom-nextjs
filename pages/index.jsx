@@ -1,5 +1,6 @@
 import React from "react";
 import NextLink from "next/link";
+import NextImage from "next/image";
 import Layout from "../components/Layout";
 import {
   Button,
@@ -18,18 +19,20 @@ export default function Home() {
   return (
     <>
       <Layout title={"Home"}>
-        <main className="p-6">
+        <section className="p-6">
           <h1>Products</h1>
-          <Grid container spacing={3}>
+          <Grid container spacing={1} className="mt-3">
             {data.products.map((product) => (
               <Grid item md={4} key={product.name}>
-                <Card>
+                <Card className="h-full">
                   <NextLink href={`/product/${product.slug}`} passHref>
                     <CardActionArea>
-                      <CardMedia
-                        component="img"
-                        image={product.image}
-                        title={product.name}
+                    <NextImage
+                        src={product.image}
+                        alt={product.image}
+                        width={640}
+                        height={640}
+                        layout={"responsive"}
                       />
                       <CardContent>
                         <Typography>{product.name}</Typography>
@@ -46,7 +49,7 @@ export default function Home() {
               </Grid>
             ))}
           </Grid>
-        </main>
+        </section>
       </Layout>
     </>
   );

@@ -14,13 +14,13 @@ export default function Layout({title, children}) {
       </Head>
 
       <AppBar position="static" className="bg-[#203040] text-[#ffffff]">
-        <Toolbar>
+        <nav className='flex items-center h-16 w-full max-w-7xl mx-auto'>
           <NextLink href="/" passHref>
-            <a className='text-2xl bold font-bold hover:text-gray-200'>
+            <a className='text-2xl bold font-bold hover:text-gray-200 bg-red-500 p-4'>
               {process.env.NEXT_PUBLIC_COMPANY_NAME}
             </a>
           </NextLink>
-          {/* <div className='ml-auto space-x-4'>
+          <div className='ml-auto space-x-4'>
             <NextLink href="/cart" passHref>
               <a className='hover:text-gray-200'>
                 Cart
@@ -31,13 +31,13 @@ export default function Layout({title, children}) {
                 Login
               </a>
             </NextLink>
-          </div> */}
-        </Toolbar>
+          </div>
+        </nav>
       </AppBar>
 
-      <Container className="h-full min-h-screenNav">
+      <main className="h-full min-h-screenNav m-[1rem] w-full max-w-7xl mx-auto bg-white border border-gray-200 rounded-sm">
         {children}
-      </Container>
+      </main>
 
       <footer className="flex items-center justify-center h-16 bg-[#203040] text-[#ffffff]">
         <Typography>{`All rights reserved. ${process.env.NEXT_PUBLIC_COMPANY_NAME}™`}</Typography>

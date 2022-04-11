@@ -22,7 +22,7 @@ module.exports = {
         roboto: ['Roboto'],
       },
       minHeight:{
-        screenNav: "calc(100vh - 8rem)", // nav 64px or 4rm + footer 64px or 4rem
+        screenNav: "calc(100vh - 10rem)", // (nav 4rm) + (footer 4rem) + (main margin top/bottom 2rem)
       },
     },
   },

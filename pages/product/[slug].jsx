@@ -1,20 +1,33 @@
 import React from 'react'
 import NextLink from 'next/link'
+import NextImage from 'next/image'
 import Layout from '../../components/Layout'
-import { Link } from '@mui/material'
+import { Grid, Link } from '@mui/material'
 import { data } from '../../utils/data'
 
 export default function ProductDetailsPage({product}) {
 
   return (
     <Layout title={product.name}> 
-      <main className="p-6">
+      <section className="p-6">
         <NextLink href="/" passHref>
           <Link>
-            back to products
+            Back to products
           </Link>
         </NextLink>
-      </main>
+
+        <Grid container spacing={1} className="mt-3">
+          <Grid item md={6} xs={12}>
+          <NextImage
+              src={product.image}
+              alt={product.image}
+              width={640}
+              height={640}
+              layout={"responsive"}
+              />
+          </Grid>
+        </Grid>
+      </section>
     </Layout>
   )
 }
