@@ -48,6 +48,10 @@ export default function ProductDetailsPage({product}) {
           
           {/* Right */}
           <div className="w-full md:w-1/2 space-y-6">
+
+
+            <h2>{product.name}</h2>
+
             <div className="flex-wrap md:flex justify-between">
               {/* Left */}
               <ul className="w-full sm:w-1/4 md:w-1/2 p-2">
@@ -60,19 +64,19 @@ export default function ProductDetailsPage({product}) {
               </ul>
 
               {/* Right */}
-              <div className="w-full sm:w-3/4 md:w-1/2 border border-gray-200 drop-shadow-md rounded-sm p-3 grid grid-cols-2 gap-2 items-center">
+              <div className="w-full sm:w-3/4 md:w-1/2 border border-gray-200 drop-shadow-md rounded-sm p-3 grid grid-cols-3 gap-2 items-center">
                 {/* Price */}
-                <bold>Price:</bold>
+                <bold className="col-span-2">Price:</bold>
                 <p>${product.price}</p>
 
                 {/* Stock */}
-                <bold>Stock:</bold>
+                <bold className="col-span-2">Stock:</bold>
                 <p>only {product.numInStock} left!</p>
 
                 {/* Color */}
                 {product.color &&
                   <>
-                  <bold>Color:</bold>
+                  <bold className="col-span-2">Color:</bold>
                   <div>
                     <select
                         value={color}
@@ -90,7 +94,7 @@ export default function ProductDetailsPage({product}) {
                 }
 
                 {/* Color */}
-                <bold>Quantity:</bold>
+                <bold className="col-span-2">Quantity:</bold>
                 <div className='flex'>
                   <button disabled={counter <= 1} onClick={() => setCounter(counter - 1)} className="w-12 bg-gray-300 p-2 rounded-tl-md rounded-bl-md disabled:cursor-not-allowed">
                     &ndash;
@@ -102,12 +106,15 @@ export default function ProductDetailsPage({product}) {
                 </div>                  
 
                 {/* Add to Cart & Buy Now */}
-                <button className='p-3 w-full bg-gray-300 rounded-md'>
+                <div className='col-span-3 space-y-3 mt-3'>
+
+                <button className='col-span-2 p-3 w-full bg-gray-300 rounded-md'>
                   ADD TO CART
                 </button>
-                <button className='p-3 w-full bg-green-500 rounded-md text-white'>
+                <button className='col-span-2 p-3 w-full bg-green-500 rounded-md text-white'>
                   BUY NOW
                 </button>
+                </div>
               </div>
             </div>
 
