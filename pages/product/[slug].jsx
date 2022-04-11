@@ -4,6 +4,7 @@ import NextImage from 'next/image'
 import Layout from '../../components/Layout'
 import Rating from '@mui/material/Rating';
 import { data } from '../../utils/data'
+import DropDown from '../../components/DropDown';
 
 export default function ProductDetailsPage({product}) {
   const [counter, setCounter] = useState(Number(1))
@@ -76,20 +77,12 @@ export default function ProductDetailsPage({product}) {
                 {/* Color */}
                 {product.color &&
                   <>
-                  <bold className="col-span-2">Color:</bold>
-                  <div>
-                    <select
-                        value={color}
-                        onChange={handleChangeColor}
-                        className="w-full p-3 rounded-md outline-none cursor-pointer"                        
-                      >
-                      {product.color.map((color) => {
-                        return (
-                          <option value={color}>{color}</option> //Need to make a component for this in order to get cursor hover
-                        )
-                      })}
-                    </select>
-                  </div>
+                    <bold className="col-span-2">Color:</bold>
+                    <DropDown 
+                      items={product.color}
+                      value={color}
+                      onChange={handleChangeColor}
+                    />
                   </> 
                 }
 
