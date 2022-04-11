@@ -11,6 +11,7 @@ export const data = {
       rating: 4.5,
       numReviews: 10,
       numInStock: 11,
+      color: ['Yellow', 'Red', 'Green', 'Blue']
     },
     {
       name: 'Pink Regular Fit Premium Cotton Shirt',
@@ -23,6 +24,7 @@ export const data = {
       rating: 3.5,
       numReviews: 6,
       numInStock: 4,
+      color: ['Pink', 'Red', 'Green', 'Blue']
     },
     {
       name: 'Blue Regular Fit Oxford Cotton Shirt',
