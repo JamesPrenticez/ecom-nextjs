@@ -2,6 +2,25 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+:root {
+    --color-primary-text: black;
+    --color-secondary-text: white;
+    --color-primary-hover: #203040; 
+    --color-secondary-hover: #dde5eb; /* bg-gray-300*/
+    --color-primary-background: #f9fafb; /* bg-gray-50*/
+    --color-secondary-background: #203040;
+    --color-primary-link: #2563EB;
+}
+
+[data-theme="dark"] {
+    --color-primary-text: white;
+    --color-secondary-text: black;
+    --color-secondary-hover: #dde5eb;
+    --color-secondary-hover: #203040;
+    --color-primary-background: #203040;
+    --color-secondary-background: #f9fafb;
+}
+
 @layer base {
     h1 {
         @apply

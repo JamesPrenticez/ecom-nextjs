@@ -17,12 +17,22 @@ module.exports = {
       "7xl": ['7rem', '7.25rem'],
       "8xl": ['8rem', '8.25rem'],
     },
+
     extend: {
       fontFamily: {
         roboto: ['Roboto'],
       },
       minHeight:{
         screenNav: "calc(100vh - 10rem)", // (nav 4rm) + (footer 4rem) + (main margin top/bottom 2rem)
+      },
+      colors: {
+        primaryText: "var(--color-primary-text)",
+        secondaryText: "var(--color-secondary-text)",
+        primaryHover: "var(--color-primary-hover)",
+        secondaryHover: "var(--color-secondary-hover)",
+        primaryBackground: "var(--color-primary-background)",
+        secondaryBackground: "var(--color-secondary-background)",
+        primaryLink: "var(--color-primary-link)"
       },
     },
   },

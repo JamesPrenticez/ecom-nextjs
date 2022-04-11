@@ -30,7 +30,7 @@ export default function ProductDetailsPage({product}) {
     <Layout title={product?.name} description={product?.description}>
       <section className="p-6">
         <NextLink href="/" passHref>
-          <a className="text-indigo-700">Back to products</a>
+          <a className="text-primaryLink">Back to products</a>
         </NextLink>
 
         <div className="flex flex-wrap md:flex-nowrap justify-between mt-3 md:space-x-6">
@@ -85,7 +85,7 @@ export default function ProductDetailsPage({product}) {
                       >
                       {product.color.map((color) => {
                         return (
-                          <option value={color}>{color}</option>
+                          <option value={color}>{color}</option> //Need to make a component for this in order to get cursor hover
                         )
                       })}
                     </select>
