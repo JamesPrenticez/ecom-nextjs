@@ -23,4 +23,13 @@
         text-lg
         font-bold 
     }
+    bold {
+        @apply
+        font-bold
+        pr-2
+    }
+    li{
+        @apply
+        flex
+    }
 }

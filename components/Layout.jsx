@@ -1,7 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
 import NextLink from 'next/link'
-import { AppBar, Toolbar, Typography, Container, Link } from '@mui/material'
+import { AppBar } from '@mui/material'
 
 export default function Layout({title, children}) {
   return (
@@ -14,7 +14,7 @@ export default function Layout({title, children}) {
       </Head>
 
       <AppBar position="static" className="bg-[#203040] text-[#ffffff]">
-        <nav className='flex items-center h-16 w-full max-w-7xl mx-auto'>
+        <nav className='flex items-center h-16 w-full max-w-7xl mx-auto pr-4'>
           <NextLink href="/" passHref>
             <a className='text-2xl bold font-bold hover:text-gray-200 bg-red-500 p-4'>
               {process.env.NEXT_PUBLIC_COMPANY_NAME}
@@ -40,7 +40,7 @@ export default function Layout({title, children}) {
       </main>
 
       <footer className="flex items-center justify-center h-16 bg-[#203040] text-[#ffffff]">
-        <Typography>{`All rights reserved. ${process.env.NEXT_PUBLIC_COMPANY_NAME}™`}</Typography>
+        <p>All rights reserved. {process.env.NEXT_PUBLIC_COMPANY_NAME} &trade;</p>
       </footer>
     </>
   )
