@@ -26,7 +26,7 @@ export default async function getProducts(req, res){
       }
     }).then(product => {
       let ratingCount = product.reviews.length
-      let ratingAvg = product.reviews.map(review => review.rating).reduce((a,b) => a + b, 0) / ratingCount;
+      let ratingAvg = Math.round((product.reviews.map(review => review.rating).reduce((a,b) => a + b, 0) / ratingCount) * 10) / 10
       let result = {
         name: product.name,
         slug: product.slug,
