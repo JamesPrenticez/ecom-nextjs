@@ -22,16 +22,18 @@ export default function ProductDetailsPage({product}) {
     setCounter(value)
   }
 
-  const handleChangeColor = (e) =>{
-    e.preventDefault()
-    setColor(e.target.value)
+  const handleChangeColor = (item) =>{
+    //This is not a input its just a Div so we can skip the extra steps
+    //e.preventDefault()
+    //setColor(e.target.value)
+    setColor(item)
   }
 
   return (
     <Layout title={product?.name} description={product?.description}>
       <section className="p-6">
         <NextLink href="/" passHref>
-          <a className="text-primaryLink">Back to products</a>
+          <a className="text-primary-link">Back to products</a>
         </NextLink>
 
         <div className="flex flex-wrap md:flex-nowrap justify-between mt-3 md:space-x-6">

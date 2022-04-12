@@ -20,3 +20,5 @@
 
 - (Currency API - Fixer)[https://fixer.io/]
 - (Flag Icons)[https://flagicons.lipis.dev/]
+
+- Maybe upgrade to axios VS fetch?

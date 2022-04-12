@@ -26,13 +26,13 @@ module.exports = {
         screenNav: "calc(100vh - 10rem)", // (nav 4rm) + (footer 4rem) + (main margin top/bottom 2rem)
       },
       colors: {
-        primaryText: "var(--color-primary-text)",
-        secondaryText: "var(--color-secondary-text)",
-        primaryHover: "var(--color-primary-hover)",
-        secondaryHover: "var(--color-secondary-hover)",
-        primaryBackground: "var(--color-primary-background)",
-        secondaryBackground: "var(--color-secondary-background)",
-        primaryLink: "var(--color-primary-link)"
+        "primary-text": "var(--color-primary-text)",
+        "secondary-text": "var(--color-secondary-text)",
+        "primary-hover": "var(--color-primary-hover)",
+        "secondary-hover": "var(--color-secondary-hover)",
+        "primary-background": "var(--color-primary-background)",
+        "secondary-background": "var(--color-secondary-background)",
+        "primary-link": "var(--color-primary-link)"
       },
     },
   },

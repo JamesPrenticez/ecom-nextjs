@@ -1,15 +1,19 @@
 import React, {useState} from 'react'
+import DropDown from './DropDown'
 
-export default function CurrencySelector() {
-  const [current, setCurrent] = useState([]);
-
-  const handleChange = (event) => {
-
+export default function CurrencySelector({countries}) {
+  const [current, setCurrent] = useState("New Zealand");
+  
+  const handleCurrencyChange = (item) => {
+    setCurrent(item)
   };
 
   return (
-    <div>
-
-    </div>
+    <DropDown 
+      className="border border-red-500"
+      items={countries.map(countires => countires.name)}
+      value={current}
+      onChange={handleCurrencyChange}
+    />
   );
 }

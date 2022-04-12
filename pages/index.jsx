@@ -12,17 +12,18 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
+import CurrencySelector from "../components/CurrencySelector";
 
-import { data } from "../utils/data";
-
-export default function Home() {
+export default function Home({products, countries}) {
   return (
     <>
       <Layout title={"Home"}>
         <section className="p-6">
           <h1>Products</h1>
+          <CurrencySelector countries={countries}/>
+
           <Grid container spacing={1} className="mt-3">
-            {data.products.map((product) => (
+            {products.map((product) => (
               <Grid item md={4} key={product.name}>
                 <Card className="h-full">
                   <NextLink href={`/product/${product.slug}`} passHref>
@@ -53,4 +54,20 @@ export default function Home() {
       </Layout>
     </>
   );
+}
+
+export const getStaticProps = async () => {
+  const a = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`) //.find(ele => ele.catagory == "main page")
+  const products = await a.json()
+  const b = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/countries`)
+  const countries = await b.json()
+
+  if(!products){
+    return { notFound: true }
+  }
+
+  return {
+    props: { products, countries },
+    revalidate: 120, // after 2mins
+  }
 }

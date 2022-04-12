@@ -1,6 +1,6 @@
 import { data } from '../../utils/data'
-const currency = data.countries
+const countries = data.countries
 
 export default function handler(req, res) {
-  res.status(200).json({ currency })
+  res.status(200).json(JSON.stringify(countries))
 }
