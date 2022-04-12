@@ -25,6 +25,19 @@
 - (Currency API - Fixer)[https://fixer.io/]
 - (Flag Icons)[https://flagicons.lipis.dev/]
 
+- Sqlite3 (3 high severity vulnerabilities... this is okay as not used in production
+- Postgres for production
+- Prisma
+  - ``` npx prisma generate ``` 
+  - ``` npx prisma db push ``` This every time you update schema
+  - ``` npx prisma studio ``` Then you can do this
+  - Migrations/Seed (here)[https://www.prisma.io/docs/guides/database/seed-database]
+  - ``` npx prisma migrate dev --name development ``` You will need to delete and re-run this is you change the schema
+  - ``` npx prisma migrate reset ``` Delete migrations folder and dev.db and this to reset the entire DB
+  - ``` node prisma/seeds/clean.js ```
+  - ``` npx prisma db seed ```
+
+
 - Maybe upgrade to axios VS fetch?
 - Change the way you are passing data to dropdown?
 - Use next Image in dropdown flags?
