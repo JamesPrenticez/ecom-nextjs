@@ -2,6 +2,10 @@ import React from 'react'
 import Head from 'next/head'
 import NextLink from 'next/link'
 import { AppBar } from '@mui/material'
+import CountrySelector from '../components/CountrySelector'
+
+let items = ["Australia", "Canada"]
+// let icons = ["/images/flags/australia.svg", "/images/flags/canada.svg"]
 
 export default function Layout({title, description, children}) {
   return (
@@ -20,6 +24,7 @@ export default function Layout({title, description, children}) {
             </a>
           </NextLink>
           <div className='ml-auto space-x-4'>
+            <CountrySelector items={items}/>
             <NextLink href="/cart" passHref>
               <a className='hover:text-text-secondary-hover'>
                 Cart

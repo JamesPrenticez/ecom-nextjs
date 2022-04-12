@@ -1,7 +1,8 @@
 import React, {useState} from 'react'
 import DropDown from './DropDown'
 
-export default function CountrySelector({countries}) {
+export default function CountrySelector({items}) {
+  console.log(items)
   const [current, setCurrent] = useState("New Zealand");
   
   const handleCurrencyChange = (item) => {
@@ -9,12 +10,14 @@ export default function CountrySelector({countries}) {
   };
 
   return (
-    <DropDown 
-      className="border border-red-500"
-      items={countries.map(countires => countires.name)}
-      value={current}
-      icons={countries.map((country) => {return ({name: country.name, icon: country.flag})})}
-      onChange={handleCurrencyChange}
-    />
+    <div className='inline-flex'>
+      <DropDown 
+        className="border border-red-500 bg-green-500 text-black space-x-4"
+        items={items}
+        value={current}
+        //icons={countries.map((country) => {return ({name: country.name, icon: country.flag})})}
+        onChange={handleCurrencyChange}
+      />
+    </div>
   );
 }

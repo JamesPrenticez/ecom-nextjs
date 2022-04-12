@@ -18,6 +18,10 @@
 
 - Tailwind
 
+- Redux
+- Redux-thunk
+- Next-redux-wrapper
+
 - (Currency API - Fixer)[https://fixer.io/]
 - (Flag Icons)[https://flagicons.lipis.dev/]
 

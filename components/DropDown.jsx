@@ -18,10 +18,10 @@ function ChevronDownIcon({className}){
 
 function DropDown({items, value, onChange, className, icons}) {
   const [isOpen, setIsOpen] = useState(true)
-
+console.log(items)
   return (
     <>
-    <div className={`${className} relative w-full bg-white select-none cursor-pointer rounded-md `}>
+    <div className={`${className} relative w-full select-none cursor-pointer rounded-md`}>
 
       <div className="flex justify-between items-center w-full p-2 " onClick={() => setIsOpen(!isOpen)} value={value}>
         <div className="flex items-center space-x-2">
@@ -36,11 +36,13 @@ function DropDown({items, value, onChange, className, icons}) {
           <p>{value}</p>
         </div>
 
+        <div>
         {isOpen ?
             <ChevronDownIcon onClick={() => setIsOpen(false)} className='h-[1rem] w-[1rem] cursor-pointer transform transition-all hover:scale-125 duration-150 ease-in-out select-none'/>
             :
             <ChevronUpIcon onClick={() => setIsOpen(true)} className='h-[1rem] w-[1rem] cursor-pointer transform transition-all hover:scale-125 duration-150 ease-in-out select-none'/>
-        }
+          }
+        </div>
       </div>
 
       <div 

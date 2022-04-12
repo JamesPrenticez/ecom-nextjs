@@ -12,16 +12,13 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import CountrySelector from "../components/CountrySelector";
 
-export default function Home({products, countries}) {
+export default function Home({products}) {
   return (
     <>
       <Layout title={"Home"}>
         <section className="p-6">
           <h1>Products</h1>
-          <CountrySelector countries={countries}/>
-
           <Grid container spacing={1} className="mt-3">
             {products.map((product) => (
               <Grid item md={4} key={product.name}>
@@ -59,15 +56,13 @@ export default function Home({products, countries}) {
 export const getStaticProps = async () => {
   const a = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`) //.find(ele => ele.catagory == "main page")
   const products = await a.json()
-  const b = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/countries`)
-  const countries = await b.json()
 
   if(!products){
     return { notFound: true }
   }
 
   return {
-    props: { products, countries },
+    props: { products },
     revalidate: 120, // after 2mins
   }
 }
