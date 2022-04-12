@@ -1,16 +1,16 @@
 import React, {useState} from "react";
 
-function ChevronLeftIcon({className}){
+function ChevronUpIcon({className}){
   return (
-  <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+  <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
   </svg>
   )
 }
 
 function ChevronDownIcon({className}){
   return (
-  <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+  <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
     <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
   </svg>
   )
@@ -25,19 +25,21 @@ function DropDown({items, value, onChange, className, icons}) {
 
       <div className="flex justify-between items-center w-full p-2 " onClick={() => setIsOpen(!isOpen)} value={value}>
         <div className="flex items-center space-x-2">
-          <div className="rounded-full h-[2rem] w-[2rem] border-none flex items-center justify-center object-cover overflow-hidden">
-            <img className="h-[6rem] w-[6rem] scale-[135%]"
-              src={icons.find(icon => icon.name == value).icon}
-              alt={icons.find(icon => icon.name == value).name}
-              />
-          </div>
+          {icons && 
+            <div className="rounded-full h-[2rem] w-[2rem] border-none flex items-center justify-center object-cover overflow-hidden">
+              <img className="h-[6rem] w-[6rem] scale-[135%]"
+                src={icons.find(icon => icon.name == value).icon}
+                alt={icons.find(icon => icon.name == value).name}
+                />
+            </div>
+          }
           <p>{value}</p>
         </div>
 
         {isOpen ?
-            <ChevronLeftIcon onClick={() => setIsOpen(true)} className='h-[1rem] w-[1rem] cursor-pointer transform transition-all hover:scale-125 duration-150 ease-in-out select-none'/>
-            :
             <ChevronDownIcon onClick={() => setIsOpen(false)} className='h-[1rem] w-[1rem] cursor-pointer transform transition-all hover:scale-125 duration-150 ease-in-out select-none'/>
+            :
+            <ChevronUpIcon onClick={() => setIsOpen(true)} className='h-[1rem] w-[1rem] cursor-pointer transform transition-all hover:scale-125 duration-150 ease-in-out select-none'/>
         }
       </div>
 
@@ -46,9 +48,6 @@ function DropDown({items, value, onChange, className, icons}) {
         onMouseLeave={() => setIsOpen(!false)}
       >
         {items.map((item) => {
-          console.log(icons)
-          console.log(icons.find(icon => icon == item))
-
           return (
             <div 
               key={item}
@@ -57,12 +56,14 @@ function DropDown({items, value, onChange, className, icons}) {
               className='p-2 hover:bg-primary-hover hover:text-secondary-text'
             >
               <div className="flex items-center space-x-2">
-                <div className="rounded-full h-[2rem] w-[2rem] border-none flex items-center justify-center object-cover overflow-hidden">
-                  <img className="h-[6rem] w-[6rem] scale-[135%]"
-                    src={icons.find(icon => icon.name == item).icon}
-                    alt={icons.find(icon => icon.name == item).name}
-                  />
-                </div>
+                {icons && 
+                  <div className="rounded-full h-[2rem] w-[2rem] border-none flex items-center justify-center object-cover overflow-hidden">
+                    <img className="h-[6rem] w-[6rem] scale-[135%]"
+                      src={icons.find(icon => icon.name == item).icon}
+                      alt={icons.find(icon => icon.name == item).name}
+                    />
+                  </div>
+                }
                 <p>{item}</p>
               </div>
             </div>

@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import DropDown from './DropDown'
 
-export default function CurrencySelector({countries}) {
+export default function CountrySelector({countries}) {
   const [current, setCurrent] = useState("New Zealand");
   
   const handleCurrencyChange = (item) => {

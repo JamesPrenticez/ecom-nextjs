@@ -12,7 +12,7 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import CurrencySelector from "../components/CurrencySelector";
+import CountrySelector from "../components/CountrySelector";
 
 export default function Home({products, countries}) {
   return (
@@ -20,7 +20,7 @@ export default function Home({products, countries}) {
       <Layout title={"Home"}>
         <section className="p-6">
           <h1>Products</h1>
-          <CurrencySelector countries={countries}/>
+          <CountrySelector countries={countries}/>
 
           <Grid container spacing={1} className="mt-3">
             {products.map((product) => (

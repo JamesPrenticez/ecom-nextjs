@@ -30,7 +30,7 @@ export default function Layout({title, description, children}) {
                 Login
               </a>
             </NextLink>
-          </div>      
+          </div>
         </nav>
       </AppBar>
 
