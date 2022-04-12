@@ -41,3 +41,5 @@
 - Maybe upgrade to axios VS fetch?
 - Change the way you are passing data to dropdown?
 - Use next Image in dropdown flags?
+
+- Need to handle 0 in stock?
