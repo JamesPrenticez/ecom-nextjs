@@ -60,7 +60,7 @@ model Product {
   image       String?
   name        String? @unique
   slug        String? @unique
-  catagory    String?
+  category    String?
   brand       String
   description String
   color       String
