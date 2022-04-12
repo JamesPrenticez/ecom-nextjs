@@ -3,7 +3,6 @@ import NextLink from 'next/link'
 import NextImage from 'next/image'
 import Layout from '../../components/Layout'
 import Rating from '@mui/material/Rating';
-import { data } from '../../utils/data'
 import DropDown from '../../components/DropDown';
 
 export default function ProductDetailsPage({product}) {
@@ -139,12 +138,14 @@ export default function ProductDetailsPage({product}) {
 }
 
 export const getStaticPaths = async () => {
-  const paths = data.products.map(product => ({
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`) //.find(ele => ele.catagory == "main page")
+  const products = await response.json()
+  
+  const paths = products.map(product => ({
     params: {
-      slug: product.slug
+      slug: product.slug, //params can only contain one key/value pair
     }
   }))
-  //console.log(paths)
   
   return {
     paths,
@@ -152,8 +153,10 @@ export const getStaticPaths = async () => {
   }
 }
 
-export const getStaticProps = async ({params}) => {
-  const product = data.products.find(ele => ele.slug == params?.slug)
+export const getStaticProps = async (context) => {
+  let { params } = context
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products/${params.slug}`)
+  const product = await response.json()
   
   if(!product){
     return { notFound: true }
@@ -161,6 +164,6 @@ export const getStaticProps = async ({params}) => {
 
   return {
     props: { product },
-    revalidate: 3600, // after 1hour seconds it will update the old cache
+    revalidate: 120, // after 2mins it will update the old cache
   }
 }

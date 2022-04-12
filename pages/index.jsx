@@ -54,8 +54,14 @@ export default function Home({products}) {
 }
 
 export const getStaticProps = async () => {
-  const a = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`) //.find(ele => ele.catagory == "main page")
-  const products = await a.json()
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'text/json',
+    }
+  });
+
+  const products = await response.json()
 
   if(!products){
     return { notFound: true }
