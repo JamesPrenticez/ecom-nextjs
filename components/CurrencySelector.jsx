@@ -13,6 +13,7 @@ export default function CurrencySelector({countries}) {
       className="border border-red-500"
       items={countries.map(countires => countires.name)}
       value={current}
+      icons={countries.map((country) => {return ({name: country.name, icon: country.flag})})}
       onChange={handleCurrencyChange}
     />
   );

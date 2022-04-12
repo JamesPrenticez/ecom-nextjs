@@ -79,27 +79,27 @@ export const data = {
     {
       name: 'United States',
       code: 'USA',
-      flag: 'images/flag/united-states'
+      flag: '/images/flags/united-states.svg'
     },
     {
       name: 'Canada',
       code: 'CA',
-      flag: 'images/flag/canada',
+      flag: '/images/flags/canada.svg',
     },
     {
       name: 'United Kingdom',
       code: 'UK',
-      flag: 'images/flag/united-kingdom',
+      flag: '/images/flags/united-kingdom.svg',
     },
     {
       name: 'Australia',
       code: 'AUS',
-      flag: 'images/flag/australia',
+      flag: '/images/flags/australia.svg',
     },
     {
       name: 'New Zealand',
       code: 'NZ',
-      flag: 'images/flag/new-zealand',
+      flag: '/images/flags/new-zealand.svg',
     }
   ]
 }

@@ -16,15 +16,24 @@ function ChevronDownIcon({className}){
   )
 }
 
-
-function DropDown({items, value, onChange, className}) {
+function DropDown({items, value, onChange, className, icons}) {
   const [isOpen, setIsOpen] = useState(true)
+
   return (
     <>
     <div className={`${className} relative w-full bg-white select-none cursor-pointer rounded-md `}>
 
       <div className="flex justify-between items-center w-full p-2 " onClick={() => setIsOpen(!isOpen)} value={value}>
-        {value}
+        <div className="flex items-center space-x-2">
+          <div className="rounded-full h-[2rem] w-[2rem] border-none flex items-center justify-center object-cover overflow-hidden">
+            <img className="h-[6rem] w-[6rem] scale-[135%]"
+              src={icons.find(icon => icon.name == value).icon}
+              alt={icons.find(icon => icon.name == value).name}
+              />
+          </div>
+          <p>{value}</p>
+        </div>
+
         {isOpen ?
             <ChevronLeftIcon onClick={() => setIsOpen(true)} className='h-[1rem] w-[1rem] cursor-pointer transform transition-all hover:scale-125 duration-150 ease-in-out select-none'/>
             :
@@ -37,6 +46,9 @@ function DropDown({items, value, onChange, className}) {
         onMouseLeave={() => setIsOpen(!false)}
       >
         {items.map((item) => {
+          console.log(icons)
+          console.log(icons.find(icon => icon == item))
+
           return (
             <div 
               key={item}
@@ -44,7 +56,15 @@ function DropDown({items, value, onChange, className}) {
               onClick={() => {onChange(item), setIsOpen(!false)}}
               className='p-2 hover:bg-primary-hover hover:text-secondary-text'
             >
-              {item}
+              <div className="flex items-center space-x-2">
+                <div className="rounded-full h-[2rem] w-[2rem] border-none flex items-center justify-center object-cover overflow-hidden">
+                  <img className="h-[6rem] w-[6rem] scale-[135%]"
+                    src={icons.find(icon => icon.name == item).icon}
+                    alt={icons.find(icon => icon.name == item).name}
+                  />
+                </div>
+                <p>{item}</p>
+              </div>
             </div>
             )
           })}

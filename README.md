@@ -22,3 +22,5 @@
 - (Flag Icons)[https://flagicons.lipis.dev/]
 
 - Maybe upgrade to axios VS fetch?
+- Change the way you are passing data to dropdown?
+- Use next Image in dropdown flags?
