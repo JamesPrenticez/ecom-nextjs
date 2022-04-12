@@ -16,50 +16,51 @@ function ChevronDownIcon({className}){
   )
 }
 
-function DropDown({items, value, onChange, className, icons}) {
+function DropDown({value, onChange, items, icons, selectClassName, optionsClassName, itemClassName}) {
   const [isOpen, setIsOpen] = useState(true)
-console.log(items)
   return (
     <>
-    <div className={`${className} relative w-full select-none cursor-pointer rounded-md`}>
+    {/* Select */}
+      <div className={`${selectClassName} relative w-full select-none cursor-pointer rounded-md`}>
+        <div className="flex justify-between items-center w-full p-2 " onClick={() => setIsOpen(!isOpen)} value={value}>
+          <div className="flex items-center space-x-2">
+            {icons && 
+              <div className="rounded-full h-[2rem] w-[2rem] border-none flex items-center justify-center object-cover overflow-hidden">
+                <img className="h-[6rem] w-[6rem] scale-[135%]"
+                  src={icons.find(icon => icon.name == value).icon}
+                  alt={icons.find(icon => icon.name == value).name}
+                  />
+              </div>
+            }
+            <p>{value}</p>
+          </div>
 
-      <div className="flex justify-between items-center w-full p-2 " onClick={() => setIsOpen(!isOpen)} value={value}>
-        <div className="flex items-center space-x-2">
-          {icons && 
-            <div className="rounded-full h-[2rem] w-[2rem] border-none flex items-center justify-center object-cover overflow-hidden">
-              <img className="h-[6rem] w-[6rem] scale-[135%]"
-                src={icons.find(icon => icon.name == value).icon}
-                alt={icons.find(icon => icon.name == value).name}
-                />
-            </div>
-          }
-          <p>{value}</p>
+          <div>
+          {isOpen ?
+              <ChevronDownIcon onClick={() => setIsOpen(false)} className='h-[1rem] w-[1rem] cursor-pointer transform transition-all hover:scale-125 duration-150 ease-in-out select-none'/>
+              :
+              <ChevronUpIcon onClick={() => setIsOpen(true)} className='h-[1rem] w-[1rem] cursor-pointer transform transition-all hover:scale-125 duration-150 ease-in-out select-none'/>
+            }
+          </div>
         </div>
 
-        <div>
-        {isOpen ?
-            <ChevronDownIcon onClick={() => setIsOpen(false)} className='h-[1rem] w-[1rem] cursor-pointer transform transition-all hover:scale-125 duration-150 ease-in-out select-none'/>
-            :
-            <ChevronUpIcon onClick={() => setIsOpen(true)} className='h-[1rem] w-[1rem] cursor-pointer transform transition-all hover:scale-125 duration-150 ease-in-out select-none'/>
-          }
-        </div>
-      </div>
-
+      {/* Options */}
       <div 
-        className={`${isOpen ? 'hidden' : 'block'}  absolute z-50 mt-1 bg-white w-full shadow-md`}
+        className={`${isOpen ? 'hidden' : 'block'} ${optionsClassName} absolute z-50 mt-1 w-full shadow-md`}
         onMouseLeave={() => setIsOpen(!false)}
       >
+        {/* Option Items*/}
         {items.map((item) => {
           return (
             <div 
               key={item}
               value={item}
               onClick={() => {onChange(item), setIsOpen(!false)}}
-              className='p-2 hover:bg-primary-hover hover:text-secondary-text'
+              className={`${itemClassName} p-2`}
             >
               <div className="flex items-center space-x-2">
                 {icons && 
-                  <div className="rounded-full h-[2rem] w-[2rem] border-none flex items-center justify-center object-cover overflow-hidden">
+                  <div className="rounded-full h-[2rem] w-[2rem] border-none flex items-center justify-center object-cover">
                     <img className="h-[6rem] w-[6rem] scale-[135%]"
                       src={icons.find(icon => icon.name == item).icon}
                       alt={icons.find(icon => icon.name == item).name}

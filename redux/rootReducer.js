@@ -1,9 +1,9 @@
 import {combineReducers} from 'redux'
 
-import countries from './countries/reducer'
+import currentCountry from './currentCountry/reducer'
 
 export default combineReducers({
-    countries,
+    currentCountry,
 })
 
 

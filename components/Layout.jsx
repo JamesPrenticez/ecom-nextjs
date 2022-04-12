@@ -4,9 +4,6 @@ import NextLink from 'next/link'
 import { AppBar } from '@mui/material'
 import CountrySelector from '../components/CountrySelector'
 
-let items = ["Australia", "Canada"]
-// let icons = ["/images/flags/australia.svg", "/images/flags/canada.svg"]
-
 export default function Layout({title, description, children}) {
   return (
     <>
@@ -18,24 +15,29 @@ export default function Layout({title, description, children}) {
 
       <AppBar position="static" className="bg-secondary-background text-secondary-text">
         <nav className='flex items-center h-16 w-full max-w-7xl mx-auto pr-4'>
+          
+          {/* Left */}
           <NextLink href="/" passHref>
             <a className='text-2xl bold font-bold hover:text-secondary-hover'>
               {process.env.NEXT_PUBLIC_COMPANY_NAME}
             </a>
           </NextLink>
-          <div className='ml-auto space-x-4'>
-            <CountrySelector items={items}/>
+
+          {/* Right */}
+          <div className='ml-auto space-x-4 inline-flex'>
+            <CountrySelector />
             <NextLink href="/cart" passHref>
-              <a className='hover:text-text-secondary-hover'>
+              <a className='hover:text-text-secondary-hover flex items-center'>
                 Cart
               </a>
             </NextLink>
             <NextLink href="/login" passHref>
-              <a className='hover:text-text-secondary-hover'>
+              <a className='hover:text-text-secondary-hover flex items-center'>
                 Login
               </a>
             </NextLink>
           </div>
+          
         </nav>
       </AppBar>
 

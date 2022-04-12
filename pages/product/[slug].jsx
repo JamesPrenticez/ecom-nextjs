@@ -80,7 +80,10 @@ export default function ProductDetailsPage({product}) {
                 {product.color &&
                   <>
                     <bold className="col-span-2">Color:</bold>
-                    <DropDown 
+                    <DropDown
+                      selectClassName="bg-secondary-background text-secondary-text"
+                      optionsClassName="bg-secondary-background text-secondary-text"
+                      itemClassName="hover:bg-primary-background hover:text-primary-text" 
                       items={product.color}
                       value={color}
                       onChange={handleChangeColor}
