@@ -64,7 +64,7 @@ model Product {
   brand       String
   description String
   color       String
-  price       Int?
+  price       Float?
   numInStock  Int?
   reviews     Review[]
   createdAt   DateTime @default(now())
@@ -77,7 +77,7 @@ model Review {
   name         String?
   email        String?
   content      String?
-  rating       Int?
+  rating       Float?
   approved     Boolean @default(false)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
