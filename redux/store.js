@@ -14,13 +14,6 @@ const persistConfig = {
   whitelist: ['currentCountry', 'cart'], // place to select which state you want to persist
 };
 
-// const persistConfig = {
-//   key: 'primary',
-//   storage,
-//   whitelist: ['currentCountry', 'cart'], // place to select which state you want to persist
-//   timeout: null,
-// }
-
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 function makeStore() {
