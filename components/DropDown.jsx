@@ -22,10 +22,12 @@ function DropDown({value, onChange, items, icons, selectClassName, optionsClassN
     <>
     {/* Select */}
       <div className={`${selectClassName} relative w-full select-none cursor-pointer rounded-md`}>
-        <div className="flex justify-between items-center w-full p-2 " onClick={() => setIsOpen(!isOpen)} value={value}>
-          <div className="flex items-center space-x-2">
+        <div
+          className="flex justify-between items-center w-full gap-1 cursor-pointer transform transition-all hover:scale-110 duration-150 ease-in-out select-none"
+          onClick={() => setIsOpen(!isOpen)} value={value}>
+          <div className="flex items-center gap-1">
             {icons && 
-              <div className="rounded-full h-[2rem] w-[2rem] border-none flex items-center justify-center object-cover overflow-hidden">
+              <div className="rounded-full h-[1.25rem] w-[1.25rem] border-none flex items-center justify-center object-cover overflow-hidden">
                 <img className="h-[6rem] w-[6rem] scale-[135%]"
                   src={icons.find(icon => icon.name == value).icon}
                   alt={icons.find(icon => icon.name == value).name}
@@ -33,13 +35,11 @@ function DropDown({value, onChange, items, icons, selectClassName, optionsClassN
               </div>
             }
             <p>{value}</p>
-          </div>
-
-          <div>
-          {isOpen ?
-              <ChevronDownIcon onClick={() => setIsOpen(false)} className="h-[1rem] w-[1rem] cursor-pointer transform transition-all hover:scale-125 duration-150 ease-in-out select-none"/>
+ 
+            {isOpen ?
+              <ChevronDownIcon onClick={() => setIsOpen(false)} className="h-[1.25rem] w-[1.25rem]"/>
               :
-              <ChevronUpIcon onClick={() => setIsOpen(true)} className="h-[1rem] w-[1rem] cursor-pointer transform transition-all hover:scale-125 duration-150 ease-in-out select-none"/>
+              <ChevronUpIcon onClick={() => setIsOpen(true)} className="h-[1.25rem] w-[1.25rem]"/>
             }
           </div>
         </div>

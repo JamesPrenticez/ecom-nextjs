@@ -25,11 +25,11 @@ export default function Layout({title, description, children}) {
           </NextLink>
 
           {/* Right */}
-          <div className='ml-auto space-x-4 inline-flex'>
+          <div className='ml-auto space-x-6 inline-flex'>
             <CountrySelector />
             <CartButton />
             <NextLink href="/login" passHref>
-              <a className='hover:text-text-secondary-hover flex items-center'>
+              <a className='text-lg hover:text-text-secondary-hover flex items-center cursor-pointer transform transition-all hover:scale-110 duration-150 ease-in-out select-none'>
                 Login
               </a>
             </NextLink>

@@ -14,7 +14,7 @@ function CountrySelector({items, currentCountry}) {
 
   return (
     <DropDown 
-      selectClassName=""
+      selectClassName="text-lg"
       optionsClassName="bg-secondary-background text-secondary-text"
       itemClassName="hover:bg-primary-background hover:text-primary-text"
       items={countries.map(country => country.name)}
