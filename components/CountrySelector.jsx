@@ -1,10 +1,11 @@
 import React from 'react'
 import DropDown from './DropDown'
-import { connect, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { updateCurrentCountry } from "../redux/currentCountry/actions"
 import { data } from '../utils/data'
 
-function CountrySelector({items, currentCountry}) {
+export default function CountrySelector() {
+  const currentCountry = useSelector((state) => state.currentCountry)
   const dispatch = useDispatch();
   const countries = data.countries
 
@@ -24,11 +25,3 @@ function CountrySelector({items, currentCountry}) {
     />
   )
 }
-
-function mapStateToProps(state) {
-  return {
-    currentCountry: state.currentCountry,
-  };
-}
-
-export default connect(mapStateToProps)(CountrySelector);
