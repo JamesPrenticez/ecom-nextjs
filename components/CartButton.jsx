@@ -1,7 +1,6 @@
 import React from 'react'
 import NextLink from 'next/link'
 import { connect } from "react-redux";
-import cart from '../redux/cart/reducer';
 
 function CartIcon({className}){
   return (
@@ -12,7 +11,6 @@ function CartIcon({className}){
 }
 
 function CartButton({cartItems}) {
-  console.log(cartItems)
   return (
     <NextLink href="/cart" passHref>
     <a className='hover:text-text-secondary-hover flex items-center gap-1 relative cursor-pointer transform transition-all hover:scale-110 duration-150 ease-in-out select-none'>
@@ -28,7 +26,6 @@ function CartButton({cartItems}) {
 }
 
 function mapStateToProps(state) {
-  console.log(state)
   return {
     cartItems: state.cart.cart.cartItems,
   };

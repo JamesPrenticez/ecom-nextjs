@@ -18,9 +18,10 @@
 
 - Tailwind
 
-- Redux
-- Redux-thunk
-- Next-redux-wrapper
+- redux
+- react-redux
+- redux-devtools-extension
+- redux-persist - for localStorage
 
 - (Currency API - Fixer)[https://fixer.io/]
 - (Flag Icons)[https://flagicons.lipis.dev/]
@@ -40,6 +41,7 @@
 
 - Maybe upgrade to axios VS fetch?
 - Change the way you are passing data to dropdown?
-- Use next Image in dropdown flags?
+- Use next Image in dropdown flags-?
+- Fix cartItems: state.cart.cart.cartItems in "cartButton"
 
 - Need to handle 0 in stock?

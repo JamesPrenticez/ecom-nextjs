@@ -14,8 +14,8 @@ export default function Layout({title, description, children}) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <AppBar position="static" className="bg-secondary-background text-secondary-text">
-        <nav className='flex items-center h-16 w-full max-w-7xl mx-auto pr-4'>
+      <AppBar position="static" className="">
+        <nav className='flex items-center h-16 w-full max-w-7xl mx-auto pr-4 bg-secondary-background text-secondary-text'>
           
           {/* Left */}
           <NextLink href="/" passHref>
