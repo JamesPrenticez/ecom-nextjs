@@ -9,6 +9,7 @@ export default async function getProducts(req, res){
         slug: reqQuerySlug
       },
       select: {
+        id: true,
         name: true,
         slug: true,
         category: true,
@@ -28,6 +29,7 @@ export default async function getProducts(req, res){
       let ratingCount = product.reviews.length
       let ratingAvg = Math.round((product.reviews.map(review => review.rating).reduce((a,b) => a + b, 0) / ratingCount) * 10) / 10
       let result = {
+        id: product.id,
         name: product.name,
         slug: product.slug,
         category: product.category,

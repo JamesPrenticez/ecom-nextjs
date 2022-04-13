@@ -4,28 +4,36 @@ import NextImage from 'next/image'
 import Layout from '../../components/Layout'
 import Rating from '@mui/material/Rating';
 import DropDown from '../../components/DropDown';
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../redux/cart/actions"
 
 export default function ProductDetailsPage({product}) {
-  const [counter, setCounter] = useState(Number(1))
+  const [quantity, setQuantity] = useState(Number(1))
   const [color, setColor] = useState(null)
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if(product.color?.length > 0) setColor(product.color[0])
   }, [])
 
-  const handleChangeStock = (e, stock) =>{
+  const handleChangeStock = (e, stock) => {
     e.preventDefault()
     let value = e.target.value
     if(value <= 1) value = 1
     if(value >= stock) value = stock
-    setCounter(value)
+    setQuantity(value)
   }
 
-  const handleChangeColor = (item) =>{
+  const handleChangeColor = (item) => {
     //This is not a input its just a Div so we can skip the extra steps
     //e.preventDefault()
     //setColor(e.target.value)
     setColor(item)
+  }
+
+  const handleAddToCart = () => {
+    if(product.numInStock <= 0) window.alert("Sorry. Product is out of stock")
+    dispatch(addToCart(product, color, quantity))
   }
 
   return (
@@ -51,34 +59,33 @@ export default function ProductDetailsPage({product}) {
           {/* Right */}
           <div className="w-full md:w-1/2 space-y-6">
 
-
             <h2>{product.name}</h2>
 
             <div className="flex-wrap md:flex justify-between">
               {/* Left */}
               <ul className="w-full sm:w-1/4 md:w-1/2 p-2">
                 <li>
-                  <bold>Category:</bold> <p>{product.category}</p>
+                  <h6>Category:</h6> <p>{product.category}</p>
                 </li>
                 <li>
-                  <bold>Brand:</bold> <p>{product.brand}</p>
+                  <h6>Brand:</h6> <p>{product.brand}</p>
                 </li>
               </ul>
 
               {/* Right */}
               <div className="w-full sm:w-3/4 md:w-1/2 border border-gray-200 drop-shadow-md rounded-sm p-3 grid grid-cols-3 gap-2 items-center">
                 {/* Price */}
-                <bold className="col-span-2">Price:</bold>
+                <h6 className="col-span-2">Price:</h6>
                 <p>${product.price}</p>
 
                 {/* Stock */}
-                <bold className="col-span-2">Stock:</bold>
+                <h6 className="col-span-2">Stock:</h6>
                 <p>only {product.numInStock} left!</p>
 
                 {/* Color */}
                 {product.color &&
                   <>
-                    <bold className="col-span-2">Color:</bold>
+                    <h6 className="col-span-2">Color:</h6>
                     <DropDown
                       selectClassName="bg-secondary-background text-secondary-text"
                       optionsClassName="bg-secondary-background text-secondary-text"
@@ -91,13 +98,13 @@ export default function ProductDetailsPage({product}) {
                 }
 
                 {/* Color */}
-                <bold className="col-span-2">Quantity:</bold>
+                <h6 className="col-span-2">Quantity:</h6>
                 <div className='flex'>
-                  <button disabled={counter <= 1} onClick={() => setCounter(counter - 1)} className="w-12 bg-gray-300 p-2 rounded-tl-md rounded-bl-md disabled:cursor-not-allowed">
+                  <button disabled={quantity <= 1} onClick={() => setQuantity(quantity - 1)} className="w-12 bg-gray-300 p-2 rounded-tl-md rounded-bl-md disabled:cursor-not-allowed">
                     &ndash;
                   </button>
-                  <input type="number" value={counter} onChange={(e) => handleChangeStock(e, product.numInStock)} className="w-full text-center outline-none p-2"/>
-                  <button disabled={counter >= product.numInStock} onClick={() => setCounter(counter + 1)} className="w-12 bg-gray-300 p-2 rounded-tr-md rounded-br-md disabled:cursor-not-allowed">
+                  <input type="number" value={quantity} onChange={(e) => handleChangeStock(e, product.numInStock)} className="w-full text-center outline-none p-2"/>
+                  <button disabled={quantity >= product.numInStock} onClick={() => setQuantity(quantity + 1)} className="w-12 bg-gray-300 p-2 rounded-tr-md rounded-br-md disabled:cursor-not-allowed">
                     &#43;
                   </button>
                 </div>                  
@@ -105,7 +112,10 @@ export default function ProductDetailsPage({product}) {
                 {/* Add to Cart & Buy Now */}
                 <div className='col-span-3 space-y-3 mt-3'>
 
-                <button className='col-span-2 p-3 w-full bg-gray-300 rounded-md'>
+                <button 
+                  className='col-span-2 p-3 w-full bg-gray-300 rounded-md'
+                  onClick={handleAddToCart}
+                >
                   ADD TO CART
                 </button>
                 <button className='col-span-2 p-3 w-full bg-green-500 rounded-md text-white'>

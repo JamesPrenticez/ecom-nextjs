@@ -42,7 +42,12 @@
         text-lg
         font-bold 
     }
-    bold {
+    h5 {
+        @apply
+        font-bold
+        pr-2
+    }
+    h6 {
         @apply
         font-bold
         pr-2
