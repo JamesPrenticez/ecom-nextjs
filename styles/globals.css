@@ -64,3 +64,15 @@
       margin: 0;
     }
 }
+
+@layer components{
+    .bubble{
+        @apply
+        transform
+        transition-all
+        hover:scale-110
+        duration-150
+        ease-in-out
+        select-none
+    }
+}

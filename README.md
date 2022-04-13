@@ -15,6 +15,12 @@
   - (CardMedia)[https://mui.com/material-ui/api/card-media/#main-content]
   - (CardContent)[]
   - (CardActions)[]
+  - (TableContainer)[]
+  - (Table)[]
+  - (TableHead)[]
+  - (TableRow)[]
+  - (TableCell)[]
+  - (TableBody)[]
 
 - Tailwind
 
@@ -45,3 +51,4 @@
 [o] Fix cartItems: state.cart.cart.cartItems in "cartButton"
 [o] handleAddToCart show a modal with "continue shopping or checkout now"
 [x] Need to handle 0 in stock?
+[o] componitize quantity incrementor for product and cart pages
