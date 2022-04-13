@@ -10,6 +10,7 @@
     --color-primary-background: #f9fafb; /* bg-gray-50*/
     --color-secondary-background: #203040;
     --color-primary-link: #2563EB;
+    --color-primary-action: #22c55e;
 }
 
 [data-theme="dark"] {

@@ -37,9 +37,9 @@ function DropDown({value, onChange, items, icons, selectClassName, optionsClassN
 
           <div>
           {isOpen ?
-              <ChevronDownIcon onClick={() => setIsOpen(false)} className='h-[1rem] w-[1rem] cursor-pointer transform transition-all hover:scale-125 duration-150 ease-in-out select-none'/>
+              <ChevronDownIcon onClick={() => setIsOpen(false)} className="h-[1rem] w-[1rem] cursor-pointer transform transition-all hover:scale-125 duration-150 ease-in-out select-none"/>
               :
-              <ChevronUpIcon onClick={() => setIsOpen(true)} className='h-[1rem] w-[1rem] cursor-pointer transform transition-all hover:scale-125 duration-150 ease-in-out select-none'/>
+              <ChevronUpIcon onClick={() => setIsOpen(true)} className="h-[1rem] w-[1rem] cursor-pointer transform transition-all hover:scale-125 duration-150 ease-in-out select-none"/>
             }
           </div>
         </div>

@@ -3,6 +3,7 @@ import Head from 'next/head'
 import NextLink from 'next/link'
 import { AppBar } from '@mui/material'
 import CountrySelector from '../components/CountrySelector'
+import CartButton from '../components/CartButton'
 
 export default function Layout({title, description, children}) {
   return (
@@ -26,11 +27,7 @@ export default function Layout({title, description, children}) {
           {/* Right */}
           <div className='ml-auto space-x-4 inline-flex'>
             <CountrySelector />
-            <NextLink href="/cart" passHref>
-              <a className='hover:text-text-secondary-hover flex items-center'>
-                Cart
-              </a>
-            </NextLink>
+            <CartButton />
             <NextLink href="/login" passHref>
               <a className='hover:text-text-secondary-hover flex items-center'>
                 Login
@@ -51,3 +48,4 @@ export default function Layout({title, description, children}) {
     </>
   )
 }
+

@@ -118,7 +118,7 @@ export default function ProductDetailsPage({product}) {
                 >
                   ADD TO CART
                 </button>
-                <button className='col-span-2 p-3 w-full bg-green-500 rounded-md text-white'>
+                <button className='col-span-2 p-3 w-full bg-primary-action rounded-md text-white'>
                   BUY NOW
                 </button>
                 </div>

@@ -5,10 +5,10 @@ module.exports = {
   theme: {
     fontSize: {
       xs: ['.75rem', '1rem'], //font size, line height
-      sm: ['.875rem', '1.25rem'],
-      base: ['1rem', '1.5rem'],
-      lg: ['1.125rem', '1.75rem'],
-      xl: ['1.25rem', '1.75rem'],
+      sm: ['.875rem', '1rem'],
+      base: ['1rem', '1.25rem'],
+      lg: ['1.25rem', '1.5rem'],
+      xl: ['1.5rem', '1.75rem'],
       "2xl": ['2rem', '2rem'],
       "3xl": ['3rem', '3.25rem'],
       "4xl": ['4rem', '4.25rem'],
@@ -32,7 +32,8 @@ module.exports = {
         "secondary-hover": "var(--color-secondary-hover)",
         "primary-background": "var(--color-primary-background)",
         "secondary-background": "var(--color-secondary-background)",
-        "primary-link": "var(--color-primary-link)"
+        "primary-link": "var(--color-primary-link)",
+        "primary-action": "var(--color-primary-action)"
       },
     },
   },
