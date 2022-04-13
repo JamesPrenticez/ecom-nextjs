@@ -1,4 +1,10 @@
-let initialState = "United States"
+let initialState = {
+  name: 'United States',
+  abbr: 'USD',
+  symbol: '$',
+  tax: 0.15,
+  flag: '/images/flags/united-states.svg'
+}
 
 export default function countries(state = initialState, action){
   switch(action.type) {

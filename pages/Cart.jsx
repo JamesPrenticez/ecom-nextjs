@@ -28,15 +28,21 @@ function TrashCan({className}){
 
 export default function Cart() {
   const cartItems = useSelector((state) => state.cart.cart.cartItems);
+  const currentCountry = useSelector((state) => state.currentCountry);
+
+  let subtotal = cartItems.reduce((a, b) => a + b.quantity * b.price, 0)
+  let tax = subtotal * currentCountry.tax
+  let total = subtotal + tax
 
   return (
     <Layout title="Shopping Cart" description="Review Order">
       <h1>Shopping Cart</h1>
-      {cartItems === 0 ? (
-        <div>
-          <h2>Cart is empty.</h2>
+      {cartItems.length === 0 ? (
+        <div className="bg-red-500 py-6 space-y-6">
           <NextLink href="/" passHref>
-            <a>Go Shopping!</a>
+            <a>
+              <h2 className="hover:text-primary-link">Cart is empty. Go Shopping!</h2>
+            </a>
           </NextLink>
         </div>
       ) : (
@@ -97,7 +103,28 @@ export default function Cart() {
             </TableContainer>
           </Grid>
           <Grid md={3} xs={12}>
-            Cart Actions
+            <div className="w-full border border-gray-200 drop-shadow-md rounded-sm p-3 items-center">
+              <ul>
+                <li>
+                  <h5>({cartItems.reduce((a, b) => a + b.quantity, 0)} item)</h5>
+                </li>
+                <li>
+                  <h5>SUBTOTAL {currentCountry.symbol}{subtotal}</h5>
+                </li>
+                <li>
+                  <h5>TAX {currentCountry.symbol}{tax}</h5>
+                </li>
+                <li>
+                  <h4>TOTAL: {currentCountry.symbol}{total} <small>({currentCountry.abbr})</small></h4>
+                </li>
+                <li>
+                  <button className='p-3 w-full bg-primary-action rounded-md text-white'>
+                    CHECKOUT
+                  </button>
+                </li>
+              </ul>
+            </div>
+
           </Grid>
         </Grid>
       )}

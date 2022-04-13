@@ -9,8 +9,9 @@ export default function CountrySelector() {
   const dispatch = useDispatch();
   const countries = data.countries
 
-  const handleCurrencyChange = (countryName) => {
-    dispatch(updateCurrentCountry(countryName))
+  const handleCountryChange = (countryName) => {
+    let country = countries.find(country => country.name === countryName)
+    dispatch(updateCurrentCountry(country))
   }
 
   return (
@@ -19,9 +20,9 @@ export default function CountrySelector() {
       optionsClassName="bg-secondary-background text-secondary-text"
       itemClassName="hover:bg-primary-background hover:text-primary-text"
       items={countries.map(country => country.name)}
-      value={currentCountry}
+      value={currentCountry.name}
       icons={countries.map((country) => {return ({name: country.name, icon: country.flag})})}
-      onChange={handleCurrencyChange}
+      onChange={handleCountryChange}
     />
   )
 }

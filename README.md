@@ -52,3 +52,5 @@
 [o] handleAddToCart show a modal with "continue shopping or checkout now"
 [x] Need to handle 0 in stock?
 [o] componitize quantity incrementor for product and cart pages
+[o] style Cart is empty. Go Shopping! [https://www.google.com/search?q=empty+cart+page+design&sxsrf=APq-WBsCynwegJZuZckBm2NT_9_bxGBcOg:1649841902338&source=lnms&tbm=isch&sa=X&ved=2ahUKEwi42JiE3JD3AhUlRWwGHfIZCd4Q_AUoAXoECAEQAw&biw=1920&bih=937&dpr=1]
+[o] Add tax for each country
