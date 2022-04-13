@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import NextLink from 'next/link'
 import NextImage from 'next/image'
+import { useRouter } from 'next/dist/client/router'
 import Layout from '../../components/Layout'
 import Rating from '@mui/material/Rating';
 import DropDown from '../../components/DropDown';
@@ -11,6 +12,7 @@ export default function ProductDetailsPage({product}) {
   const [quantity, setQuantity] = useState(Number(1))
   const [color, setColor] = useState(null)
   const dispatch = useDispatch();
+  const router = useRouter()
 
   useEffect(() => {
     if(product.color?.length > 0) setColor(product.color[0])
@@ -34,6 +36,9 @@ export default function ProductDetailsPage({product}) {
   const handleAddToCart = () => {
     if(product.numInStock <= 0) window.alert("Sorry. Product is out of stock")
     dispatch(addToCart(product, color, quantity))
+    //We want to show a modal here 
+    //Continue shopping? or checkout now?
+    router.push('/cart')
   }
 
   return (

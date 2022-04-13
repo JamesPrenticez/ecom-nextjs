@@ -39,9 +39,9 @@
   - ``` npx prisma db seed ```
 
 
-- Maybe upgrade to axios VS fetch?
-- Change the way you are passing data to dropdown?
-- Use next Image in dropdown flags-?
-- Fix cartItems: state.cart.cart.cartItems in "cartButton"
-
-- Need to handle 0 in stock?
+[o] Maybe upgrade to axios VS fetch?
+[o] Change the way you are passing data to dropdown?
+[o] Use next Image in dropdown flags-?
+[o] Fix cartItems: state.cart.cart.cartItems in "cartButton"
+[o] handleAddToCart show a modal with "continue shopping or checkout now"
+[x] Need to handle 0 in stock?
