@@ -1,7 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
 import NextLink from 'next/link'
-import { AppBar } from '@mui/material'
 import CountrySelector from '../components/CountrySelector'
 import CartButton from '../components/CartButton'
 
@@ -14,8 +13,8 @@ export default function Layout({title, description, children}) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <AppBar position="static" className="">
-        <nav className='flex items-center h-16 w-full max-w-7xl mx-auto pr-4 bg-secondary-background text-secondary-text'>
+      <header className="bg-secondary-background">
+        <nav className='flex items-center h-16 w-full max-w-7xl mx-auto pr-4  text-secondary-text'>
           
           {/* Left */}
           <NextLink href="/" passHref>
@@ -34,9 +33,8 @@ export default function Layout({title, description, children}) {
               </a>
             </NextLink>
           </div>
-          
         </nav>
-      </AppBar>
+      </header>
 
       <main className="h-full min-h-screenNav m-[1rem] w-full max-w-7xl mx-auto bg-white border border-gray-200 rounded-sm">
         {children}
