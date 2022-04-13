@@ -2,15 +2,33 @@ import { useMemo } from 'react'
 import { createStore, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { persistReducer } from 'redux-persist'
-import storage from 'redux-persist/lib/storage'
+import createWebStorage from "redux-persist/lib/storage/createWebStorage";
 import rootReducer from "./rootReducer"
 
 let store
 
+// We need to create dummy storage on the server-side (we don't want to share persisted state with multiple clients) and wrapper for locale storage on the client-side.
+// From https://github.com/vercel/next.js/discussions/15687
+const createNoopStorage = () => {
+  return {
+    getItem(_key) {
+      return Promise.resolve(null);
+    },
+    setItem(_key, value) {
+      return Promise.resolve(value);
+    },
+    removeItem(_key) {
+      return Promise.resolve();
+    },
+  }
+}
+
+const storage = typeof window !== "undefined" ? createWebStorage("local") : createNoopStorage();
+
 const persistConfig = {
   timeout: 10, //Set the timeout function to 2 seconds
   key: 'root',
-  storage,
+  storage: storage,
   whitelist: ['currentCountry', 'cart'], // place to select which state you want to persist
 };
 
