@@ -105,25 +105,27 @@ export default function Cart() {
           </div>
           <div className="col-span-12 md:col-span-3">
             <div className="w-full h-full border-l border-b p-3 border-gray-200 drop-shadow-md rounded-sm  items-center">
-              <ul>
-                <li>
-                  <h5>({cartItems.reduce((a, b) => a + b.quantity, 0)} item)</h5>
-                </li>
-                <li>
-                  <h5>SUBTOTAL: {currentCountry.symbol}{subtotal}</h5>
-                </li>
-                <li>
-                  <h5>TAX: {currentCountry.symbol}{tax}</h5>
-                </li>
-                <li>
-                  <h4>TOTAL: {currentCountry.symbol}{total} <small>({currentCountry.abbr})</small></h4>
-                </li>
-                <li>
-                  <button className='p-3 w-full bg-primary-action rounded-md text-white'>
-                    CHECKOUT
-                  </button>
-                </li>
-              </ul>
+              <div className="h-full w-full p-3 bg-white shadow-lg">
+                <ul>
+                  <li>
+                    <h5>({cartItems.reduce((a, b) => a + b.quantity, 0)} item)</h5>
+                  </li>
+                  <li>
+                    <h5>SUBTOTAL: {currentCountry.symbol}{subtotal}</h5>
+                  </li>
+                  <li>
+                    <h5>TAX: {currentCountry.symbol}{tax}</h5>
+                  </li>
+                  <li>
+                    <h4>TOTAL: {currentCountry.symbol}{total} <small>({currentCountry.abbr})</small></h4>
+                  </li>
+                  <li>
+                    <button className='p-3 w-[90%] bg-primary-action rounded-md text-white bubble mx-auto'>
+                      CHECKOUT
+                    </button>
+                  </li>
+                </ul>
+              </div>
             </div>
 
 
