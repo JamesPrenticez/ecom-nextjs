@@ -16,14 +16,13 @@ function Plus({className}){
   )
 }
 
-export default function Counter({item, handleClick, handleChange}) {
-  console.log(item)
+export default function Counter({className, item, handleClick, handleChange}) {
   const currQty = item.quantity
   const min = 1
   const max = item.numInStock
 
   return (
-    <div className='flex'>
+    <div className={`${className} flex ml-auto`}>
       <button 
         disabled={currQty <= min} onClick={() => handleClick(item, currQty - 1)}
         className="bg-gray-300 p-1 rounded-tl-md rounded-bl-md disabled:cursor-not-allowed"
@@ -32,12 +31,13 @@ export default function Counter({item, handleClick, handleChange}) {
       </button>
       <div 
         contentEditable="true"
+        suppressContentEditableWarning={true}
         type="number"
-        value={currQty || min}
+        value={currQty}
         onChange={(e) => handleChange(e, item, min, max)}
         className="flex text-center justify-center outline-none py-1 text-[1rem] w-[3rem]" 
       >
-        {currQty || min}
+        {currQty}
       </div>
       <button 
         disabled={currQty >= max} 

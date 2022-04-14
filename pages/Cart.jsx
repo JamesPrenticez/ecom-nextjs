@@ -74,6 +74,7 @@ export default function Cart() {
                   <TableRow>
                     <TableCell>Image</TableCell>
                     <TableCell>Name</TableCell>
+                    <TableCell align="right">Color</TableCell>
                     <TableCell align="right">Quantity</TableCell>
                     <TableCell align="right">Price</TableCell>
                     <TableCell align="right">Remove</TableCell>
@@ -105,9 +106,15 @@ export default function Cart() {
                           </a>
                         </NextLink>
                       </TableCell>
+                      {/* ---------- Color DropDown ----------  */}
+                      <TableCell align="right">
+                        {item.color}
+                        {/* <DropDown></DropDown> */}
+                      </TableCell>
                       {/* ---------- Quantity Incrementor ----------  */}
                       <TableCell align="right">
                         <Counter
+                          className="float-right"
                           item={item} 
                           handleClick={handleClickQuantity} //redux
                           handleChange={handleChangeQuantity}
