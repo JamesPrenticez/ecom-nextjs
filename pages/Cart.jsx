@@ -4,7 +4,6 @@ import NextImage from "next/image";
 import { useSelector } from "react-redux";
 import Layout from "../components/Layout";
 import {
-  Grid,
   TableContainer,
   Table,
   TableHead,
@@ -36,9 +35,10 @@ export default function Cart() {
 
   return (
     <Layout title="Shopping Cart" description="Review Order">
-      <h1>Shopping Cart</h1>
+
       {cartItems.length === 0 ? (
         <div className="bg-red-500 py-6 space-y-6">
+          <h1>Shopping Cart</h1>
           <NextLink href="/" passHref>
             <a>
               <h2 className="hover:text-primary-link">Cart is empty. Go Shopping!</h2>
@@ -46,8 +46,9 @@ export default function Cart() {
           </NextLink>
         </div>
       ) : (
-        <Grid container spacing={1}>
-          <Grid item md={9} xs={12}>
+        <div className="grid grid-cols-12">
+          <div className="col-span-12 md:col-span-9">
+            <h1 className="p-3">Shopping Cart</h1>
             <TableContainer className="overflow-hidden">
               <Table>
                 <TableHead>
@@ -101,18 +102,18 @@ export default function Cart() {
                 </TableBody>
               </Table>
             </TableContainer>
-          </Grid>
-          <Grid md={3} xs={12}>
-            <div className="w-full border border-gray-200 drop-shadow-md rounded-sm p-3 items-center">
+          </div>
+          <div className="col-span-12 md:col-span-3">
+            <div className="w-full h-full border-l border-b p-3 border-gray-200 drop-shadow-md rounded-sm  items-center">
               <ul>
                 <li>
                   <h5>({cartItems.reduce((a, b) => a + b.quantity, 0)} item)</h5>
                 </li>
                 <li>
-                  <h5>SUBTOTAL {currentCountry.symbol}{subtotal}</h5>
+                  <h5>SUBTOTAL: {currentCountry.symbol}{subtotal}</h5>
                 </li>
                 <li>
-                  <h5>TAX {currentCountry.symbol}{tax}</h5>
+                  <h5>TAX: {currentCountry.symbol}{tax}</h5>
                 </li>
                 <li>
                   <h4>TOTAL: {currentCountry.symbol}{total} <small>({currentCountry.abbr})</small></h4>
@@ -125,8 +126,9 @@ export default function Cart() {
               </ul>
             </div>
 
-          </Grid>
-        </Grid>
+
+          </div>
+        </div>
       )}
     </Layout>
   );
