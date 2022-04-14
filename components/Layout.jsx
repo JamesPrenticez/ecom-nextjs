@@ -1,8 +1,8 @@
 import React from 'react'
 import Head from 'next/head'
 import NextLink from 'next/link'
-import CountrySelector from '../components/CountrySelector'
-import CartButton from '../components/CartButton'
+import CountrySelector from './nav/CountrySelector'
+import CartButton from './nav/CartButton'
 
 export default function Layout({title, description, children}) {
   return (

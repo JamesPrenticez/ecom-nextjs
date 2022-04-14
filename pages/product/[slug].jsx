@@ -2,11 +2,12 @@ import React, {useEffect, useState} from 'react'
 import NextLink from 'next/link'
 import NextImage from 'next/image'
 import { useRouter } from 'next/dist/client/router'
-import Layout from '../../components/Layout'
-import Rating from '@mui/material/Rating';
-import DropDown from '../../components/DropDown';
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/cart/actions"
+import Rating from '@mui/material/Rating';
+import Layout from '../../components/Layout'
+import Counter from '../../components/common/Counter'
+import DropDown from '../../components/common/DropDown';
 
 export default function ProductDetailsPage({product}) {
   const [quantity, setQuantity] = useState(Number(1))
@@ -18,11 +19,12 @@ export default function ProductDetailsPage({product}) {
     if(product.color?.length > 0) setColor(product.color[0])
   }, [])
 
-  const handleChangeStock = (e, stock) => {
+  const handleChangeStock = (e, min, max) => {
     e.preventDefault()
     let value = e.target.value
-    if(value <= 1) value = 1
-    if(value >= stock) value = stock
+    if(value > min && value < max) return
+    if(value <= min) value = min
+    if(value >= max) value = max
     setQuantity(value)
   }
 
@@ -102,17 +104,15 @@ export default function ProductDetailsPage({product}) {
                   </> 
                 }
 
-                {/* Color */}
+                {/* Quantity */}
                 <h6 className="col-span-2">Quantity:</h6>
-                <div className='flex'>
-                  <button disabled={quantity <= 1} onClick={() => setQuantity(quantity - 1)} className="w-12 bg-gray-300 p-2 rounded-tl-md rounded-bl-md disabled:cursor-not-allowed">
-                    &ndash;
-                  </button>
-                  <input type="number" value={quantity} onChange={(e) => handleChangeStock(e, product.numInStock)} className="w-full text-center outline-none p-2"/>
-                  <button disabled={quantity >= product.numInStock} onClick={() => setQuantity(quantity + 1)} className="w-12 bg-gray-300 p-2 rounded-tr-md rounded-br-md disabled:cursor-not-allowed">
-                    &#43;
-                  </button>
-                </div>                  
+                <Counter 
+                  value={quantity} 
+                  min={1}
+                  max={product.numInStock}
+                  boobs={setQuantity}
+                  handleChange={handleChangeStock}
+                />
 
                 {/* Add to Cart & Buy Now */}
                 <div className='col-span-3 space-y-3 mt-3'>

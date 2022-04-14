@@ -11,6 +11,7 @@ import {
   TableCell,
   TableBody,
 } from "@mui/material";
+import Counter from "../components/common/Counter";
 
 function TrashCan({className}){
   return(
@@ -87,7 +88,13 @@ export default function Cart() {
                       </TableCell>
                       {/* ---------- Quantity Incrementor ----------  */}
                       <TableCell align="right">
-                        {/* <Couter value={item.quantity} min={1} max={item.numInStock} /> */}
+                        <Counter 
+                          value={item.quantity} 
+                          min={1}
+                          max={item.numInStock}
+                          handleClick={()=>{}}
+                          handleChange={()=>{}}
+                        />
                       </TableCell>
                       {/* ---------- Price----------  */}
                       <TableCell align="right">

@@ -1,8 +1,8 @@
 import React from 'react'
-import DropDown from './DropDown'
+import DropDown from '../common/DropDown'
 import { useSelector, useDispatch } from "react-redux";
-import { updateCurrentCountry } from "../redux/currentCountry/actions"
-import { data } from '../utils/data'
+import { updateCurrentCountry } from "../../redux/currentCountry/actions"
+import { data } from '../../utils/data'
 
 export default function CountrySelector() {
   const currentCountry = useSelector((state) => state.currentCountry)
