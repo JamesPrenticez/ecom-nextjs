@@ -31,7 +31,7 @@ export default function Counter({item, handleClick, handleChange}) {
         <Minus className="h-[1rem] w-[1rem]"/>
       </button>
       <div 
-        contenteditable="true"
+        contentEditable="true"
         type="number"
         value={currQty || min}
         onChange={(e) => handleChange(e, item, min, max)}
