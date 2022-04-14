@@ -16,6 +16,7 @@ export default async function getProducts(req, res){
         image: true,
         brand: true,
         description: true,
+        color: true,
         price: true,
         numInStock: true,
         reviews: {
@@ -25,19 +26,20 @@ export default async function getProducts(req, res){
           },
         }
       }
-    }).then(product => {
-      let ratingCount = product.reviews.length
-      let ratingAvg = Math.round((product.reviews.map(review => review.rating).reduce((a,b) => a + b, 0) / ratingCount) * 10) / 10
+    }).then(item => {
+      let ratingCount = item.reviews.length
+      let ratingAvg = Math.round((item.reviews.map(review => review.rating).reduce((a,b) => a + b, 0) / ratingCount) * 10) / 10
       let result = {
-        id: product.id,
-        name: product.name,
-        slug: product.slug,
-        category: product.category,
-        image: product.image,
-        brand: product.brand,
-        description: product.description,
-        price: product.price,
-        numInStock: product.numInStock,
+        id: item.id,
+        name: item.name,
+        slug: item.slug,
+        category: item.category,
+        image: item.image,
+        brand: item.brand,
+        description: item.description,
+        color: item.color,
+        price: item.price,
+        numInStock: item.numInStock,
         numReviews: ratingCount,
         rating: ratingAvg,
       }

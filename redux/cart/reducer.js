@@ -1,25 +1,24 @@
-const intialState = {
-  cart: {
-    cartItems: []
-  }
+const intialState = { 
+  cartItems: [
+    // {id: 0},
+    // {id: 1}
+  ]
 }
+
 
 export default function cart(state=intialState, action){
   switch(action.type) {
-    case "ADD_TO_CART":
+    case "SET_CART_ITEMS":
       //Check if item is already added to cart
       const newItem = action.payload
-      const itemExists = state.cart.cartItems.find(item => item.id == newItem.id)
+      const itemExists = state.cartItems.find(item => item.id == newItem.id)
 
+      // This removes the need for an update function
       //If itemExists then overwrite with newItem otherwise concat cart with newItem 
-      const cartItems = itemExists ? state.cart.cartItems.map(item => item.id == itemExists.id ? newItem : item) : [...state.cart.cartItems, newItem]
-
-      return {...state, cart: {cartItems}}
+      const updatedCartItems = itemExists ? state.cartItems.map(item => item.id == itemExists.id ? newItem : item) : [...state.cartItems, newItem]
+      //console.log(updatedCartItems)
+      return {...state, cartItems: updatedCartItems}
     
-    case "ADD_TO_CART_ERROR":
-      console.log("Result from ADD_TO_CART_ERROR", action.err)
-      return state
-
     default: 
       return state
   }

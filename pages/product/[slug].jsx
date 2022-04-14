@@ -3,20 +3,20 @@ import NextLink from 'next/link'
 import NextImage from 'next/image'
 import { useRouter } from 'next/dist/client/router'
 import { useDispatch } from "react-redux";
-import { addToCart } from "../../redux/cart/actions"
+import { setCartItems } from "../../redux/cart/actions"
 import Rating from '@mui/material/Rating';
 import Layout from '../../components/Layout'
 import Counter from '../../components/common/Counter'
 import DropDown from '../../components/common/DropDown';
 
-export default function ProductDetailsPage({product}) {
+export default function ProductDetailsPage({item}) {
   const [quantity, setQuantity] = useState(Number(1))
   const [color, setColor] = useState(null)
   const dispatch = useDispatch();
   const router = useRouter()
 
   useEffect(() => {
-    if(product.color?.length > 0) setColor(product.color[0])
+    if(item.color?.length > 0) setColor(item.color[0])
   }, [])
 
   const handleChangeStock = (e, min, max) => {
@@ -28,23 +28,23 @@ export default function ProductDetailsPage({product}) {
     setQuantity(value)
   }
 
-  const handleChangeColor = (item) => {
+  const handleChangeColor = (color) => {
     //This is not a input its just a Div so we can skip the extra steps
     //e.preventDefault()
     //setColor(e.target.value)
-    setColor(item)
+    setColor(color)
   }
 
   const handleAddToCart = () => {
-    if(product.numInStock <= 0) window.alert("Sorry. Product is out of stock")
-    dispatch(addToCart(product, color, quantity))
+    if(item.numInStock <= 0) window.alert("Sorry. Product is out of stock")
+    dispatch(setCartItems(item, color, quantity))
     //We want to show a modal here 
     //Continue shopping? or checkout now?
     router.push('/cart')
   }
 
   return (
-    <Layout title={product?.name} description={product?.description}>
+    <Layout title={item?.name} description={item?.description}>
       <section className="p-6">
         <NextLink href="/" passHref>
           <a className="text-primary-link">Back to products</a>
@@ -55,8 +55,8 @@ export default function ProductDetailsPage({product}) {
           {/* Left */}
           <div className="w-full md:w-1/2">
             <NextImage
-              src={product.image}
-              alt={product.image}
+              src={item.image}
+              alt={item.image}
               width={640}
               height={640}
               layout={"responsive"}
@@ -66,16 +66,16 @@ export default function ProductDetailsPage({product}) {
           {/* Right */}
           <div className="w-full md:w-1/2 space-y-6">
 
-            <h2>{product.name}</h2>
+            <h2>{item.name}</h2>
 
             <div className="flex-wrap md:flex justify-between">
               {/* Left */}
               <ul className="w-full sm:w-1/4 md:w-1/2 p-2">
                 <li>
-                  <h6>Category:</h6> <p>{product.category}</p>
+                  <h6>Category:</h6> <p>{item.category}</p>
                 </li>
                 <li>
-                  <h6>Brand:</h6> <p>{product.brand}</p>
+                  <h6>Brand:</h6> <p>{item.brand}</p>
                 </li>
               </ul>
 
@@ -83,34 +83,32 @@ export default function ProductDetailsPage({product}) {
               <div className="w-full sm:w-3/4 md:w-1/2 border border-gray-200 drop-shadow-md rounded-sm p-3 grid grid-cols-3 gap-2 items-center">
                 {/* Price */}
                 <h6 className="col-span-2">Price:</h6>
-                <p>${product.price}</p>
+                <p>${item.price}</p>
 
                 {/* Stock */}
                 <h6 className="col-span-2">Stock:</h6>
-                <p>only {product.numInStock} left!</p>
+                <p>only {item.numInStock} left!</p>
 
                 {/* Color */}
-                {product.color &&
+                {item.color &&
                   <>
                     <h6 className="col-span-2">Color:</h6>
-                    <DropDown
+                    {/* <DropDown
                       selectClassName="bg-secondary-background text-secondary-text"
                       optionsClassName="bg-secondary-background text-secondary-text"
                       itemClassName="hover:bg-primary-background hover:text-primary-text" 
-                      items={product.color}
+                      items={item.color}
                       value={color}
                       onChange={handleChangeColor}
-                    />
+                    /> */}
                   </> 
                 }
 
                 {/* Quantity */}
                 <h6 className="col-span-2">Quantity:</h6>
                 <Counter 
-                  value={quantity} 
-                  min={1}
-                  max={product.numInStock}
-                  boobs={setQuantity}
+                  item={item} 
+                  handleClick={setQuantity}
                   handleChange={handleChangeStock}
                 />
 
@@ -131,18 +129,18 @@ export default function ProductDetailsPage({product}) {
             </div>
 
             {/* Description */}
-            <p>Description: {product.description}</p>
+            <p>Description: {item.description}</p>
 
             {/* Star Rating */}
             <div className="flex items-center space-x-2">
               <Rating
                 precision={0.1}
                 name="read-only"
-                value={product.rating}
+                value={item.rating}
                 readOnly
               />
-              <p>{product.rating}/5</p>
-              <small>({product.numReviews} reviews)</small>
+              <p>{item.rating}/5</p>
+              <small>({item.numReviews} reviews)</small>
             </div>
             
           </div>
@@ -156,9 +154,9 @@ export const getStaticPaths = async () => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`) //.find(ele => ele.catagory == "main page")
   const products = await response.json()
   
-  const paths = products.map(product => ({
+  const paths = products.map(item => ({
     params: {
-      slug: product.slug, //params can only contain one key/value pair
+      slug: item.slug, //params can only contain one key/value pair
     }
   }))
   
@@ -171,14 +169,14 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async (context) => {
   let { params } = context
   const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products/${params.slug}`)
-  const product = await response.json()
+  const item = await response.json()
   
-  if(!product){
+  if(!item){
     return { notFound: true }
   }
 
   return {
-    props: { product },
+    props: { item },
     revalidate: 120, // after 2mins it will update the old cache
   }
 }

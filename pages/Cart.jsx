@@ -1,7 +1,8 @@
 import React from "react";
 import NextLink from "next/link";
 import NextImage from "next/image";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setCartItems } from "../redux/cart/actions"
 import Layout from "../components/Layout";
 import {
   TableContainer,
@@ -16,7 +17,7 @@ import Counter from "../components/common/Counter";
 function TrashCan({className}){
   return(
   // Option 1
-  <svg xmlns="http://www.w3.org/2000/svg" className={className}viewBox="0, 0, 400,400" stroke="none" fill="currentColor" fill-rule="evenodd">
+  <svg xmlns="http://www.w3.org/2000/svg" className={className}viewBox="0, 0, 400,400" stroke="none" fill="currentColor" fillRule="evenodd">
     <path id="path0" d="M161.719 30.024 C 152.480 32.595,145.175 38.699,140.833 47.476 L 137.891 53.424 137.643 66.165 L 137.395 78.906 92.058 78.906 C 41.511 78.906,43.170 78.737,39.405 84.277 C 36.804 88.106,36.734 94.738,39.258 98.445 C 42.991 103.931,44.045 104.270,58.208 104.544 L 70.994 104.791 71.441 108.841 C 71.686 111.068,75.042 161.230,78.898 220.313 C 84.437 305.194,86.210 328.886,87.349 333.221 C 91.643 349.565,103.750 362.513,120.442 368.610 L 126.172 370.703 197.789 370.922 C 277.218 371.164,275.504 371.258,286.179 366.100 C 300.035 359.406,310.669 346.002,314.033 330.992 C 314.437 329.188,317.766 279.728,321.431 221.082 C 325.096 162.436,328.301 112.286,328.555 109.637 L 329.016 104.820 341.797 104.558 C 353.305 104.323,354.796 104.134,356.781 102.663 C 364.835 96.689,364.523 84.689,356.202 80.444 C 353.306 78.967,351.407 78.906,307.911 78.906 L 262.634 78.906 262.372 66.166 L 262.109 53.427 259.167 47.478 C 254.739 38.525,247.443 32.520,237.891 29.968 C 232.486 28.525,166.935 28.573,161.719 30.024 M233.013 56.306 C 236.346 57.824,237.042 59.973,237.363 69.727 L 237.665 78.906 200.000 78.906 L 162.335 78.906 162.637 69.727 C 162.952 60.150,163.658 57.858,166.759 56.352 C 169.030 55.249,230.599 55.205,233.013 56.306 M302.769 105.669 C 303.500 106.569,289.020 325.170,288.043 327.972 C 285.416 335.517,279.037 341.726,271.467 344.110 C 267.992 345.205,259.660 345.322,198.421 345.134 L 129.297 344.922 125.722 343.160 C 120.028 340.355,115.909 336.316,113.268 330.951 L 110.845 326.029 104.694 221.413 C 101.311 163.874,98.331 114.014,98.071 110.613 L 97.598 104.429 200.106 104.954 C 256.485 105.242,302.684 105.564,302.769 105.669 M145.313 146.148 C 142.764 147.220,139.970 149.862,138.598 152.500 C 136.897 155.769,136.967 294.359,138.671 297.655 C 142.107 304.300,151.485 306.534,157.305 302.095 C 162.845 297.870,162.500 303.008,162.500 224.764 L 162.500 154.137 160.742 151.555 C 157.187 146.331,150.473 143.978,145.313 146.148 M195.313 146.148 C 192.764 147.220,189.970 149.862,188.598 152.500 C 186.897 155.769,186.967 294.359,188.671 297.655 C 192.107 304.300,201.485 306.534,207.305 302.095 C 212.845 297.870,212.500 303.008,212.500 224.764 L 212.500 154.137 210.742 151.555 C 207.187 146.331,200.473 143.978,195.313 146.148 M245.313 146.148 C 242.764 147.220,239.970 149.862,238.598 152.500 C 236.897 155.769,236.967 294.359,238.671 297.655 C 242.107 304.300,251.485 306.534,257.305 302.095 C 262.845 297.870,262.500 303.008,262.500 224.764 L 262.500 154.137 260.742 151.555 C 257.187 146.331,250.473 143.978,245.313 146.148"></path>
   </svg>
   // Option 2
@@ -27,12 +28,29 @@ function TrashCan({className}){
 }
 
 export default function Cart() {
-  const cartItems = useSelector((state) => state.cart.cart.cartItems);
+  const cartItems = useSelector((state) => state.cart.cartItems);
   const currentCountry = useSelector((state) => state.currentCountry);
+  const dispatch = useDispatch();
 
   let subtotal = cartItems.reduce((a, b) => a + b.quantity * b.price, 0)
   let tax = subtotal * currentCountry.tax
   let total = subtotal + tax
+
+  const handleChangeQuantity = (e, id, min, max) => {
+    //console.log(min, max)
+    //e.preventDefault()
+    // let value = e.target.value
+    // if(value > min && value < max) return
+    // if(value <= min) value = min
+    // if(value >= max) value = max
+    //setQuantity(value) // redux
+  }
+
+  const handleClickQuantity = (item, quantity) => {
+    //console.log('handleClickQuantity', id, value)
+    let color = "[]"
+    dispatch(setCartItems(item, color, quantity))
+  }
 
   return (
     <Layout title="Shopping Cart" description="Review Order">
@@ -62,7 +80,8 @@ export default function Cart() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {cartItems.map((item) => (
+                  {cartItems.map((item) => { 
+                    return (
                     <TableRow key={item.id}>
                       {/* ---------- Display Image ----------  */}
                       <TableCell className="bubble">
@@ -88,12 +107,10 @@ export default function Cart() {
                       </TableCell>
                       {/* ---------- Quantity Incrementor ----------  */}
                       <TableCell align="right">
-                        <Counter 
-                          value={item.quantity} 
-                          min={1}
-                          max={item.numInStock}
-                          handleClick={()=>{}}
-                          handleChange={()=>{}}
+                        <Counter
+                          item={item} 
+                          handleClick={handleClickQuantity} //redux
+                          handleChange={handleChangeQuantity}
                         />
                       </TableCell>
                       {/* ---------- Price----------  */}
@@ -105,7 +122,8 @@ export default function Cart() {
                           <TrashCan className="h-[1.25rem] ml-auto cursor-pointer bubble" />
                       </TableCell>
                     </TableRow>
-                  ))}
+
+                  )})}
                 </TableBody>
               </Table>
             </TableContainer>

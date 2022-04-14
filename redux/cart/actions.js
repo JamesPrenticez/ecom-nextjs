@@ -1,3 +1,3 @@
-export const addToCart = (product, color, quantity) => {
-  return ({ type: "ADD_TO_CART", payload: {...product, color, quantity} })
+export const setCartItems = (product, color, quantity) => {
+  return ({ type: "SET_CART_ITEMS", payload: {...product, color, quantity} })
 }

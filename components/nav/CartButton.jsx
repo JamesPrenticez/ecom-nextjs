@@ -23,7 +23,7 @@ function CartIcon({className}){
 }
 
 export default function CartButton() {
-  const cartItems = useSelector((state) => state.cart.cart.cartItems)
+  const cartItems = useSelector((state) => state.cart.cartItems)
 
   return (
     <NextLink href="/cart" passHref>
