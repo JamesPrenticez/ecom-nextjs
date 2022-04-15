@@ -3,8 +3,11 @@ import Head from 'next/head'
 import NextLink from 'next/link'
 import CountrySelector from './nav/CountrySelector'
 import CartButton from './nav/CartButton'
+import { signIn, signOut, useSession } from 'next-auth/react';
 
 export default function Layout({title, description, children}) {
+  const {data: session} = useSession();
+
   return (
     <>
       <Head>
@@ -27,11 +30,30 @@ export default function Layout({title, description, children}) {
           <div className='ml-auto space-x-6 inline-flex'>
             <CountrySelector />
             <CartButton />
-            <NextLink href="/login" passHref>
-              <a className='text-lg hover:text-text-secondary-hover flex items-center cursor-pointer transform transition-all hover:scale-110 duration-150 ease-in-out select-none'>
-                Login
-              </a>
-            </NextLink>
+
+            { !session ? 
+            <a 
+              className='text-lg hover:text-text-secondary-hover flex items-center cursor-pointer transform transition-all hover:scale-110 duration-150 ease-in-out select-none'
+              onClick={signIn}
+            >
+              Login
+            </a>
+            :
+            <>
+              <NextLink href={`/user/${session?.user.email}/settings`} passHref>
+              <h3 className="text-primary-link py-1 mt-2 hover:cursor-pointer">{session?.user.email}</h3>
+              </NextLink>
+              <div className="tooltip">
+                <img 
+                  className='h-12 w-12 rounded-full object-cover hover:cursor-pointer'
+                  src={session?.user.image}
+                  onClick={signOut}
+                  alt=''
+                />
+                <span className="tooltiptext">Sign Out</span>
+              </div>
+            </>
+            }
           </div>
         </nav>
       </header>
