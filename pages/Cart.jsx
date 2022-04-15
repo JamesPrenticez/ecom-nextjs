@@ -138,12 +138,8 @@ export default function Cart() {
                   <li>
 
                   <NextLink href={"/checkout/shipping"} passHref>
-                    <a>
-                      <button 
-                        className='p-3 w-[90%] bg-primary-action rounded-md text-white bubble mx-auto'
-                        >
+                    <a className="text-center p-3 w-[90%] bg-primary-action rounded-md text-white bubble mx-auto">
                         CHECKOUT
-                      </button>
                     </a>
                   </NextLink>
                   </li>
