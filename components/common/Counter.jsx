@@ -16,7 +16,7 @@ function Plus({className}){
   )
 }
 
-export default function Counter({className, item, handleClick, handleChange}) {
+export default function Counter({className, item, handleClick}) {
   const currQty = item.quantity
   const min = 1
   const max = item.numInStock
@@ -34,7 +34,6 @@ export default function Counter({className, item, handleClick, handleChange}) {
         suppressContentEditableWarning={true}
         type="number"
         value={currQty}
-        onChange={(e) => handleChange(e, item, min, max)}
         className="flex text-center justify-center outline-none py-1 text-[1rem] w-[3rem]" 
       >
         {currQty}

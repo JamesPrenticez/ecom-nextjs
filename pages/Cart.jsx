@@ -24,19 +24,8 @@ export default function Cart() {
   let tax = subtotal * currentCountry.tax
   let total = subtotal + tax
 
-  const handleChangeQuantity = (e, id, min, max) => {
-    //console.log(min, max)
-    //e.preventDefault()
-    // let value = e.target.value
-    // if(value > min && value < max) return
-    // if(value <= min) value = min
-    // if(value >= max) value = max
-    //setQuantity(value) // redux
-  }
-
   const handleClickQuantity = (item, quantity) => {
-    //console.log('handleClickQuantity', id, value)
-    let color = "[]"
+    let color = item.color
     dispatch(setCartItems(item, color, quantity))
   }
 
@@ -109,7 +98,6 @@ export default function Cart() {
                           className="float-right"
                           item={item} 
                           handleClick={handleClickQuantity} //redux
-                          handleChange={handleChangeQuantity}
                         />
                       </TableCell>
                       {/* ---------- Price----------  */}
@@ -148,9 +136,16 @@ export default function Cart() {
                     <h4>TOTAL: {currentCountry.symbol}{total} <small>({currentCountry.abbr})</small></h4>
                   </li>
                   <li>
-                    <button className='p-3 w-[90%] bg-primary-action rounded-md text-white bubble mx-auto'>
-                      CHECKOUT
-                    </button>
+
+                  <NextLink href={"/checkout/shipping"} passHref>
+                    <a>
+                      <button 
+                        className='p-3 w-[90%] bg-primary-action rounded-md text-white bubble mx-auto'
+                        >
+                        CHECKOUT
+                      </button>
+                    </a>
+                  </NextLink>
                   </li>
                 </ul>
               </div>
