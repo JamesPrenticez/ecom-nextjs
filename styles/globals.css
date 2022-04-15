@@ -87,7 +87,6 @@
         visibility:hidden;
         opacity:0;
         transition:visibility 0.3s linear,opacity 0.3s linear;
-        background-color: red;
         color: #fff;
         text-align: center;
         padding: 5px 0;
@@ -112,10 +111,10 @@
         content: "";
         position: absolute;
         bottom: 100%;
-        left: 70%;
-        margin-left: -5px;
-        border-width: 5px;
+        right: 0;
+        margin-right: 1.55rem; 
+        border-width: 0.7rem;
         border-style: solid;
-        border-color: transparent transparent red transparent;
+        border-color: transparent transparent var(--color-secondary-background) transparent;
     }
 }
