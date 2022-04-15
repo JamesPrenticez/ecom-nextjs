@@ -28,7 +28,7 @@ function DropDown({value, onChange, items, icons, selectClassName, optionsClassN
           <div className="flex items-center gap-1">
             {icons && 
               <div className="rounded-full h-[1.25rem] w-[1.25rem] border-none flex items-center justify-center object-cover overflow-hidden">
-                <img className="h-[6rem] w-[6rem] scale-[135%]"
+                <img className="scale-[135%]"
                   src={icons.find(icon => icon.name == value).icon}
                   alt={icons.find(icon => icon.name == value).name}
                   />

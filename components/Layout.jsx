@@ -4,6 +4,7 @@ import NextLink from 'next/link'
 import CountrySelector from './nav/CountrySelector'
 import CartButton from './nav/CartButton'
 import { signIn, signOut, useSession } from 'next-auth/react';
+import NextImage from 'next/image'
 
 export default function Layout({title, description, children}) {
   const {data: session} = useSession();
@@ -27,7 +28,7 @@ export default function Layout({title, description, children}) {
           </NextLink>
 
           {/* Right */}
-          <div className='ml-auto space-x-6 inline-flex'>
+          <div className='ml-auto space-x-6 inline-flex items-center'>
             <CountrySelector />
             <CartButton />
 
@@ -41,15 +42,22 @@ export default function Layout({title, description, children}) {
             :
             <>
               <NextLink href={`/user/${session?.user.email}/settings`} passHref>
-              <h3 className="text-primary-link py-1 mt-2 hover:cursor-pointer">{session?.user.email}</h3>
+              <a 
+                className='text-lg hover:text-text-secondary-hover cursor-pointer transform transition-all hover:scale-110 duration-150 ease-in-out select-none'>
+                {session?.user.email}
+              </a>
               </NextLink>
               <div className="tooltip">
-                <img 
-                  className='h-12 w-12 rounded-full object-cover hover:cursor-pointer'
-                  src={session?.user.image}
-                  onClick={signOut}
-                  alt=''
-                />
+                <div className='h-[2.5rem] w-[2.5rem] rounded-full object-cover hover:cursor-pointer overflow-hidden bubble'>
+                  <NextImage
+                    src={session?.user.image}
+                    alt={session?.user.image}
+                    onClick={signOut}
+                    width={25}
+                    height={25}
+                    layout={"responsive"}
+                  />
+                </div>
                 <span className="tooltiptext">Sign Out</span>
               </div>
             </>
