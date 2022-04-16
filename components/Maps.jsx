@@ -18,19 +18,25 @@ let options = {
   zoom: 9
 }
 
-function MyMapComponent(){
-  const [autoCompleteWidget, setAutoCompleteWidget] = useState(google.maps.places.Autocomplete | undefined)
-  const mapRef = useRef();
-  const inputRef = useRef();
+let defaultPlace = {
+  lat: -36.1699, //North/South
+  lng:  115.1398 //East/West
+}
 
+function MyMapComponent(){
+  const [autoComplete, setAutoComplete] = useState(undefined)
+  //const [place, setPlace] = useState(defaultPlace)
+  const mapRef = useRef()
+  const inputRef = useRef()
+
+  // --------- Input --------- 
   useEffect(() => {
     // Instansiate the input field 
     // Takes two arguments 1. html element 2. an object with options
     // https://developers.google.com/maps/documentation/javascript/places-autocomplete
     // geometry = lat/lng
-    if (inputRef.current && !autoCompleteWidget) {
-      console.log(`init input`);
-      setAutoCompleteWidget(
+    if (inputRef.current && !autoComplete) {
+      setAutoComplete(
         new google.maps.places.Autocomplete(inputRef.current, {
           types: ["address"],
           componentRestrictions: { country: ["US", "CA", "UK", "AU", "NZ"] },
@@ -38,9 +44,28 @@ function MyMapComponent(){
         })
       );
     }
-  }, [inputRef, autoCompleteWidget]);
+    
+  }, [inputRef, autoComplete])
 
+  useEffect(() => {
+    let place
 
+    if(autoComplete) {
+      place = autoComplete.getPlace()
+    }
+
+    if(autoComplete && place){
+      console.log(place)
+      autoComplete.addListener("place_changed", () => {
+        new google.maps.Marker({
+          position: place.geometry.location,
+          //title: place.address
+        })
+      })
+    }
+  })
+  
+  // --------- Map --------- 
   useEffect(() => {
     if(navigator.geolocation){
       //Nav.geo has a success callback and a erro call back depending if user allows us to read their location
@@ -50,19 +75,19 @@ function MyMapComponent(){
         location.lat = userLocation.coords.latitude,
         location.lng = userLocation.coords.longitude
         // Write map with user location
-        map = new window.google.maps.Map(mapRef.current, options);
+        map = new window.google.maps.Map(mapRef.current, options)
         console.log("Success")
       },
       //Handle Error
       (err) => {
           console.log("User declined geolocation access", err)
-          map = new window.google.maps.Map(mapRef.current, options);
+          map = new window.google.maps.Map(mapRef.current, options)
         }
       )
     }else {
-      map = new window.google.maps.Map(mapRef.current, options);
+      map = new window.google.maps.Map(mapRef.current, options)
     }  
-  });
+  })
 
   return (
     <>
