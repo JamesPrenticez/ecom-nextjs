@@ -1,19 +1,26 @@
 import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
+import React from 'react';
 import Layout from '../../components/Layout';
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
+
 import CheckoutWizard from '../../components/CheckoutWizard';
 
 export default function Shipping() {
   const {
+    register,
     handleSubmit,
-    control,
     formState: { errors },
-    setValue,
-    getValues,
-  } = useForm();
+  } = useForm({
+    mode: 'onChange',
+  });
 
   const router = useRouter();
+
+  const defaultValues = {
+    firstName: "James", // user.firstName
+    lastName: "Bond", // user.lastName
+    email: 'JamesBond@example.com', // user.email
+  };
 
   const shippingAddress = {
     fullName: "James Prentice", 
@@ -35,18 +42,10 @@ export default function Shipping() {
   // const {userInfo, cart: { shippingAddress }} = state;
   // const { location } = shippingAddress;
 
-  useEffect(() => {
-    if (!userInfo) {
-      router.push('/login?redirect=/shipping');
-    }
-    setValue('fullName', shippingAddress.fullName);
-    setValue('address', shippingAddress.address);
-    setValue('city', shippingAddress.city);
-    setValue('postalCode', shippingAddress.postalCode);
-    setValue('country', shippingAddress.country);
-  }, []);
+  const onSubmit  = (data) => {
+    alert(JSON.stringify(data))
+  }
 
-  const submitHandler = () => {}
   const chooseLocationHandler = () => {}
 
   // const submitHandler = ({ fullName, address, city, postalCode, country }) => {
@@ -73,10 +72,112 @@ export default function Shipping() {
 
   return (
     <Layout title="Shipping Address">
+      <h1> Shipping Details </h1>
       <CheckoutWizard activeStep={1} />
-      <form onSubmit={handleSubmit(submitHandler)} className="">
-        <h1> Shipping Details </h1>
-            <Controller
+      <form 
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col-2 p-5 max-w-7xl mx-auto"
+      >
+      {/* Container - Left */}
+      <div className="flex-col w-1/2 p-6">
+
+        {/* ---------- First Name ---------- */}
+        <label htmlFor="firstName" className="block mb-5">
+          <h5 className="inline text-primary-text">First Name</h5>
+          {errors.firstName && (
+            <>
+              <small className="text-red-500 italic">- &nbsp;
+                { errors.firstName.type === "required" ? errors.firstName.message
+                  : errors.firstName.type === "maxLength" ? errors.firstName.message
+                  : null }
+              </small>
+            </>
+            )
+          }
+          <input
+            type="text"
+            className={`shadow rounded py-2 px-3 form-input mt-1 block w-full outline-none focus:ring-2 ${errors.firstName ? "ring-red-500" : "ring-primary-link"}`}
+            defaultValue={defaultValues.firstName}
+            placeholder="firstname"
+            {...register("firstName", 
+              { required: "first name required",
+                maxLength: { 
+                  value: 32,
+                  message: "maximum of 32 characters"
+                },
+              }
+            )}
+          />
+        </label>
+
+        {/* ---------- Last Name ---------- */}
+        <label htmlFor="lastName" className="block mb-5">
+          <h5 className="inline text-primary-text">Last Name</h5>
+          {errors.lastName && (
+            <>
+              <small className="text-red-500 italic">- &nbsp;
+                { errors.lastName.type === "required" ? errors.lastName.message
+                  : errors.lastName.type === "maxLength" ? errors.lastName.message
+                  : null }
+              </small>
+            </>
+            )
+          }
+          <input
+            type="text"
+            className={`shadow rounded py-2 px-3 form-input mt-1 block w-full outline-none focus:ring-2 ${errors.lastName ? "ring-red-500" : "ring-primary-link"}`}
+            defaultValue={defaultValues.lastName}
+            placeholder="lastname"
+            {...register("lastName", 
+              { required: "last name required",
+                maxLength: { 
+                  value: 32,
+                  message: "maximum of 32 characters"
+                },
+              }
+            )}
+          />
+        </label>
+
+        {/* ---------- Email ---------- */}
+        <label htmlFor="email" className="blck mb-5">
+          <h5 className="text-primary-text">Email Address</h5>
+          {errors.email && (
+            <>
+              <small className="text-red-500 italic">- &nbsp;
+                { errors.email.type === "required" ? errors.email.message
+                  : errors.email.type === "maxLength" ? errors.email.message
+                  : errors.email.type === "pattern" ? errors.email.message
+                  : null }
+              </small>
+            </>
+            )
+          }
+          <input
+            type="text"
+            className={`shadow rounded py-2 px-3 form-input mt-1 block w-full outline-none focus:ring-2 ${errors.firstName ? "ring-red-500" : "ring-primary-link"}`}
+            defaultValue={defaultValues.email}
+            placeholder="email@example.com"
+            {...register("email", 
+              { required: "email address required",
+                maxLength: { 
+                  value: 64,
+                  message: "maximum of 64 characters"
+                },
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                  message: "Email is contains invalid characters"
+                }
+              }
+            )}
+          />
+        </label>
+
+      </div>
+
+
+
+            {/* <Controller
               name="fullName"
               control={control}
               defaultValue=""
@@ -93,8 +194,11 @@ export default function Shipping() {
                   {...field}
                 />
               )}
-            ></Controller>
-            <Controller
+            ></Controller> */}
+
+
+
+            {/* <Controller
               name="address"
               control={control}
               defaultValue=""
@@ -108,18 +212,19 @@ export default function Shipping() {
                   id="address"
                   label="Address"
                   error={Boolean(errors.address)}
-                  // helperText={
-                  //   errors.address
-                  //     ? errors.address.type === 'minLength'
-                  //       ? 'Address length is more than 1'
-                  //       : 'Address is required'
-                  //     : ''
-                  // }
+                  helperText={
+                    errors.address
+                      ? errors.address.type === 'minLength'
+                        ? 'Address length is more than 1'
+                        : 'Address is required'
+                      : ''
+                  }
                   {...field}
                 ></input>
               )}
-            ></Controller>
-            <Controller
+            ></Controller> */}
+
+            {/* <Controller
               name="city"
               control={control}
               defaultValue=""
@@ -133,18 +238,19 @@ export default function Shipping() {
                   id="city"
                   label="City"
                   error={Boolean(errors.city)}
-                  // helperText={
-                  //   errors.city
-                  //     ? errors.city.type === 'minLength'
-                  //       ? 'City length is more than 1'
-                  //       : 'City is required'
-                  //     : ''
-                  // }
+                  helperText={
+                    errors.city
+                      ? errors.city.type === 'minLength'
+                        ? 'City length is more than 1'
+                        : 'City is required'
+                      : ''
+                  }
                   {...field}
                 />
               )}
-            ></Controller>
-            <Controller
+            ></Controller> */}
+
+            {/* <Controller
               name="postalCode"
               control={control}
               defaultValue=""
@@ -158,18 +264,19 @@ export default function Shipping() {
                   id="postalCode"
                   label="Postal Code"
                   error={Boolean(errors.postalCode)}
-                  // helperText={
-                  //   errors.postalCode
-                  //     ? errors.postalCode.type === 'minLength'
-                  //       ? 'Postal Code length is more than 1'
-                  //       : 'Postal Code is required'
-                  //     : ''
-                  // }
+                  helperText={
+                    errors.postalCode
+                      ? errors.postalCode.type === 'minLength'
+                        ? 'Postal Code length is more than 1'
+                        : 'Postal Code is required'
+                      : ''
+                  }
                   {...field}
                 />
               )}
-            ></Controller>
-            <Controller
+            ></Controller> */}
+
+            {/* <Controller
               name="country"
               control={control}
               defaultValue=""
@@ -183,17 +290,18 @@ export default function Shipping() {
                   id="country"
                   label="Country"
                   error={Boolean(errors.country)}
-                  // helperText={
-                  //   errors.country
-                  //     ? errors.country.type === 'minLength'
-                  //       ? 'Country length is more than 1'
-                  //       : 'Country is required'
-                  //     : ''
-                  // }
+                  helperText={
+                    errors.country
+                      ? errors.country.type === 'minLength'
+                        ? 'Country length is more than 1'
+                        : 'Country is required'
+                      : ''
+                  }
                   {...field}
                 />
               )}
-            ></Controller>
+            ></Controller> */}
+
             <button
               type="button"
               onClick={chooseLocationHandler}

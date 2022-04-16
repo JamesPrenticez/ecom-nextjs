@@ -56,3 +56,5 @@
 [o] Add tax for each country
 
 // need to fix drop down to work with  color
+
+// spend some time on getting form validation really robust
