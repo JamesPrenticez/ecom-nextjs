@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
 // import { MarkerWithLabel } from '@googlemaps/markerwithlabel';
 
@@ -19,19 +19,29 @@ let options = {
 }
 
 function MyMapComponent(){
-  const ref = useRef();
+  const [autoCompleteWidget, setAutoCompleteWidget] = useState(google.maps.places.Autocomplete | undefined)
+  const mapRef = useRef();
+  const inputRef = useRef();
 
   useEffect(() => {
-    // navigator.geolocation.getCurrentPosition(function(position) {
-    //   let userLocation = {
-    //     lat: position.coords.latitude,
-    //     lng: position.coords.longitude
-    //   }
-      
-      //console.log("Latitude is :", position.coords.latitude)
-      //console.log("Longitude is :", position.coords.longitude)
-    //})
+    // Instansiate the input field 
+    // Takes two arguments 1. html element 2. an object with options
+    // https://developers.google.com/maps/documentation/javascript/places-autocomplete
+    // geometry = lat/lng
+    if (inputRef.current && !autoCompleteWidget) {
+      console.log(`init input`);
+      setAutoCompleteWidget(
+        new google.maps.places.Autocomplete(inputRef.current, {
+          types: ["address"],
+          componentRestrictions: { country: ["US", "CA", "UK", "AU", "NZ"] },
+          fields: ["geometry"],
+        })
+      );
+    }
+  }, [inputRef, autoCompleteWidget]);
 
+
+  useEffect(() => {
     if(navigator.geolocation){
       //Nav.geo has a success callback and a erro call back depending if user allows us to read their location
       navigator.geolocation.getCurrentPosition(
@@ -40,23 +50,26 @@ function MyMapComponent(){
         location.lat = userLocation.coords.latitude,
         location.lng = userLocation.coords.longitude
         // Write map with user location
-        map = new window.google.maps.Map(ref.current, options);
+        map = new window.google.maps.Map(mapRef.current, options);
         console.log("Success")
       },
       //Handle Error
       (err) => {
-        console.log("User declined geolocation access")
-        map = new window.google.maps.Map(ref.current, options);
+          console.log("User declined geolocation access", err)
+          map = new window.google.maps.Map(mapRef.current, options);
         }
       )
     }else {
-      map = new window.google.maps.Map(ref.current, options);
+      map = new window.google.maps.Map(mapRef.current, options);
+    }  
+  });
 
-    }
-    
-  }, []);
-
-  return <div className="h-64 w-64" ref={ref} id="map" />
+  return (
+    <>
+      <input type="text" className="w-64 h-12" ref={inputRef} />
+      <div className="h-64 w-64" ref={mapRef}  />
+    </>
+  )
 }
 
 const render = (status) => {
@@ -72,6 +85,8 @@ const render = (status) => {
 
 export default function Maps() {
   return (
-    <Wrapper apiKey="AIzaSyC8ylALbEGioCRfyRgRaYPryTZwd4frXyQ" render={render}/>
+    <Wrapper apiKey="AIzaSyC8ylALbEGioCRfyRgRaYPryTZwd4frXyQ" render={render} libraries={["places"]}/>
   )
 }
+
+//https://stackoverflow.com/questions/70464613/google-maps-react-wrapper-places-api

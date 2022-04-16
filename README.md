@@ -37,6 +37,7 @@
 - @googlemaps/markerwithlabel https://www.npmjs.com/package/@googlemaps/markerwithlabel
 - How To Google Maps (Part 1)[https://www.youtube.com/watch?v=C6VxJoR3754&t]
 - How To Google Maps (Part 2)[https://www.youtube.com/watch?v=pWQeUPog2hU]
+- two-character, ISO 3166-1 Alpha-2 compatible country code [https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2]
 
 - Sqlite3 (3 high severity vulnerabilities... this is okay as not used in production
 - Postgres for production
