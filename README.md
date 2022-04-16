@@ -35,6 +35,8 @@
 - Google Maps API
 - @googlemaps/react-wrapper https://www.npmjs.com/package/@googlemaps/react-wrapper
 - @googlemaps/markerwithlabel https://www.npmjs.com/package/@googlemaps/markerwithlabel
+- How To Google Maps (Part 1)[https://www.youtube.com/watch?v=C6VxJoR3754&t]
+- How To Google Maps (Part 2)[https://www.youtube.com/watch?v=pWQeUPog2hU]
 
 - Sqlite3 (3 high severity vulnerabilities... this is okay as not used in production
 - Postgres for production
