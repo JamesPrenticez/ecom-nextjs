@@ -32,6 +32,10 @@
 - (Currency API - Fixer)[https://fixer.io/]
 - (Flag Icons)[https://flagicons.lipis.dev/]
 
+- Google Maps API
+- @googlemaps/react-wrapper https://www.npmjs.com/package/@googlemaps/react-wrapper
+- @googlemaps/markerwithlabel https://www.npmjs.com/package/@googlemaps/markerwithlabel
+
 - Sqlite3 (3 high severity vulnerabilities... this is okay as not used in production
 - Postgres for production
 - Prisma
