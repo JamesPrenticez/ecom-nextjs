@@ -4,6 +4,11 @@ export default function GoogleAutoComplete() {
   const [autoComplete, setAutoComplete] = useState(undefined)
   const inputRef = useRef();
 
+  const handleChangePlace = () => {
+    let address = autoComplete.getPlace()
+    console.log(address)
+  }
+
   useEffect(() => {
     if (inputRef && !autoComplete) {
       setAutoComplete(
@@ -14,7 +19,13 @@ export default function GoogleAutoComplete() {
         })
       )
     }
+
+    if(autoComplete){
+      autoComplete.addListener("place_changed", handleChangePlace);
+    }
+
   }, [inputRef, autoComplete])
+
 
   return <input type="text" className="w-full h-12" ref={inputRef} />
 }
