@@ -1,12 +1,10 @@
 import React from 'react'
-//import MapWrapper from '../components/Maps/MapWrapper'
-import Test from '../components/Maps/Test'
+import MapWrapper from '../components/Maps/MapWrapper'
 
 export default function Index() {
   return (
     <div>
-      {/* <MapWrapper /> */}
-      <Test />
+      <MapWrapper />
     </div>
   )
 }

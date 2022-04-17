@@ -1,17 +1,9 @@
 import React, {useEffect, useRef} from 'react'
+import { googleMapMarker } from './googleMapsHelpers'
 
-let location = {
-  lat: 36.1699421,
-  lng: -115.1398149
-}
-
-let options = {
-  center: location,
-  zoom: 9
-}
-
-export default function GoogleMaps() {
-  const mapRef = useRef();
+export default function GoogleMaps({ options, address, setOptions}) {
+  const mapRef = useRef()
+  let map
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -19,21 +11,30 @@ export default function GoogleMaps() {
       navigator.geolocation.getCurrentPosition(
         //Handle Success
         (userLocation) => {
-          (location.lat = userLocation.coords.latitude),
-          (location.lng = userLocation.coords.longitude);
           // Re-write options with our new user location
-          new window.google.maps.Map(mapRef.current, options);
-          console.log("User location updated with:", options);
+          setOptions({
+            center: {
+              lat: userLocation.coords.latitude,
+              lng: userLocation.coords.longitude
+            },
+            zoom: 9
+          })
         },
         //Handle Error
         (err) => {
           console.log("User declined geolocation access", err)
-          console.log("Proceed to rende map with dafault setting:", options)
-          new window.google.maps.Map(mapRef.current, options);
         }
       )
     }
-  })
+  }, [])
+
+  useEffect(() => {
+    map = new window.google.maps.Map(mapRef.current, options)
+    if(address){
+      let location = options.center
+      googleMapMarker(location, address, map) // asssigns to the old map...
+    }
+  }, [options])
 
   return <div className="h-64 w-64" ref={mapRef} />
 }

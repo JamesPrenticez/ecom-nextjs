@@ -1,38 +1,20 @@
 import React, {useRef, useState, useEffect} from 'react'
-import { googleMaker } from './GoogleMarker'
+import { addressFormatter,  } from './googleMapsHelpers'
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-export default function GoogleAutoComplete() {
+export default function GoogleAutoComplete({ setOptions, setAddress}) {
   const [autoComplete, setAutoComplete] = useState(undefined)
-  const [address, setAddress] = useState(initialStateAddress)
   const inputRef = useRef();
-
+  
   const handleChangePlace = () => {
     let infoObj = autoComplete.getPlace()
-    let geometry = infoObj.geometry
-    let address = infoObj.address_components.map(item => item.)
-
-    
-    console.log(address)
+    let location = infoObj.geometry.location
+    let address_components = infoObj.address_components
+    let address = addressFormatter(address_components)
+    setAddress(address)
+    setOptions({
+      center: location,
+      zoom: 9
+    })
   }
 
   useEffect(() => {
@@ -47,7 +29,7 @@ export default function GoogleAutoComplete() {
     }
 
     if(autoComplete){
-      autoComplete.addListener("place_changed", handleChangePlace);
+      autoComplete.addListener("place_changed", () => handleChangePlace());
     }
 
   }, [inputRef, autoComplete])
@@ -55,5 +37,3 @@ export default function GoogleAutoComplete() {
 
   return <input type="text" className="w-full h-12" placeholder="Enter your address..." ref={inputRef} />
 }
-
-//https://codesandbox.io/s/94s8c?file=/src/App.js:130-162
