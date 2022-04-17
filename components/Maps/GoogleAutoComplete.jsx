@@ -1,11 +1,37 @@
 import React, {useRef, useState, useEffect} from 'react'
+import { googleMaker } from './GoogleMarker'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 export default function GoogleAutoComplete() {
   const [autoComplete, setAutoComplete] = useState(undefined)
+  const [address, setAddress] = useState(initialStateAddress)
   const inputRef = useRef();
 
   const handleChangePlace = () => {
-    let address = autoComplete.getPlace()
+    let infoObj = autoComplete.getPlace()
+    let geometry = infoObj.geometry
+    let address = infoObj.address_components.map(item => item.)
+
+    
     console.log(address)
   }
 
@@ -27,7 +53,7 @@ export default function GoogleAutoComplete() {
   }, [inputRef, autoComplete])
 
 
-  return <input type="text" className="w-full h-12" ref={inputRef} />
+  return <input type="text" className="w-full h-12" placeholder="Enter your address..." ref={inputRef} />
 }
 
 //https://codesandbox.io/s/94s8c?file=/src/App.js:130-162
