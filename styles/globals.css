@@ -63,6 +63,11 @@
       -webkit-appearance: none;
       margin: 0;
     }
+    /*======= Map Styling ============*/
+
+
+ 
+    
 }
 
 @layer components{
@@ -116,5 +121,52 @@
         border-width: 0.7rem;
         border-style: solid;
         border-color: transparent transparent var(--color-secondary-background) transparent;
+    }
+
+    .map { 
+        width: 1000px !important;
+    }
+    
+    .map .gmnoprint a,.gmnoprint span,.gm-style-cc { 
+        display: none !important;
+    }
+    
+    .map a[href^="http://maps.google.com/maps"], a[href^="https://maps.google.com/maps"] ::before {
+        content: "Powered by";
+        color: DeepSkyBlue;
+        font-size: 15px;
+        float: right;
+        font-family: system-ui;
+        margin-right: 69px;
+    }
+
+    .map div div div div {
+        width: 100% !important; 
+    } 
+
+    .map div div div div a{
+        display: flex !important;
+        
+    }
+
+    .map div div div div a div{
+        /* background: pink; */
+    }
+    .map div div div div a img{
+        bottom: 0 !important;
+        right: 0 !important;
+        left: auto !important;
+        width: 64px !important;
+        margin-right: 5px !important;
+    }
+
+    .map div div div div a img ::before{
+        content: "Powered by";
+        color: red;
+        font-size: 25px;
+    }
+
+    .map a[title="Report problems with Street View imagery to Google"]{
+        display: none !important;
     }
 }

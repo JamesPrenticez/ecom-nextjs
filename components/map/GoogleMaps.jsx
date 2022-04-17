@@ -17,7 +17,10 @@ export default function GoogleMaps({ options, address, setOptions}) {
               lat: userLocation.coords.latitude,
               lng: userLocation.coords.longitude
             },
-            zoom: 9
+            zoom: 9,
+            disableDefaultUI: true,
+            gestureHandling: "none",
+            keyboardShortcuts: false
           })
         },
         //Handle Error
@@ -36,5 +39,5 @@ export default function GoogleMaps({ options, address, setOptions}) {
     }
   }, [options])
 
-  return <div className="h-64 w-64" ref={mapRef} />
+  return <div id="map" className="h-64 w-64 map" ref={mapRef} />
 }

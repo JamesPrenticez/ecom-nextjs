@@ -13,7 +13,10 @@ export default function GoogleAutoComplete({ setOptions, setAddress}) {
     setAddress(address)
     setOptions({
       center: location,
-      zoom: 9
+      zoom: 9,
+      disableDefaultUI: true, 
+      gestureHandling: "none",
+      keyboardShortcuts: false,
     })
   }
 
