@@ -61,7 +61,6 @@
 [o] componitize quantity incrementor for product and cart pages
 [o] style Cart is empty. Go Shopping! [https://www.google.com/search?q=empty+cart+page+design&sxsrf=APq-WBsCynwegJZuZckBm2NT_9_bxGBcOg:1649841902338&source=lnms&tbm=isch&sa=X&ved=2ahUKEwi42JiE3JD3AhUlRWwGHfIZCd4Q_AUoAXoECAEQAw&biw=1920&bih=937&dpr=1]
 [o] Add tax for each country
-
-// need to fix drop down to work with  color
-
-// spend some time on getting form validation really robust
+[o] need to fix drop down to work with  color
+[o] spend some time on getting form validation really robust
+[o] need to get address based on user geo location

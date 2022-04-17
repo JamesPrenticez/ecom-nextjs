@@ -37,15 +37,15 @@ export function addressFormatter(address_components){
 export function googleMapMarker(location, address, map) {
   const contentString =
     '<div id="content">' +
-    '<h1 id="firstHeading" class="firstHeading">Shipping Address</h1>' +
-    '<div id="bodyContent">' +
-    `<p><b>Street:</b> ${address.street_number + " " + address.street}</p>` +
-    `<p><b>Suburb:</b> ${address.suburb}</p>` +
-    `<p><b>City:</b> ${address.city}</p>` +
-    `<p><b>State:</b> ${address.state}</p>` +
-    `<p><b>Country:</b> ${address.country}</p>` +
-    `<p><b>Post Code:</b> ${address.postal_code}</p>` +
-    "</div>" +
+      '<h5>Shipping Address</h5>' +
+      '<div>' +
+        `<p><b>Street:</b> ${address.street_number + " " + address.street}</p>` +
+        `<p><b>Suburb:</b> ${address.suburb}</p>` +
+        `<p><b>City:</b> ${address.city}</p>` +
+        `<p><b>State:</b> ${address.state}</p>` +
+        `<p><b>Country:</b> ${address.country}</p>` +
+        `<p><b>Post Code:</b> ${address.postal_code}</p>` +
+      "</div>" +
     "</div>";
 
   const infowindow = new google.maps.InfoWindow({
@@ -57,6 +57,10 @@ export function googleMapMarker(location, address, map) {
     position: location,
     title: "Shipping Address",
     map: map
+  })
+
+  google.maps.event.addListenerOnce(map, 'tilesloaded', function() {
+    infowindow.open(map, marker)
   })
 
   return ( 

@@ -30,9 +30,9 @@ export default function GoogleMaps({ options, address, setOptions}) {
 
   useEffect(() => {
     map = new window.google.maps.Map(mapRef.current, options)
-    if(address){
+    if(address){ //need to get address if using geolocation and update this object
       let location = options.center
-      googleMapMarker(location, address, map) // asssigns to the old map...
+      googleMapMarker(location, address, map)
     }
   }, [options])
 

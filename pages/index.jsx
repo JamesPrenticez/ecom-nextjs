@@ -1,5 +1,5 @@
 import React from 'react'
-import MapWrapper from '../components/Maps/MapWrapper'
+import MapWrapper from '../components/map/MapWrapper'
 
 export default function Index() {
   return (
