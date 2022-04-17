@@ -15,7 +15,7 @@ export default function GoogleAutoComplete() {
         new google.maps.places.Autocomplete(inputRef.current, {
           types: ["address"],
           componentRestrictions: { country: ["US", "CA", "UK", "AU", "NZ"] },
-          fields: ["geometry"],
+          fields: ["geometry", "address_components"],
         })
       )
     }
@@ -29,3 +29,5 @@ export default function GoogleAutoComplete() {
 
   return <input type="text" className="w-full h-12" ref={inputRef} />
 }
+
+//https://codesandbox.io/s/94s8c?file=/src/App.js:130-162
