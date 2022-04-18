@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 
-export default function Input({
+export default function InputText({
   className,
-  type,
   name,
   value,
   register,
@@ -47,7 +46,7 @@ let isError = Object.values(errors)[0]
       >
 
       <input
-        type={type}
+        type="text"
         className="bg-transparent outline-none w-full px-4 py-2"
         onFocus={handleFocus}
         onBlur={handleBlur}

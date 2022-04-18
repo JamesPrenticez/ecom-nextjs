@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 
 import Stepper from '../../components/checkout/Stepper';
 import Map from '../../components/map/Map'
-import Input from '../../components/common/Input';
+import InputText from '../../components/common/InputText';
 
 export default function Shipping() {
   const {
@@ -40,6 +40,10 @@ export default function Shipping() {
     country: "New Zealand"
   }
 
+
+  const handleClickNewsletter = () => {
+    console.log("user subbed to newletter")
+  }
 
   // const {userInfo, cart: { shippingAddress }} = state;
   // const { location } = shippingAddress;
@@ -85,10 +89,9 @@ export default function Shipping() {
       >
         {/* ---------- Email ---------- */}
 
-        <Input
+        <InputText
           className="col-span-2"
           color="ring-primary-link"
-          type="text"
           name="Email Address"
           value="email"
           placeholder="email@example.com"
@@ -96,9 +99,21 @@ export default function Shipping() {
           errors={errors}
           mistakes={{
             required: {message: "email address required"}, 
-            maxLength: {message: "maximum of 32 characters", value: 22}, 
+            maxLength: {message: "maximum of 32 characters", value: 32}, 
           }}
         />
+
+        <div className="col-span-2 flex items-center space-x-2 ">
+          <input type="checkbox" className="accent-primary-link text-secondary-text h-4 w-4" {...register("newsletter")} />
+          <small>Email me with new and offers</small>
+        </div>
+
+        <button 
+          className="text-center p-2 w-full border border-primary-action rounded-md text-primary-action mx-auto hover:bg-primary-action hover:text-secondary-text"
+          type="submit"
+        >
+              Continue
+        </button>
 
         {/* ---------- First Name ---------- */}
         {/* <label htmlFor="firstName" className="mb-5 cols-span-1 bg-purple-500 ">
@@ -191,8 +206,8 @@ export default function Shipping() {
             )}
           />
         </label> */}
-{/* 
-        <button
+
+        {/* <button
               type="button"
               onClick={chooseLocationHandler}
             >
@@ -200,10 +215,8 @@ export default function Shipping() {
             </button>
             <p>
               {location.lat && `${location.lat}, ${location.lat}`}
-            </p>
-            <button variant="contained" type="submit">
-              Continue
-        </button> */}
+            </p> */}
+
         </form>
       </div>
 
