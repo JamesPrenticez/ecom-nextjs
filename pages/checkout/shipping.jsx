@@ -73,7 +73,7 @@ export default function Shipping() {
   // }
 
   return (
-    <div className="flex max-w-7xl mx-auto">
+    <div className="flex min-h-screen max-w-7xl mx-auto border-x border-[#d9d9d9]">
       {/* --------- Container - Left ---------  */}
       <div className="w-1/2 p-6">
 
@@ -86,6 +86,7 @@ export default function Shipping() {
         {/* ---------- Email ---------- */}
 
         <Input
+          className="col-span-2"
           color="ring-primary-link"
           type="text"
           name="Email Address"
@@ -207,7 +208,7 @@ export default function Shipping() {
       </div>
 
       {/* --------- Container - Right ---------  */}
-      <div className="flex-col w-1/2 p-6 bg-[#fafafa]">
+      <div className="flex-col w-1/2 p-6 bg-[#fafafa] border-l border-[#d9d9d9]">
         <h1>Product</h1>
       </div>
 

@@ -1,12 +1,10 @@
 import React, { useState } from 'react'
 
 export default function Input({
-  color,
+  className,
   type,
   name,
   value,
-  defaultValue,
-  placeholder,
   register,
   errors,
   mistakes
@@ -14,13 +12,11 @@ export default function Input({
 
 const [active, setActive] = useState(true)
 
-const handleFocus = (e) => {
-  console.log("foucus", e.target.value)
+const handleFocus = () => {
   setActive(true)
 }
 
 const handleBlur = (e) => {
-  console.log("blur", e.target.value)
   if (e.target.value) {
     return;
  } else {
@@ -31,12 +27,11 @@ const handleBlur = (e) => {
 let isError = Object.values(errors)[0]
 //console.log(isError)
 
-console.log(active)
   return (
-    <div>
-    <fieldset className={`relative bg-transparent border-2  shadow rounded w-full mt-2
-       ${errors.value && "border-red-500"}
-       ${active ? "border-blue-500" : "border-transparent"}`}
+    <div className={className}>
+    <fieldset className={`relative bg-transparent border rounded w-full mt-2 transition ease-in-out
+       ${isError && "border-red-500"}
+       ${active ? "border-primary-link" : "border-[#d9d9d9]"}`}
       >
 
       <legend
@@ -45,6 +40,7 @@ console.log(active)
       >
         {name}
       </legend>
+
       <label htmlFor={value} 
         onFocus={handleFocus}
         onBlur={handleBlur}
