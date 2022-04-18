@@ -81,22 +81,21 @@ export default function Shipping() {
       <Stepper activeStep={1} />
       <form 
         onSubmit={handleSubmit(onSubmit)}
-        className="grid grid-cols-2 gap-2"
+        className="grid grid-cols-2 gap-2 "
       >
         {/* ---------- Email ---------- */}
+
         <Input
           color="ring-primary-link"
           type="text"
           name="Email Address"
           value="email"
-          defaultValue={defaultValues.email}
           placeholder="email@example.com"
           register={register}
           errors={errors}
           mistakes={{
-            required: {message: "first name required"}, 
+            required: {message: "email address required"}, 
             maxLength: {message: "maximum of 32 characters", value: 22}, 
-            pattern: {message: "Email is contains invalid characters", value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i}, 
           }}
         />
 
@@ -191,7 +190,7 @@ export default function Shipping() {
             )}
           />
         </label> */}
-
+{/* 
         <button
               type="button"
               onClick={chooseLocationHandler}
@@ -203,7 +202,7 @@ export default function Shipping() {
             </p>
             <button variant="contained" type="submit">
               Continue
-            </button>
+        </button> */}
         </form>
       </div>
 
