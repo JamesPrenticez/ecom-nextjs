@@ -9,7 +9,7 @@ export default function InputText({
   mistakes
 }){
 
-const [active, setActive] = useState(true)
+const [active, setActive] = useState(false)
 
 const handleFocus = () => {
   setActive(true)
@@ -34,7 +34,7 @@ let isError = Object.values(errors)[0]
       >
 
       <legend
-        className={`text-primary-text text-[1rem] tansform transition origin-top-left ease-in-out ml-2 px-2
+        className={`text-primary-text text-[1rem] tansform transition origin-top-left ease-in-out ml-2 px-2 select-none pointer-events-none
         ${active ? "text-[.75rem] !leading-[0rem] " : "absolute translate-y-2"}`}
       >
         {name}
