@@ -18,7 +18,7 @@ export default function Stepper({ activeStep = 0 }) {
   }
 
   return (
-    <div className="flex  text-sm">
+    <div className="flex text-xs">
       {steps.map((step) => (
           <div
             key={step.id}
@@ -30,7 +30,7 @@ export default function Stepper({ activeStep = 0 }) {
             >
               {step.name}
             </a>
-            <ChevronRight className={`${step.id === steps.length -1 && "hidden"} h-3 w-3 mx-1 `}/>
+            <ChevronRight className={`${step.id === steps.length -1 && "hidden"} h-[.75rem] w-[.75rem] mx-1 `}/>
           </div>
         )
       )}

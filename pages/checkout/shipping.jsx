@@ -1,11 +1,11 @@
-import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import Layout from '../../components/Layout';
+import { useRouter } from 'next/router';
+import { signIn } from 'next-auth/react';
 import { useForm } from 'react-hook-form';
 
 import Stepper from '../../components/checkout/Stepper';
-import Map from '../../components/map/Map'
 import InputText from '../../components/common/InputText';
+import Map from '../../components/map/Map'
 
 export default function Shipping() {
   const {
@@ -89,14 +89,19 @@ export default function Shipping() {
         onSubmit={handleSubmit(onSubmit)}
         className="grid grid-cols-2 gap-2 "
       >
-        {/* ---------- Email ---------- */}
+        {/* ---------- Contact Information / Already have an account ?---------- */}
+        <h5 className="col-span-1">Contact Information</h5>
+        <p className="col-span-1 text-xs ml-auto flex items-center">
+          Already have an account? &nbsp;
+          <span className="text-primary-link hover:cursor-pointer" onClick={signIn}>Log In</span>
+        </p>
 
+        {/* ---------- Email ---------- */}
         <InputText
           className="col-span-2"
           color="ring-primary-link"
           name="Email Address"
           value="email"
-          placeholder="email@example.com"
           register={register}
           errors={errors}
           mistakes={{
@@ -105,17 +110,50 @@ export default function Shipping() {
           }}
         />
 
-        <div className="col-span-2 flex items-center space-x-2 ">
+        {/* ---------- New Letter Checkbox ---------- */}
+        <div className="col-span-2 flex items-center space-x-2">
           <input 
             type="checkbox"
             className="accent-primary-link text-secondary-text h-4 w-4"
             checked={checked}
             onClick={(e) => setChecked(e.target.checked)}
             {...register("newsletter")}
-          />
-          <label className="text-sm">Email me with new and offers</label>
+            />
+          <label className="text-xs">Email me with new and offers</label>
         </div>
 
+        {/* ---------- Shipping Address ---------- */}
+        <h5 className="col-span-2 mt-6">Shipping Address</h5>
+
+        {/* ---------- First Name ---------- */}
+        <InputText
+          className="col-span-1"
+          color="ring-primary-link"
+          name="First Name"
+          value="firstName"
+          register={register}
+          errors={errors}
+          mistakes={{
+            required: {message: "first name required"}, 
+            maxLength: {message: "maximum of 32 characters", value: 32}, 
+          }}
+        />
+
+        {/* ---------- Last Name ---------- */}
+        <InputText
+          className="col-span-1"
+          color="ring-primary-link"
+          name="Last Name"
+          value="lastName"
+          register={register}
+          errors={errors}
+          mistakes={{
+            required: {message: "last name required"}, 
+            maxLength: {message: "maximum of 32 characters", value: 32}, 
+          }}
+        />
+
+        {/* ---------- Submit Button ---------- */}
         <button 
           className="text-center p-2 w-full border border-primary-action rounded-md text-primary-action mx-auto hover:bg-primary-action hover:text-secondary-text"
           type="submit"
