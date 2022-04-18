@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 import Layout from '../../components/Layout';
 import { useForm } from 'react-hook-form';
 
@@ -15,6 +15,8 @@ export default function Shipping() {
   } = useForm({
     mode: 'onChange',
   });
+
+  const [checked, setChecked] = useState(true);
 
   const router = useRouter();
 
@@ -104,15 +106,21 @@ export default function Shipping() {
         />
 
         <div className="col-span-2 flex items-center space-x-2 ">
-          <input type="checkbox" className="accent-primary-link text-secondary-text h-4 w-4" {...register("newsletter")} />
-          <small>Email me with new and offers</small>
+          <input 
+            type="checkbox"
+            className="accent-primary-link text-secondary-text h-4 w-4"
+            checked={checked}
+            onClick={(e) => setChecked(e.target.checked)}
+            {...register("newsletter")}
+          />
+          <label className="text-sm">Email me with new and offers</label>
         </div>
 
         <button 
           className="text-center p-2 w-full border border-primary-action rounded-md text-primary-action mx-auto hover:bg-primary-action hover:text-secondary-text"
           type="submit"
         >
-              Continue
+          Continue
         </button>
 
         {/* ---------- First Name ---------- */}
