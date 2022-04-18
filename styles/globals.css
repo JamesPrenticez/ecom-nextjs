@@ -13,6 +13,8 @@
     --color-primary-action: #22c55e;
 }
 
+/* fafafa */
+
 [data-theme="dark"] {
     --color-primary-text: white;
     --color-secondary-text: black;

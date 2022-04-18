@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 
 import Stepper from '../../components/checkout/Stepper';
 import Map from '../../components/map/Map'
+import Input from '../../components/common/Input';
 
 export default function Shipping() {
   const {
@@ -72,19 +73,36 @@ export default function Shipping() {
   // }
 
   return (
-    <Layout title="Shipping Address">
+    <div className="flex max-w-7xl mx-auto">
+      {/* --------- Container - Left ---------  */}
+      <div className="w-1/2 p-6">
+
       <h1> Shipping Details </h1>
       <Stepper activeStep={1} />
       <form 
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col-2 p-5 max-w-7xl mx-auto"
+        className="grid grid-cols-2 gap-2"
       >
-      {/* Container - Left */}
-      <div className="flex-col w-1/2 p-6">
+        {/* ---------- Email ---------- */}
+        <Input
+          color="ring-primary-link"
+          type="text"
+          name="Email Address"
+          value="email"
+          defaultValue={defaultValues.email}
+          placeholder="email@example.com"
+          register={register}
+          errors={errors}
+          mistakes={{
+            required: {message: "first name required"}, 
+            maxLength: {message: "maximum of 32 characters", value: 22}, 
+            pattern: {message: "Email is contains invalid characters", value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i}, 
+          }}
+        />
 
         {/* ---------- First Name ---------- */}
-        <label htmlFor="firstName" className="block mb-5">
-          <h5 className="inline text-primary-text">First Name</h5>
+        {/* <label htmlFor="firstName" className="mb-5 cols-span-1 bg-purple-500 ">
+          <h5 className="text-primary-text">First Name</h5>
           {errors.firstName && (
             <>
               <small className="text-red-500 italic">- &nbsp;
@@ -97,7 +115,7 @@ export default function Shipping() {
           }
           <input
             type="text"
-            className={`shadow rounded py-2 px-3 form-input mt-1 block w-full outline-none focus:ring-2 ${errors.firstName ? "ring-red-500" : "ring-primary-link"}`}
+            className={`shadow rounded py-2 px-3 mt-1 block w-1/2 outline-none focus:ring-2 ${errors.firstName ? "ring-red-500" : "ring-primary-link"}`}
             defaultValue={defaultValues.firstName}
             placeholder="firstname"
             {...register("firstName", 
@@ -109,10 +127,10 @@ export default function Shipping() {
               }
             )}
           />
-        </label>
+        </label> */}
 
         {/* ---------- Last Name ---------- */}
-        <label htmlFor="lastName" className="block mb-5">
+        {/* <label htmlFor="lastName" className="inline w-1/2 mb-5">
           <h5 className="inline text-primary-text">Last Name</h5>
           {errors.lastName && (
             <>
@@ -138,10 +156,10 @@ export default function Shipping() {
               }
             )}
           />
-        </label>
+        </label> */}
 
         {/* ---------- Email ---------- */}
-        <label htmlFor="email" className="blck mb-5">
+        {/* <label htmlFor="email" className="blck mb-5">
           <h5 className="text-primary-text">Email Address</h5>
           {errors.email && (
             <>
@@ -172,7 +190,7 @@ export default function Shipping() {
               }
             )}
           />
-        </label>
+        </label> */}
 
         <button
               type="button"
@@ -186,13 +204,16 @@ export default function Shipping() {
             <button variant="contained" type="submit">
               Continue
             </button>
+        </form>
       </div>
-      <div className="flex-col w-1/2 p-6 bg-gray-300">
+
+      {/* --------- Container - Right ---------  */}
+      <div className="flex-col w-1/2 p-6 bg-[#fafafa]">
         <h1>Product</h1>
       </div>
 
 
-      </form>
-    </Layout>
+    </div>
+
   );
 }
