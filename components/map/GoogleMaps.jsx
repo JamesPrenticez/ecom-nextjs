@@ -39,5 +39,5 @@ export default function GoogleMaps({ options, address, setOptions}) {
     }
   }, [options])
 
-  return <div id="map" className="h-64 w-64 map" ref={mapRef} />
+  return <div id="map" className="h-[14rem] w-full map" ref={mapRef} />
 }

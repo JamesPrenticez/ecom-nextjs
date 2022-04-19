@@ -126,7 +126,6 @@
     }
 
     .map { 
-        width: 1000px !important;
     }
     
     .map .gmnoprint a,.gmnoprint span,.gm-style-cc { 
@@ -134,8 +133,8 @@
     }
     
     .map a[href^="http://maps.google.com/maps"], a[href^="https://maps.google.com/maps"] ::before {
-        content: "Powered by";
-        color: DeepSkyBlue;
+        content: "powered by";
+        color: #787878;
         font-size: 15px;
         float: right;
         font-family: system-ui;

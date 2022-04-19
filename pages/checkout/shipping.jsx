@@ -1,82 +1,61 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { signIn } from 'next-auth/react';
-import { useForm } from 'react-hook-form';
 
 import Stepper from '../../components/checkout/Stepper';
 import InputText from '../../components/common/InputText';
+
+import { Wrapper, Status } from "@googlemaps/react-wrapper"
+import GoogleAutoComplete from '../../components/map/GoogleAutoComplete';
 import Map from '../../components/map/Map'
+import GoogleMaps from '../../components/map/GoogleMaps';
+
+const myApiKey = process.env.NEXT_PUBLIC_GOOGLE_API_KEY //this is currently public!
+let defaultOptions = {
+  center: {lat: 36.1699421, lng: -115.1398149}, // Las Vegas
+  zoom: 9,
+  disableDefaultUI: true, // remove controls
+  gestureHandling: "none", // prevent mouse actions panning/scroll zooming
+  keyboardShortcuts: false // prevents keyborad actions and removes annoying overlay in bottom right
+}
 
 export default function Shipping() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    mode: 'onChange',
-  });
+  const [options, setOptions] = useState(defaultOptions)
+  const [address, setAddress] = useState("") // this need to be fixed in GoogleAutoComplete
 
-  const [checked, setChecked] = useState(true);
-
-  const router = useRouter();
-
-  const defaultValues = {
-    firstName: "James", // user.firstName
-    lastName: "Bond", // user.lastName
-    email: 'JamesBond@example.com', // user.email
+  const [contactInfo, setContactInfo] = useState(
+    {
+      email: "",
+      firstName: "",
+      lastName: "",
+      address: ""
+    }
+  )
+  
+  const handleChange = (event) => {
+    setContactInfo({ ...contactInfo, [event.target.name]: event.target.value });
   };
 
-  const shippingAddress = {
-    fullName: "James Prentice", 
-    address: "2 Mission Cove",
-    city: "Dunedin",
-    postalCode: 9016,
-    country: "New Zealand"
-  }
-
-  const userInfo = {
-    fullName: "James Prentice", 
-    address: "2 Mission Cove",
-    city: "Dunedin",
-    postalCode: 9016,
-    country: "New Zealand"
-  }
-
-
-  const handleClickNewsletter = () => {
-    console.log("user subbed to newletter")
-  }
-
-  // const {userInfo, cart: { shippingAddress }} = state;
-  // const { location } = shippingAddress;
-
-  const onSubmit  = (data) => {
+  const onSubmit= () => {
+    const data = contactInfo
     alert(JSON.stringify(data))
+  } 
+
+  const render = (status) => {
+    switch (status) {
+      case Status.LOADING:
+        return <h1>LOADING</h1> //spinner
+      case Status.FAILURE:
+        return <h1>ERROR</h1> // error page
+      case Status.SUCCESS:
+        return (
+        <div className="col-span-2">
+          <GoogleAutoComplete setOptions={setOptions} setAddress={setAddress} handleChange={handleChange} value={contactInfo.address}/>
+          <GoogleMaps options={options} address={address} setOptions={setOptions}/>
+        </div>
+        )
+    }
   }
-
-  const chooseLocationHandler = () => {}
-
-  // const submitHandler = ({ fullName, address, city, postalCode, country }) => {
-  //   dispatch({
-  //     type: 'SAVE_SHIPPING_ADDRESS',
-  //     payload: { fullName, address, city, postalCode, country, location },
-  //   });
-  //   router.push('/payment');
-  // };
-
-  // const chooseLocationHandler = () => {
-  //   const fullName = getValues('fullName');
-  //   const address = getValues('address');
-  //   const city = getValues('city');
-  //   const postalCode = getValues('postalCode');
-  //   const country = getValues('country');
-  //   dispatch({
-  //     type: 'SAVE_SHIPPING_ADDRESS',
-  //     payload: { fullName, address, city, postalCode, country },
-  //   });
-
-  //   router.push('/map');
-  // }
 
   return (
     <div className="flex min-h-screen max-w-7xl mx-auto border-x border-[#d9d9d9]">
@@ -86,7 +65,7 @@ export default function Shipping() {
       <h1> Shipping Details </h1>
       <Stepper activeStep={1} />
       <form 
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={onSubmit}
         className="grid grid-cols-2 gap-2 "
       >
         {/* ---------- Contact Information / Already have an account ?---------- */}
@@ -98,27 +77,23 @@ export default function Shipping() {
 
         {/* ---------- Email ---------- */}
         <InputText
+          name="email"
+          value={contactInfo.email}
           className="col-span-2"
           color="ring-primary-link"
-          name="Email Address"
-          value="email"
-          register={register}
-          errors={errors}
-          mistakes={{
-            required: {message: "email address required"}, 
-            maxLength: {message: "maximum of 32 characters", value: 32}, 
-          }}
+          label="Email Address"
+          handleChange={handleChange}
         />
 
         {/* ---------- New Letter Checkbox ---------- */}
         <div className="col-span-2 flex items-center space-x-2">
           <input 
             type="checkbox"
+            name="newsletter"
             className="accent-primary-link text-secondary-text h-4 w-4"
-            checked={checked}
-            onClick={(e) => setChecked(e.target.checked)}
-            {...register("newsletter")}
-            />
+            defaultChecked={contactInfo.newsletter}
+            onClick={(e) => setContactInfo({ ...contactInfo, [e.target.name]: e.target.checked })}
+          />
           <label className="text-xs">Email me with new and offers</label>
         </div>
 
@@ -126,7 +101,7 @@ export default function Shipping() {
         <h5 className="col-span-2 mt-6">Shipping Address</h5>
 
         {/* ---------- First Name ---------- */}
-        <InputText
+        {/* <InputText
           className="col-span-1"
           color="ring-primary-link"
           name="First Name"
@@ -137,10 +112,10 @@ export default function Shipping() {
             required: {message: "first name required"}, 
             maxLength: {message: "maximum of 32 characters", value: 32}, 
           }}
-        />
+        /> */}
 
         {/* ---------- Last Name ---------- */}
-        <InputText
+        {/* <InputText
           className="col-span-1"
           color="ring-primary-link"
           name="Last Name"
@@ -151,7 +126,10 @@ export default function Shipping() {
             required: {message: "last name required"}, 
             maxLength: {message: "maximum of 32 characters", value: 32}, 
           }}
-        />
+        /> */}
+
+        <Wrapper apiKey={myApiKey} render={render} libraries={["places"]}/> 
+
 
         {/* ---------- Submit Button ---------- */}
         <button 
