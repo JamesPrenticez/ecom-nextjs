@@ -1,7 +1,7 @@
 import React, { forwardRef, useState } from 'react'
 
 //const InputText = React.forwardRef((props, ref) => {
-const InputText = React.forwardRef(({ className, name, value, handleChange}, ref) => {
+const InputText = forwardRef(({ className, name, label, value, handleChange}, ref) => {
   const [active, setActive] = useState(false)
 
   function handleFocus(){
@@ -27,7 +27,7 @@ const InputText = React.forwardRef(({ className, name, value, handleChange}, ref
           className={`text-primary-text text-[1rem] tansform transition origin-top-left ease-in-out ml-2 px-2 select-none pointer-events-none
           ${active ? "text-[.75rem] !leading-[0rem] " : "absolute translate-y-2"}`}
         >
-          {name}
+          {label}
         </legend>
 
         <label htmlFor={name} 
@@ -39,6 +39,7 @@ const InputText = React.forwardRef(({ className, name, value, handleChange}, ref
           ref={ref}
           name={name}
           value={value}
+          placeholder=""
           onChange={handleChange}
           type="text"
           className="bg-transparent outline-none w-full px-4 py-2"

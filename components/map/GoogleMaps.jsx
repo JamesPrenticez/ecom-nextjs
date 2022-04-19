@@ -12,15 +12,11 @@ export default function GoogleMaps({ options, address, setOptions}) {
         //Handle Success
         (userLocation) => {
           // Re-write options with our new user location
-          setOptions({
+          setOptions({...options,
             center: {
               lat: userLocation.coords.latitude,
               lng: userLocation.coords.longitude
             },
-            zoom: 9,
-            disableDefaultUI: true,
-            gestureHandling: "none",
-            keyboardShortcuts: false
           })
         },
         //Handle Error
@@ -39,5 +35,5 @@ export default function GoogleMaps({ options, address, setOptions}) {
     }
   }, [options])
 
-  return <div id="map" className="h-[14rem] w-full map" ref={mapRef} />
+  return <div id="map" className="h-[28rem] w-full map" ref={mapRef} />
 }

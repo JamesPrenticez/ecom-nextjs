@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useRouter } from 'next/router';
 import { signIn } from 'next-auth/react';
 
 import Stepper from '../../components/checkout/Stepper';
@@ -7,13 +6,12 @@ import InputText from '../../components/common/InputText';
 
 import { Wrapper, Status } from "@googlemaps/react-wrapper"
 import GoogleAutoComplete from '../../components/map/GoogleAutoComplete';
-import Map from '../../components/map/Map'
 import GoogleMaps from '../../components/map/GoogleMaps';
 
 const myApiKey = process.env.NEXT_PUBLIC_GOOGLE_API_KEY //this is currently public!
 let defaultOptions = {
   center: {lat: 36.1699421, lng: -115.1398149}, // Las Vegas
-  zoom: 9,
+  zoom: 11,
   disableDefaultUI: true, // remove controls
   gestureHandling: "none", // prevent mouse actions panning/scroll zooming
   keyboardShortcuts: false // prevents keyborad actions and removes annoying overlay in bottom right
@@ -23,15 +21,31 @@ export default function Shipping() {
   const [options, setOptions] = useState(defaultOptions)
   const [address, setAddress] = useState("") // this need to be fixed in GoogleAutoComplete
 
+  // const [contactInfo, setContactInfo] = useState(
+  //   {
+  //     email: "",
+  //     firstName: "",
+  //     lastName: "",
+  //     address: ""
+  //   }
+  // )
   const [contactInfo, setContactInfo] = useState(
     {
-      email: "",
-      firstName: "",
-      lastName: "",
-      address: ""
+      firstName: {value: ""},
+      lastName: {value: ""},
+      email: {
+        value: "",
+        errors: {
+          required: { message: "Email is required" },
+          maxLength: { message: "Email is required", value: 64 },
+          pattern1: {message: "", value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i}
+        }
+      },
+      newsletter: {value: true},
+      address: { value: "" }
     }
   )
-  
+
   const handleChange = (event) => {
     setContactInfo({ ...contactInfo, [event.target.name]: event.target.value });
   };
@@ -49,13 +63,16 @@ export default function Shipping() {
         return <h1>ERROR</h1> // error page
       case Status.SUCCESS:
         return (
-        <div className="col-span-2">
-          <GoogleAutoComplete setOptions={setOptions} setAddress={setAddress} handleChange={handleChange} value={contactInfo.address}/>
+        <>
+          {/* NEED TO FIX SETADDRESS */}
+          <GoogleAutoComplete options={options} setOptions={setOptions} setAddress={setAddress} handleChange={handleChange} value={contactInfo.address.value}/>
           <GoogleMaps options={options} address={address} setOptions={setOptions}/>
-        </div>
+        </>
         )
     }
   }
+
+  console.log(address)
 
   return (
     <div className="flex min-h-screen max-w-7xl mx-auto border-x border-[#d9d9d9]">
@@ -75,68 +92,74 @@ export default function Shipping() {
           <span className="text-primary-link hover:cursor-pointer" onClick={signIn}>Log In</span>
         </p>
 
-        {/* ---------- Email ---------- */}
+        {/* ---------- First Name ---------- */}
         <InputText
-          name="email"
-          value={contactInfo.email}
-          className="col-span-2"
+          name="firstName"
+          label="First Name"
           color="ring-primary-link"
-          label="Email Address"
+          className="col-span-1"
+          value={contactInfo.firstName.value}
           handleChange={handleChange}
         />
 
-        {/* ---------- New Letter Checkbox ---------- */}
-        <div className="col-span-2 flex items-center space-x-2">
-          <input 
-            type="checkbox"
-            name="newsletter"
-            className="accent-primary-link text-secondary-text h-4 w-4"
-            defaultChecked={contactInfo.newsletter}
-            onClick={(e) => setContactInfo({ ...contactInfo, [e.target.name]: e.target.checked })}
-          />
-          <label className="text-xs">Email me with new and offers</label>
+        {/* ---------- Last Name ---------- */}
+        <InputText
+          name="lastName"
+          label="Last Name"
+          color="ring-primary-link"
+          className="col-span-1"
+          value={contactInfo.lastName.value}
+          handleChange={handleChange}
+        />
+
+        {/* ---------- Email ---------- */}
+        <InputText
+          name="email"
+          label="Email Address"
+          color="ring-primary-link"
+          className="col-span-2"
+          value={contactInfo.email.value}
+          handleChange={handleChange}
+        />
+
+        {/* ---------- Newsletter Checkbox ---------- */}
+        <div className="col-span-1">
+          <label className="flex items-center space-x-2 select-none">
+            <input 
+              type="checkbox"
+              name="newsletter"
+              className="accent-primary-link text-secondary-text h-4 w-4"
+              defaultChecked={contactInfo.newsletter.value}
+              onClick={(e) => setContactInfo({ ...contactInfo, [e.target.name]: e.target.value })}
+            />
+            <small>Email me with new and offers</small>
+          </label>
         </div>
 
         {/* ---------- Shipping Address ---------- */}
         <h5 className="col-span-2 mt-6">Shipping Address</h5>
 
-        {/* ---------- First Name ---------- */}
-        {/* <InputText
-          className="col-span-1"
-          color="ring-primary-link"
-          name="First Name"
-          value="firstName"
-          register={register}
-          errors={errors}
-          mistakes={{
-            required: {message: "first name required"}, 
-            maxLength: {message: "maximum of 32 characters", value: 32}, 
-          }}
-        /> */}
-
-        {/* ---------- Last Name ---------- */}
-        {/* <InputText
-          className="col-span-1"
-          color="ring-primary-link"
-          name="Last Name"
-          value="lastName"
-          register={register}
-          errors={errors}
-          mistakes={{
-            required: {message: "last name required"}, 
-            maxLength: {message: "maximum of 32 characters", value: 32}, 
-          }}
-        /> */}
-
-        <Wrapper apiKey={myApiKey} render={render} libraries={["places"]}/> 
 
 
-        {/* ---------- Submit Button ---------- */}
+        {/* ---------- Street Address & Map ---------- */}
+        <div className="col-span-2 space-y-4">
+          <Wrapper apiKey={myApiKey} render={render} libraries={["places"]}/> 
+        </div>
+
+        {/* ---------- Continue Shopping Button ---------- */}
+        <button 
+          className="text-center p-2 w-full border border-yellow-500 rounded-md text-yellow-500 mx-auto hover:bg-yellow-500 hover:text-secondary-text"
+          type="submit"
+        >
+          Continue Shopping
+        </button>
+
+        {/* ---------- Proceed to Payment Button ---------- */}
         <button 
           className="text-center p-2 w-full border border-primary-action rounded-md text-primary-action mx-auto hover:bg-primary-action hover:text-secondary-text"
           type="submit"
         >
-          Continue
+          Proceed to Payment
         </button>
 
         {/* ---------- First Name ---------- */}

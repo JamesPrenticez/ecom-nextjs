@@ -1,8 +1,10 @@
 export function addressFormatter(address_components){
+    //console.log(address_components)
+
     const ShouldBeComponent = {
       street_number: ["street_number"],
       street: ["street_address", "route"],
-      suburb: ["neighborhood"],
+      suburb: ["sublocality_level_1", "sublocality", "political"],
       city: ["locality" ],
       state: ["administrative_area_level_1", "administrative_area_level_2"],
       country: ["country"],
