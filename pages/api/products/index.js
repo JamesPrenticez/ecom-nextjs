@@ -17,6 +17,7 @@ export default async function getProducts(req, res){
         published: true
       },
       select: {
+        id: true,
         name: true,
         slug: true,
         image: true,

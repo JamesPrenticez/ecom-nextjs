@@ -16,7 +16,7 @@ export default async function getProducts(req, res){
         image: true,
         brand: true,
         description: true,
-        color: true,
+        colors: true,
         price: true,
         num_in_stock: true,
         reviews: {
@@ -37,7 +37,7 @@ export default async function getProducts(req, res){
         image: item.image,
         brand: item.brand,
         description: item.description,
-        color: item.color,
+        colors: item.colors,
         price: item.price,
         num_in_stock: item.num_in_stock,
         num_reviews: ratingCount,

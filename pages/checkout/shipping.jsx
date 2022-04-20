@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 import { signIn } from 'next-auth/react';
 
+import NextImage from 'next/image'
+
 import Stepper from '../../components/checkout/Stepper';
 import InputText from '../../components/common/InputText';
 
 import { Wrapper, Status } from "@googlemaps/react-wrapper"
 import GoogleAutoComplete from '../../components/map/GoogleAutoComplete';
 import GoogleMaps from '../../components/map/GoogleMaps';
+
+import { useSelector } from 'react-redux';
+
 
 const myApiKey = process.env.NEXT_PUBLIC_GOOGLE_API_KEY //this is currently public!
 let defaultOptions = {
@@ -20,6 +25,7 @@ let defaultOptions = {
 export default function Shipping() {
   const [options, setOptions] = useState(defaultOptions)
   const [address, setAddress] = useState("") // this need to be fixed in GoogleAutoComplete
+  const cartItems = useSelector((state) => state.cart.cartItems);
 
   const [contactInfo, setContactInfo] = useState(
     {
@@ -153,115 +159,40 @@ export default function Shipping() {
         >
           Proceed to Payment
         </button>
-
-        {/* ---------- First Name ---------- */}
-        {/* <label htmlFor="firstName" className="mb-5 cols-span-1 bg-purple-500 ">
-          <h5 className="text-primary-text">First Name</h5>
-          {errors.firstName && (
-            <>
-              <small className="text-red-500 italic">- &nbsp;
-                { errors.firstName.type === "required" ? errors.firstName.message
-                  : errors.firstName.type === "maxLength" ? errors.firstName.message
-                  : null }
-              </small>
-            </>
-            )
-          }
-          <input
-            type="text"
-            className={`shadow rounded py-2 px-3 mt-1 block w-1/2 outline-none focus:ring-2 ${errors.firstName ? "ring-red-500" : "ring-primary-link"}`}
-            defaultValue={defaultValues.firstName}
-            placeholder="firstname"
-            {...register("firstName", 
-              { required: "first name required",
-                maxLength: { 
-                  value: 32,
-                  message: "maximum of 32 characters"
-                },
-              }
-            )}
-          />
-        </label> */}
-
-        {/* ---------- Last Name ---------- */}
-        {/* <label htmlFor="lastName" className="inline w-1/2 mb-5">
-          <h5 className="inline text-primary-text">Last Name</h5>
-          {errors.lastName && (
-            <>
-              <small className="text-red-500 italic">- &nbsp;
-                { errors.lastName.type === "required" ? errors.lastName.message
-                  : errors.lastName.type === "maxLength" ? errors.lastName.message
-                  : null }
-              </small>
-            </>
-            )
-          }
-          <input
-            type="text"
-            className={`shadow rounded py-2 px-3 form-input mt-1 block w-full outline-none focus:ring-2 ${errors.lastName ? "ring-red-500" : "ring-primary-link"}`}
-            defaultValue={defaultValues.lastName}
-            placeholder="lastname"
-            {...register("lastName", 
-              { required: "last name required",
-                maxLength: { 
-                  value: 32,
-                  message: "maximum of 32 characters"
-                },
-              }
-            )}
-          />
-        </label> */}
-
-        {/* ---------- Email ---------- */}
-        {/* <label htmlFor="email" className="blck mb-5">
-          <h5 className="text-primary-text">Email Address</h5>
-          {errors.email && (
-            <>
-              <small className="text-red-500 italic">- &nbsp;
-                { errors.email.type === "required" ? errors.email.message
-                  : errors.email.type === "maxLength" ? errors.email.message
-                  : errors.email.type === "pattern" ? errors.email.message
-                  : null }
-              </small>
-            </>
-            )
-          }
-          <input
-            type="text"
-            className={`shadow rounded py-2 px-3 form-input mt-1 block w-full outline-none focus:ring-2 ${errors.firstName ? "ring-red-500" : "ring-primary-link"}`}
-            defaultValue={defaultValues.email}
-            placeholder="email@example.com"
-            {...register("email", 
-              { required: "email address required",
-                maxLength: { 
-                  value: 64,
-                  message: "maximum of 64 characters"
-                },
-                pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                  message: "Email is contains invalid characters"
-                }
-              }
-            )}
-          />
-        </label> */}
-
-        {/* <button
-              type="button"
-              onClick={chooseLocationHandler}
-            >
-              Choose on map
-            </button>
-            <p>
-              {location.lat && `${location.lat}, ${location.lat}`}
-            </p> */}
-
+       
         </form>
       </div>
 
       {/* --------- Container - Right ---------  */}
       <div className="flex-col w-1/2 p-6 bg-[#fafafa] border-l border-[#d9d9d9]">
         <h1>Product</h1>
+        <div className="mt-12 grid gap-4">
+          {cartItems.map((item) => {
+            console.log(item.image)
+            return (
+                <div className="flex items-center space-x-2">
+                  <div className="w-16 relative">
+                    <NextImage
+                      className="rounded-lg"
+                      src={item.image}
+                      alt={item.name}
+                      width={50}
+                      height={50}
+                      layout={"responsive"}
+                    />
+                    {/* Quantity Badge */}
+                    <div className='bg-gray-500 text-secondary-text rounded-full h-[1rem] w-[1rem] text-xs flex items-center justify-center absolute -right-2 -top-2'>
+                      {item.quantity}
+                    </div>
+                  </div>
+       
+                  <h3 className="font-normal grow">{item.name}</h3>
+                  <p className="font-bold">${item.price} </p>
+
+              </div>
+            )
+          })}
+        </div>
       </div>
 
 
