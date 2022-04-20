@@ -24,7 +24,6 @@ let defaultOptions = {
 
 export default function Shipping() {
   const [options, setOptions] = useState(defaultOptions)
-  const [address, setAddress] = useState("") // this need to be fixed in GoogleAutoComplete
   const cartItems = useSelector((state) => state.cart.cartItems);
 
   const [contactInfo, setContactInfo] = useState(
@@ -39,18 +38,35 @@ export default function Shipping() {
           pattern1: {message: "", value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i}
         }
       },
+      phoneNumber: {value: Number(0)},
       newsletter: {value: true},
-      address: { value: "" }
     }
   )
 
-  const handleChange = (event) => {
+  const [shippingInfo, setShippingInfo] = useState({
+    address: "",
+    street_number: "",
+    street_name: "",
+    suburb: "",
+    city: "",
+    state:"",
+    country: "",
+    postal_code: ""
+  })
+  console.log(shippingInfo)
+
+
+  const handleChangeContactInfo = (event) => {
     setContactInfo({ ...contactInfo, [event.target.name]: event.target.value });
+  };
+  
+  const handleChangeShippingInfo = (event) => {
+    setShippingInfo({ ...shippingInfo, [event.target.name]: event.target.value });
   };
 
   const onSubmit= () => {
-    const data = contactInfo
-    alert(JSON.stringify(data))
+    alert(JSON.stringify(contactInfo))
+    alert(JSON.stringify(shippingInfo))
   } 
 
   const render = (status) => {
@@ -63,14 +79,12 @@ export default function Shipping() {
         return (
         <>
           {/* NEED TO FIX SETADDRESS */}
-          <GoogleAutoComplete options={options} setOptions={setOptions} setAddress={setAddress} handleChange={handleChange} value={contactInfo.address.value}/>
+          <GoogleAutoComplete options={options} setOptions={setOptions} handleChange={handleChangeShippingInfo} shippingInfo={shippingInfo} setShippingInfo={setShippingInfo}/>
           {/* <GoogleMaps options={options} address={address} setOptions={setOptions}/> */}
         </>
         )
     }
   }
-
-  console.log(address)
 
   return (
     <div className="flex min-h-screen max-w-7xl mx-auto border-x border-[#d9d9d9]">
@@ -97,7 +111,7 @@ export default function Shipping() {
           color="ring-primary-link"
           className="col-span-1"
           value={contactInfo.firstName.value}
-          handleChange={handleChange}
+          handleChange={handleChangeContactInfo}
         />
 
         {/* ---------- Last Name ---------- */}
@@ -107,7 +121,7 @@ export default function Shipping() {
           color="ring-primary-link"
           className="col-span-1"
           value={contactInfo.lastName.value}
-          handleChange={handleChange}
+          handleChange={handleChangeContactInfo}
         />
 
         {/* ---------- Email ---------- */}
@@ -117,7 +131,7 @@ export default function Shipping() {
           color="ring-primary-link"
           className="col-span-2"
           value={contactInfo.email.value}
-          handleChange={handleChange}
+          handleChange={handleChangeContactInfo}
         />
 
         {/* ---------- Newsletter Checkbox ---------- */}
@@ -168,9 +182,8 @@ export default function Shipping() {
         <h1>Product</h1>
         <div className="mt-12 grid gap-4">
           {cartItems.map((item) => {
-            console.log(item.image)
             return (
-                <div className="flex items-center space-x-2">
+                <div key={item.id} className="flex items-center space-x-2">
                   <div className="w-16 relative">
                     <NextImage
                       className="rounded-lg"

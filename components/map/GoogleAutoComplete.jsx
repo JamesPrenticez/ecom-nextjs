@@ -2,7 +2,7 @@ import React, {useRef, useState, useEffect} from 'react'
 import { addressFormatter,  } from './googleMapsHelpers'
 import InputText from '../common/InputText'
 
-export default function GoogleAutoComplete({ options, setOptions, setAddress, handleChange, value}) {
+export default function GoogleAutoComplete({ options, setOptions, handleChange, shippingInfo, setShippingInfo,}) {
   const [autoComplete, setAutoComplete] = useState(undefined)
   const inputRef = useRef()
   
@@ -10,8 +10,8 @@ export default function GoogleAutoComplete({ options, setOptions, setAddress, ha
     let infoObj = autoComplete.getPlace()
     let location = infoObj.geometry.location
     let address_components = infoObj.address_components
-    let address = addressFormatter(address_components)
-    setAddress(address)
+    let formattedAddress = addressFormatter(address_components)
+    setShippingInfo({formattedAddress, address: formattedAddress.street_number + " " +  formattedAddress.street_name})
     setOptions({
       ...options,
       center: location,
@@ -45,7 +45,7 @@ export default function GoogleAutoComplete({ options, setOptions, setAddress, ha
       label="Street Address"
       color="ring-primary-link"
       className="col-span-2"
-      value={value}
+      value={shippingInfo.address}
       handleChange={handleChange}
     />
   )

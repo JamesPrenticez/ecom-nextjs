@@ -28,7 +28,6 @@ async function clean() {
       " | user_ordered_item: " + f.length,
       " | user_notification: " + g.length,
     )
-    
   }
 
   clean()
