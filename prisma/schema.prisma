@@ -46,18 +46,19 @@ model verification_token {
 }
 
 model user {
-  id                String  @id @default(cuid())
-  first_name        String?
-  last_name         String
-  email             String? @unique
-  email_verified    Boolean
-  phone_number      String
-  image             String
-  account           account[]
-  session           session[]
-  address           user_address[]
-  user_cart_item    user_cart_item[]
-  user_ordered_item user_ordered_item[]
+  id                  String  @id @default(cuid())
+  first_name          String?
+  last_name           String
+  email               String? @unique
+  email_verified      Boolean
+  phone_number        String
+  image               String
+  account             account[]
+  session             session[]
+  address             user_address[]
+  user_cart_item      user_cart_item[]
+  user_ordered_item   user_ordered_item[]
+  user_notification   user_notification[]
 }
 
 model user_address {
@@ -99,6 +100,13 @@ model user_ordered_item {
   updated_at        DateTime @updatedAt
 }
 
+model user_notification {
+  id            String  @id @default(cuid())           
+  newsletter    Boolean
+  user_id       String
+  user          user    @relation(fields: [user_id], references: [id], onDelete: Cascade)
+}
+
 model product {
   id                  String @id @default(cuid())
   image               String?
@@ -110,7 +118,7 @@ model product {
   colors              String
   price               Float?
   num_in_stock        Int?
-  reviews             review[]
+  product_reviews     product_review[]
   user_cart_item      user_cart_item[]
   user_ordered_item   user_ordered_item[]
   created_at          DateTime @default(now())
@@ -118,7 +126,7 @@ model product {
   published           Boolean @default(false)
 }
 
-model review {
+model product_review {
   id           String @id @default(cuid())
   name         String?
   email        String?

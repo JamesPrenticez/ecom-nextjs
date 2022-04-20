@@ -1,4 +1,4 @@
-const reviews = [
+const product_reviews = [
   // ---------- Shirt 1 ---------- 
   {
     id: 'cl004kg800045l4vi49adng05',
@@ -233,4 +233,4 @@ const reviews = [
 
 ]
 
-module.exports = {reviews}
+module.exports = {product_reviews}

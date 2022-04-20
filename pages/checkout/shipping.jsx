@@ -64,7 +64,7 @@ export default function Shipping() {
         <>
           {/* NEED TO FIX SETADDRESS */}
           <GoogleAutoComplete options={options} setOptions={setOptions} setAddress={setAddress} handleChange={handleChange} value={contactInfo.address.value}/>
-          <GoogleMaps options={options} address={address} setOptions={setOptions}/>
+          {/* <GoogleMaps options={options} address={address} setOptions={setOptions}/> */}
         </>
         )
     }
