@@ -19,7 +19,8 @@ export default NextAuth({
       async authorize(){
         const user = {
           id: '1',
-          name: 'Elon Musk',
+          first_name: 'Elon',
+          last_name: 'Musk',
           email: 'elon@tesla.com',
           image: 'https://i.imgur.com/l7eQGiE.jpg'
         }

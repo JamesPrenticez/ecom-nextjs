@@ -3,7 +3,7 @@ export function addressFormatter(address_components){
 
     const ShouldBeComponent = {
       street_number: ["street_number"],
-      street: ["street_address", "route"],
+      street_name: ["street_address", "route"],
       suburb: ["sublocality_level_1", "sublocality", "political"],
       city: ["locality" ],
       state: ["administrative_area_level_1", "administrative_area_level_2"],
@@ -13,7 +13,7 @@ export function addressFormatter(address_components){
   
     let address = {
       street_number: "",
-      street: "",
+      street_name: "",
       suburb: "",
       city: "",
       state:"",
@@ -41,7 +41,7 @@ export function googleMapMarker(location, address, map) {
     '<div id="content">' +
       '<h5>Shipping Address</h5>' +
       '<div>' +
-        `<p><b>Street:</b> ${address.street_number + " " + address.street}</p>` +
+        `<p><b>Street:</b> ${address.street_number + " " + address.street_name}</p>` +
         `<p><b>Suburb:</b> ${address.suburb}</p>` +
         `<p><b>City:</b> ${address.city}</p>` +
         `<p><b>State:</b> ${address.state}</p>` +

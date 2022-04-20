@@ -6,7 +6,7 @@ const reviews = [
     email: 'AlanRoss@gmail.com',
     content: 'My neighbor Eller has one of these. She works as a butler and she says it looks amazing.',
     rating: 5,
-    productId: 'ckzywzytm00413svi6jezdk1o',
+    product_id: 'ckzywzytm00413svi6jezdk1o',
     approved: true,
   },
   {
@@ -15,7 +15,7 @@ const reviews = [
     email: 'IsaiahSimmmons@gmail.com',
     content: 'Fits perfectly',
     rating: 4.7,
-    productId: 'ckzywzytm00413svi6jezdk1o',
+    product_id: 'ckzywzytm00413svi6jezdk1o',
     approved: true,
   },
   {
@@ -24,7 +24,7 @@ const reviews = [
     email: 'EugeneJordan@gmail.com',
     content: 'A little bit small in the sholded, but ima pretty big guy',
     rating: 4,
-    productId: 'ckzywzytm00413svi6jezdk1o',
+    product_id: 'ckzywzytm00413svi6jezdk1o',
     approved: true,
   },
   // ---------- Shirt 2 ---------- 
@@ -34,7 +34,7 @@ const reviews = [
     email: 'BethGeorge@gmail.com',
     content: 'Nice color, but I find the fabric a bit itchy',
     rating: 3,
-    productId: 'cl00ep6zb0005eovi5oym6d8o',
+    product_id: 'cl00ep6zb0005eovi5oym6d8o',
     approved: true,
   },
   {
@@ -43,7 +43,7 @@ const reviews = [
     email: 'HarbertGerardet@gmail.com',
     content: 'Fantastic!',
     rating: 4.7,
-    productId: 'cl00ep6zb0005eovi5oym6d8o',
+    product_id: 'cl00ep6zb0005eovi5oym6d8o',
     approved: true,
   },
   {
@@ -52,7 +52,7 @@ const reviews = [
     email: 'SavannahCurtis@gmail.com',
     content: 'Gave it to my brother as a gift he loves it',
     rating: 4,
-    productId: 'cl00ep6zb0005eovi5oym6d8o',
+    product_id: 'cl00ep6zb0005eovi5oym6d8o',
     approved: true,
   },
   {
@@ -61,7 +61,7 @@ const reviews = [
     email: 'CharlieGregory@gmail.com',
     content: 'Nice! Would buy another.',
     rating: 4.6,
-    productId: 'cl00ep6zb0005eovi5oym6d8o',
+    product_id: 'cl00ep6zb0005eovi5oym6d8o',
     approved: true,
   },
   {
@@ -70,7 +70,7 @@ const reviews = [
     email: 'LeahFord@gmail.com',
     content: 'Happy with my purchace',
     rating: 3.9,
-    productId: 'cl00ep6zb0005eovi5oym6d8o',
+    product_id: 'cl00ep6zb0005eovi5oym6d8o',
     approved: true,
   },
   // ---------- Shirt 3 ---------- 
@@ -80,7 +80,7 @@ const reviews = [
     email: 'KevinBerry@gmail.com',
     content: 'My new favourite shirt',
     rating: 4.5,
-    productId: 'cl00195lv00658gviriq5udt2',
+    product_id: 'cl00195lv00658gviriq5udt2',
     approved: true,
   },
   {
@@ -89,7 +89,7 @@ const reviews = [
     email: 'ClaytonThompson@gmail.com',
     content: 'Slow delivery, but okay quality',
     rating: 2,
-    productId: 'cl00195lv00658gviriq5udt2',
+    product_id: 'cl00195lv00658gviriq5udt2',
     approved: true,
   },
   {
@@ -98,7 +98,7 @@ const reviews = [
     email: 'PhilipCruz@gmail.com',
     content: 'Doesnt fit at all',
     rating: 1,
-    productId: 'cl00195lv00658gviriq5udt2',
+    product_id: 'cl00195lv00658gviriq5udt2',
     approved: true,
   },
   {
@@ -107,7 +107,7 @@ const reviews = [
     email: 'VictorRose@gmail.com',
     content: 'Fits perfectly',
     rating: 5,
-    productId: 'cl00195lv00658gviriq5udt2',
+    product_id: 'cl00195lv00658gviriq5udt2',
     approved: true,
   },
   {
@@ -116,7 +116,7 @@ const reviews = [
     email: 'ZackScott@gmail.com',
     content: 'Fast delivery, happy with my purchase',
     rating: 4.5,
-    productId: 'cl00195lv00658gviriq5udt2',
+    product_id: 'cl00195lv00658gviriq5udt2',
     approved: true,
   },
   {
@@ -125,7 +125,7 @@ const reviews = [
     email: 'RayHicks@gmail.com',
     content: 'Good quality shirt',
     rating: 4,
-    productId: 'cl00195lv00658gviriq5udt2',
+    product_id: 'cl00195lv00658gviriq5udt2',
     approved: true,
   },
   // ---------- Pant 1 ---------- 
@@ -135,7 +135,7 @@ const reviews = [
     email: 'SandraSutton@gamil.com',
     content: 'OMG I just love these pants they fire!',
     rating: 4.8,
-    productId: 'ckzyxktb501843sviv5w8g39i',
+    product_id: 'ckzyxktb501843sviv5w8g39i',
     approved: true,
   },
   {
@@ -144,7 +144,7 @@ const reviews = [
     email: 'JoColeman@gamil.com',
     content: 'Really cool',
     rating: 4,
-    productId: 'ckzyxktb501843sviv5w8g39i',
+    product_id: 'ckzyxktb501843sviv5w8g39i',
     approved: true,
   },
   {
@@ -153,7 +153,7 @@ const reviews = [
     email: 'JeanBarrett@gamil.com',
     content: 'Fast and good quality',
     rating: 4.8,
-    productId: 'ckzyxktb501843sviv5w8g39i',
+    product_id: 'ckzyxktb501843sviv5w8g39i',
     approved: true,
   },
   {
@@ -162,7 +162,7 @@ const reviews = [
     email: 'RandallHicks@gamil.com',
     content: 'I dont feel comfrtable when I wear these in public',
     rating: 1.8,
-    productId: 'ckzyxktb501843sviv5w8g39i',
+    product_id: 'ckzyxktb501843sviv5w8g39i',
     approved: true,
   },
   {
@@ -171,7 +171,7 @@ const reviews = [
     email: 'ReginaldKelley@gamil.com',
     content: 'My girlfriend loves them',
     rating: 5,
-    productId: 'ckzyxktb501843sviv5w8g39i',
+    product_id: 'ckzyxktb501843sviv5w8g39i',
     approved: true,
   },
   // ---------- Pant 2 ---------- 
@@ -181,7 +181,7 @@ const reviews = [
     email: 'OliverFassman@gmail.com',
     content: 'Swagger',
     rating: 4.1,
-    productId: 'ckzzbq1nf000524vi1s1yeeuz',
+    product_id: 'ckzzbq1nf000524vi1s1yeeuz',
     approved: true,
   },
   {
@@ -190,7 +190,7 @@ const reviews = [
     email: 'CasparLakey@gmail.com',
     content: 'Happy would reccomend',
     rating: 4.5,
-    productId: 'ckzzbq1nf000524vi1s1yeeuz',
+    product_id: 'ckzzbq1nf000524vi1s1yeeuz',
     approved: true,
   },
   {
@@ -199,7 +199,7 @@ const reviews = [
     email: 'NoreanPapaccio@gmail.com',
     content: 'Great pants look cool',
     rating: 5,
-    productId: 'ckzzbq1nf000524vi1s1yeeuz',
+    product_id: 'ckzzbq1nf000524vi1s1yeeuz',
     approved: true,
   },
   {
@@ -208,7 +208,7 @@ const reviews = [
     email: 'LeslieMetzig@gmail.com',
     content: 'I feel really cool when I wear these, I also bought the jacket to match!',
     rating: 4.3,
-    productId: 'ckzzbq1nf000524vi1s1yeeuz',
+    product_id: 'ckzzbq1nf000524vi1s1yeeuz',
     approved: true,
   },
   // ---------- Pant 3 ---------- 
@@ -218,7 +218,7 @@ const reviews = [
     email: 'ZackPitcher@gmail.com',
     content: 'Proffessional look, good for work',
     rating: 5,
-    productId: 'ckzyxh6of01453svii3bxf707',
+    product_id: 'ckzyxh6of01453svii3bxf707',
     approved: true,
   },
   {
@@ -227,7 +227,7 @@ const reviews = [
     email: 'StephieFrangleton@gmail.com',
     content: 'Really good fit',
     rating: 4.5,
-    productId: 'ckzyxh6of01453svii3bxf707',
+    product_id: 'ckzyxh6of01453svii3bxf707',
     approved: true,
   },
 

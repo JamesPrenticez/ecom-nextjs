@@ -21,14 +21,6 @@ export default function Shipping() {
   const [options, setOptions] = useState(defaultOptions)
   const [address, setAddress] = useState("") // this need to be fixed in GoogleAutoComplete
 
-  // const [contactInfo, setContactInfo] = useState(
-  //   {
-  //     email: "",
-  //     firstName: "",
-  //     lastName: "",
-  //     address: ""
-  //   }
-  // )
   const [contactInfo, setContactInfo] = useState(
     {
       firstName: {value: ""},
