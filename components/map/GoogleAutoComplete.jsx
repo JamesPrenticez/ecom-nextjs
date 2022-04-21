@@ -11,7 +11,7 @@ export default function GoogleAutoComplete({ options, setOptions, handleChange, 
     let location = infoObj.geometry.location
     let address_components = infoObj.address_components
     let formattedAddress = addressFormatter(address_components)
-    setShippingInfo({formattedAddress, address: formattedAddress.street_number + " " +  formattedAddress.street_name})
+    setShippingInfo({...formattedAddress, address: formattedAddress.street_number + " " +  formattedAddress.street_name})
     setOptions({
       ...options,
       center: location,

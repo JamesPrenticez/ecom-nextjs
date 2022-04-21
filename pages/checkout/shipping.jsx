@@ -8,10 +8,10 @@ import InputText from '../../components/common/InputText';
 
 import { Wrapper, Status } from "@googlemaps/react-wrapper"
 import GoogleAutoComplete from '../../components/map/GoogleAutoComplete';
-import GoogleMaps from '../../components/map/GoogleMaps';
+//import GoogleMaps from '../../components/map/GoogleMaps';
+
 
 import { useSelector } from 'react-redux';
-
 
 const myApiKey = process.env.NEXT_PUBLIC_GOOGLE_API_KEY //this is currently public!
 let defaultOptions = {
@@ -25,7 +25,6 @@ let defaultOptions = {
 export default function Shipping() {
   const [options, setOptions] = useState(defaultOptions)
   const cartItems = useSelector((state) => state.cart.cartItems);
-
   const [contactInfo, setContactInfo] = useState(
     {
       firstName: {value: ""},
@@ -53,8 +52,6 @@ export default function Shipping() {
     country: "",
     postal_code: ""
   })
-  console.log(shippingInfo)
-
 
   const handleChangeContactInfo = (event) => {
     setContactInfo({ ...contactInfo, [event.target.name]: event.target.value });
@@ -69,6 +66,7 @@ export default function Shipping() {
     alert(JSON.stringify(shippingInfo))
   } 
 
+  console.log(shippingInfo)
   const render = (status) => {
     switch (status) {
       case Status.LOADING:
@@ -95,21 +93,31 @@ export default function Shipping() {
       <Stepper activeStep={1} />
       <form 
         onSubmit={onSubmit}
-        className="grid grid-cols-2 gap-2 "
+        className="grid grid-cols-6 gap-2 "
       >
         {/* ---------- Contact Information / Already have an account ?---------- */}
-        <h5 className="col-span-1">Contact Information</h5>
-        <p className="col-span-1 text-xs ml-auto flex items-center">
+        <h5 className="col-span-3">Contact Information</h5>
+        <p className="col-span-3 text-xs ml-auto flex items-center">
           Already have an account? &nbsp;
           <span className="text-primary-link hover:cursor-pointer" onClick={signIn}>Log In</span>
         </p>
+
+        {/* ---------- Email ---------- */}
+        <InputText
+          name="email"
+          label="Email Address"
+          color="ring-primary-link"
+          className="col-span-6"
+          value={contactInfo.email.value}
+          handleChange={handleChangeContactInfo}
+        />
 
         {/* ---------- First Name ---------- */}
         <InputText
           name="firstName"
           label="First Name"
           color="ring-primary-link"
-          className="col-span-1"
+          className="col-span-3"
           value={contactInfo.firstName.value}
           handleChange={handleChangeContactInfo}
         />
@@ -119,23 +127,13 @@ export default function Shipping() {
           name="lastName"
           label="Last Name"
           color="ring-primary-link"
-          className="col-span-1"
+          className="col-span-3"
           value={contactInfo.lastName.value}
           handleChange={handleChangeContactInfo}
         />
 
-        {/* ---------- Email ---------- */}
-        <InputText
-          name="email"
-          label="Email Address"
-          color="ring-primary-link"
-          className="col-span-2"
-          value={contactInfo.email.value}
-          handleChange={handleChangeContactInfo}
-        />
-
         {/* ---------- Newsletter Checkbox ---------- */}
-        <div className="col-span-1">
+        <div className="col-span-6">
           <label className="flex items-center space-x-2 select-none">
             <input 
               type="checkbox"
@@ -149,26 +147,85 @@ export default function Shipping() {
         </div>
 
         {/* ---------- Shipping Address ---------- */}
-        <h5 className="col-span-2 mt-6">Shipping Address</h5>
+        <h5 className="col-span-6 mt-6">Shipping Address</h5>
 
 
-
-        {/* ---------- Street Address & Map ---------- */}
-        <div className="col-span-2 space-y-4">
+        {/* ---------- Full Address using Google Auto Complete ---------- */}
+        <div className="col-span-6 space-y-4">
           <Wrapper apiKey={myApiKey} render={render} libraries={["places"]}/> 
         </div>
 
+        {/* ---------- street number ---------- */}
+        {/* <InputText
+          name="street_number"
+          label="Street/Apartment Number"
+          color="ring-primary-link"
+          className="col-span-3"
+          value={shippingInfo.street_number}
+          handleChange={handleChangeShippingInfo}
+        /> */}
+
+        {/* ---------- street name ---------- */}
+        {/* <InputText
+          name="street_name"
+          label="Street Name"
+          color="ring-primary-link"
+          className="col-span-3"
+          value={shippingInfo.street_name}
+          handleChange={handleChangeShippingInfo}
+        /> */}
+
+        {/* ---------- suburb ---------- */}
+        <InputText
+          name="suburb"
+          label="Suburb"
+          color="ring-primary-link"
+          className="col-span-3"
+          value={shippingInfo.suburb}
+          handleChange={handleChangeShippingInfo}
+        />
+
+        {/* ---------- city ---------- */}
+        <InputText
+          name="city"
+          label="City"
+          color="ring-primary-link"
+          className="col-span-3"
+          value={shippingInfo.city}
+          handleChange={handleChangeShippingInfo}
+        />
+
+        {/* ---------- country ---------- */}
+        <InputText
+          name="country"
+          label="Country"
+          color="ring-primary-link"
+          className="col-span-3"
+          value={shippingInfo.country}
+          handleChange={handleChangeShippingInfo}
+        />
+
+        {/* ---------- post code ---------- */}
+        <InputText
+          name="post_code"
+          label="Post Code"
+          color="ring-primary-link"
+          className="col-span-3"
+          value={shippingInfo.postal_code}
+          handleChange={handleChangeShippingInfo}
+        />
+
         {/* ---------- Continue Shopping Button ---------- */}
-        <button 
-          className="text-center p-2 w-full border border-yellow-500 rounded-md text-yellow-500 mx-auto hover:bg-yellow-500 hover:text-secondary-text"
+        {/* <button 
+          className="col-span-3 text-center p-2 w-full border border-yellow-500 rounded-md text-yellow-500 mx-auto hover:bg-yellow-500 hover:text-secondary-text"
           type="submit"
         >
           Continue Shopping
-        </button>
+        </button> */}
 
         {/* ---------- Proceed to Payment Button ---------- */}
         <button 
-          className="text-center p-2 w-full border border-primary-action rounded-md text-primary-action mx-auto hover:bg-primary-action hover:text-secondary-text"
+          className="col-span-6 text-center p-2 w-full border border-primary-action rounded-md text-primary-action mx-auto hover:bg-primary-action hover:text-secondary-text"
           type="submit"
         >
           Proceed to Payment

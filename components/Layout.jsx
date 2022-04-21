@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Head from 'next/head'
 import NextLink from 'next/link'
-import CountrySelector from './nav/CountrySelector'
+import CountrySelector from './common/CountrySelector'
 import CartButton from './nav/CartButton'
 import { signIn, signOut, useSession } from 'next-auth/react';
 import NextImage from 'next/image'

@@ -24,11 +24,11 @@ export function addressFormatter(address_components){
     address_components.forEach((component) => {
       for (var shouldBe in ShouldBeComponent) {
         if (ShouldBeComponent[shouldBe].indexOf(component.types[0]) !== -1) {
-          if (shouldBe === "country") {
-            address[shouldBe] = component.short_name;
-          } else {
+          // if (shouldBe === "country") {
+          //   address[shouldBe] = component.short_name;
+          // } else {
             address[shouldBe] = component.long_name;
-          }
+          //}
         }
       }
     });
