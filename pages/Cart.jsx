@@ -137,7 +137,7 @@ export default function Cart() {
                   </li>
                   <li>
 
-                  <NextLink href={"/checkout/shipping"} passHref>
+                  <NextLink href={"/checkout/shipping_details"} passHref>
                     <a className="text-center p-3 w-[90%] bg-primary-action rounded-md text-white mx-auto">
                         CHECKOUT
                     </a>

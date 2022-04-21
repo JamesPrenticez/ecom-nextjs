@@ -4,9 +4,9 @@ import ChevronRight from '../icons/ChevronRight';
 
 const steps = [
   { id: 0, name: "Cart", href: "/cart"},
-  { id: 1, name: "Shipping Address", href: "/shipping"},
-  { id: 2, name: "Payment Method", href: "/payment"},
-  { id: 3, name: "Place Order", href: "/confirmation"},
+  { id: 1, name: "Contact Details", href: "/checkout/shipping_details"},
+  { id: 2, name: "Payment Method", href: "/checkout/payment"},
+  { id: 3, name: "Confirm Order", href: "/checkout/confirmation"},
 ]
 
 export default function Stepper({ activeStep = 0 }) {

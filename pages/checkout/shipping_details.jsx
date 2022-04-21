@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { signIn } from 'next-auth/react';
+import { useSession, signIn, signOut } from 'next-auth/react';
 
 import NextImage from 'next/image'
 
@@ -12,6 +12,8 @@ import GoogleAutoComplete from '../../components/map/GoogleAutoComplete';
 
 
 import { useSelector } from 'react-redux';
+import { GithubIcon } from '../../components/icons/GithubIcon';
+import { GoogleIcon } from '../../components/icons/GoogleIcon';
 
 const myApiKey = process.env.NEXT_PUBLIC_GOOGLE_API_KEY //this is currently public!
 let defaultOptions = {
@@ -23,6 +25,8 @@ let defaultOptions = {
 }
 
 export default function Shipping() {
+  const { data: session } = useSession()
+  const [showLogInForm, setShowLogInForm] = useState(false)
   const [options, setOptions] = useState(defaultOptions)
   const cartItems = useSelector((state) => state.cart.cartItems);
   const [contactInfo, setContactInfo] = useState(
@@ -62,11 +66,12 @@ export default function Shipping() {
   };
 
   const onSubmit= () => {
+
+
     alert(JSON.stringify(contactInfo))
     alert(JSON.stringify(shippingInfo))
   } 
 
-  console.log(shippingInfo)
   const render = (status) => {
     switch (status) {
       case Status.LOADING:
@@ -83,6 +88,7 @@ export default function Shipping() {
         )
     }
   }
+  console.log(session.user.email)
 
   return (
     <div className="flex min-h-screen max-w-7xl mx-auto border-x border-[#d9d9d9]">
@@ -97,40 +103,76 @@ export default function Shipping() {
       >
         {/* ---------- Contact Information / Already have an account ?---------- */}
         <h5 className="col-span-3">Contact Information</h5>
-        <p className="col-span-3 text-xs ml-auto flex items-center">
-          Already have an account? &nbsp;
-          <span className="text-primary-link hover:cursor-pointer" onClick={signIn}>Log In</span>
-        </p>
 
-        {/* ---------- Email ---------- */}
-        <InputText
-          name="email"
-          label="Email Address"
-          color="ring-primary-link"
-          className="col-span-6"
-          value={contactInfo.email.value}
-          handleChange={handleChangeContactInfo}
-        />
+        {/* ---------- Option 2 - Not logged in then continue as guest ----------  */}
+        { session ?
+        <>
+          <p className="col-span-3 text-xs ml-auto flex items-center">
+            <span className="text-primary-link hover:cursor-pointer" onClick={signOut}>Sign Out</span>
+          </p>
+          <p className="col-span-6">Email: {session.user.email}</p>
+          <p className="col-span-6">Name: {session.user.name}</p>
+        </>
+        : showLogInForm === false ?
+          <>
+            <p className="col-span-3 text-xs ml-auto flex items-center">
+              Already have and account? &nbsp; <span className="text-primary-link hover:cursor-pointer" onClick={() => setShowLogInForm(!showLogInForm)}>Log In</span>
+            </p>
+            {/* ---------- Email ---------- */}
+            <InputText
+              name="email"
+              label="Email Address"
+              color="ring-primary-link"
+              className="col-span-6"
+              value={contactInfo.email.value}
+              handleChange={handleChangeContactInfo}
+            />
 
-        {/* ---------- First Name ---------- */}
-        <InputText
-          name="firstName"
-          label="First Name"
-          color="ring-primary-link"
-          className="col-span-3"
-          value={contactInfo.firstName.value}
-          handleChange={handleChangeContactInfo}
-        />
+            {/* ---------- First Name ---------- */}
+            <InputText
+              name="firstName"
+              label="First Name"
+              color="ring-primary-link"
+              className="col-span-3"
+              value={contactInfo.firstName.value}
+              handleChange={handleChangeContactInfo}
+            />
 
-        {/* ---------- Last Name ---------- */}
-        <InputText
-          name="lastName"
-          label="Last Name"
-          color="ring-primary-link"
-          className="col-span-3"
-          value={contactInfo.lastName.value}
-          handleChange={handleChangeContactInfo}
-        />
+            {/* ---------- Last Name ---------- */}
+            <InputText
+              name="lastName"
+              label="Last Name"
+              color="ring-primary-link"
+              className="col-span-3"
+              value={contactInfo.lastName.value}
+              handleChange={handleChangeContactInfo}
+            />
+          </>
+
+          //* ---------- Option 3 - Wants to log in ---------- 
+          : showLogInForm && !session ?
+          <>
+            <p className="col-span-3 text-xs ml-auto flex items-center">
+              <span className="text-primary-link hover:cursor-pointer" onClick={() => setShowLogInForm(!showLogInForm)}>Continue as guest</span>
+            </p>
+
+            <div className="col-span-6 flex w-full flex-wrap justify-center p-2 space-y-4">
+              <button
+                className="inline-flex items-center justify-center space-x-2 w-full border rounded-full p-2 text-lg border-black text-black hover:bg-black hover:text-white"
+                onClick={() => signIn('github')}>
+                <GithubIcon className="h-5 w-5 hover:cursor-pointer" />
+                <p>Sign in with Github</p>
+              </button>
+              <button
+                className="inline-flex items-center justify-center space-x-2 w-full border rounded-full p-2 text-lg border-black text-black hover:bg-blue-700 hover:text-white"
+                onClick={() => signIn("google")}>
+                <GoogleIcon className="h-5 w-5 hover:cursor-pointer" />
+                <p>Sign in with Google</p>
+              </button>
+            </div>
+          </>
+          : null
+        }
 
         {/* ---------- Newsletter Checkbox ---------- */}
         <div className="col-span-6">

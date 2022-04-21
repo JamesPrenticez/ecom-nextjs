@@ -64,3 +64,5 @@
 [o] need to fix drop down to work with  color
 [o] spend some time on getting form validation really robust
 [o] need to get address based on user geo location
+
+[o] need to extend next auth to include a firstName and lastName PapaReact will have the answers - we can also improve on how we are handling JWT https://github.com/JamesPrenticez/spotify_clone/blob/master/pages/api/auth/%5B...nextauth%5D.js
