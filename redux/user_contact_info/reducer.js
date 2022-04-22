@@ -1,8 +1,8 @@
 const intialState = {}
 
-export default function userInfo(state=intialState, action){
+export default function userContactInfo(state=intialState, action){
   switch(action.type) {
-    case "SET_USER_INFO":
+    case "SET_USER_CONTACT_INFO":
       return action.payload
     
     default: 

@@ -5,15 +5,15 @@ import NextImage from 'next/image'
 
 import Stepper from '../../components/checkout/Stepper';
 import InputText from '../../components/common/InputText';
+import { GithubIcon } from '../../components/icons/GithubIcon';
+import { GoogleIcon } from '../../components/icons/GoogleIcon';
 
 import { Wrapper, Status } from "@googlemaps/react-wrapper"
 import GoogleAutoComplete from '../../components/map/GoogleAutoComplete';
 //import GoogleMaps from '../../components/map/GoogleMaps';
 
-
-import { useSelector } from 'react-redux';
-import { GithubIcon } from '../../components/icons/GithubIcon';
-import { GoogleIcon } from '../../components/icons/GoogleIcon';
+import { useSelector, useDispatch } from 'react-redux';
+import { setUserContactInfo } from '../../redux/user_contact_info/actions'
 
 const myApiKey = process.env.NEXT_PUBLIC_GOOGLE_API_KEY //this is currently public!
 let defaultOptions = {
@@ -26,9 +26,12 @@ let defaultOptions = {
 
 export default function Shipping() {
   const { data: session } = useSession()
+
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart.cartItems);
+
   const [showLogInForm, setShowLogInForm] = useState(false)
   const [options, setOptions] = useState(defaultOptions)
-  const cartItems = useSelector((state) => state.cart.cartItems);
   const [contactInfo, setContactInfo] = useState(
     {
       firstName: {value: ""},
@@ -58,15 +61,25 @@ export default function Shipping() {
   })
 
   const handleChangeContactInfo = (event) => {
-    setContactInfo({ ...contactInfo, [event.target.name]: event.target.value });
+    setContactInfo({ ...contactInfo, [event.target.name]: {...contactInfo[event.target.name], value: event.target.value }});
   };
   
   const handleChangeShippingInfo = (event) => {
     setShippingInfo({ ...shippingInfo, [event.target.name]: event.target.value });
   };
 
-  const onSubmit= () => {
+  const onSubmit = async(e) => {
+    e.preventDefault()
 
+    if(session){
+        //UPDATE existing user in db
+        console.log("UPDATE existing user")
+        dispatch(setUserContactInfo(contactInfo))
+      } else {
+        // CREATE guest user
+        console.log("CREATE guest user")
+        dispatch(setUserContactInfo(contactInfo))
+    }
 
     alert(JSON.stringify(contactInfo))
     alert(JSON.stringify(shippingInfo))
@@ -88,7 +101,6 @@ export default function Shipping() {
         )
     }
   }
-  console.log(session.user.email)
 
   return (
     <div className="flex min-h-screen max-w-7xl mx-auto border-x border-[#d9d9d9]">
@@ -104,7 +116,7 @@ export default function Shipping() {
         {/* ---------- Contact Information / Already have an account ?---------- */}
         <h5 className="col-span-3">Contact Information</h5>
 
-        {/* ---------- Option 2 - Not logged in then continue as guest ----------  */}
+        {/* ---------- Option 1 - Logged in then use the information avaliable ----------  */}
         { session ?
         <>
           <p className="col-span-3 text-xs ml-auto flex items-center">
@@ -113,6 +125,8 @@ export default function Shipping() {
           <p className="col-span-6">Email: {session.user.email}</p>
           <p className="col-span-6">Name: {session.user.name}</p>
         </>
+
+        // ---------- Option 2 - Not logged in then continue as guest ---------- 
         : showLogInForm === false ?
           <>
             <p className="col-span-3 text-xs ml-auto flex items-center">
@@ -149,7 +163,7 @@ export default function Shipping() {
             />
           </>
 
-          //* ---------- Option 3 - Wants to log in ---------- 
+          // ---------- Option 3 - Wants to log in ---------- 
           : showLogInForm && !session ?
           <>
             <p className="col-span-3 text-xs ml-auto flex items-center">

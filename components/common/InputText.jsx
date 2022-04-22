@@ -21,14 +21,6 @@ const InputText = forwardRef(({ className, name, label, value, handleChange}, re
     }
   }
 
-  function didUpdate(){
-    if (!e.target.value) {
-      return;
-    } else {
-      setActive(true)
-    }
-  }
-  
   return (
     <div className={className}>
       <fieldset className={`relative bg-transparent border rounded w-full mt-2 transition ease-in-out
