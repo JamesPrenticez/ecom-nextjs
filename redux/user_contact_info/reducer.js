@@ -1,4 +1,10 @@
-const intialState = {}
+const intialState = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  phoneNumber: "",
+  newsletter: true,
+}
 
 export default function userContactInfo(state=intialState, action){
   switch(action.type) {

@@ -29,7 +29,7 @@ const persistConfig = {
   timeout: 10, //Set the timeout function to 2 seconds
   key: 'root',
   storage: storage,
-  whitelist: ['currentCountry', 'cart', 'userContactInfo'], // place to select which state you want to persist
+  whitelist: ['currentCountry', 'cart'], // place to select which state you want to persist
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

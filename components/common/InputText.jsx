@@ -1,13 +1,24 @@
 import React, { forwardRef, useEffect, useState } from 'react'
+import {required, maxLength, pattern} from './inputTextErrorHelper'
 
 //const InputText = React.forwardRef((props, ref) => {
-const InputText = forwardRef(({ className, name, label, value, handleChange}, ref) => {
+const InputText = forwardRef(({ className, name, label, value, errors, handleChange}, ref) => {
   const [active, setActive] = useState(false)
+  const [isError, setIsError] = useState({type: ""})
 
+  
   useEffect(() => {
     if(!value) return 
     else setActive(true)
   }, [value])
+  
+  function handleErrors(e){
+    console.log(e.target.value)
+    if(!errors) return
+    //if(required(value)) return setIsError({type: "required"})
+    //if(maxLength(e.target.value, errors.maxLength.value)) return setIsError({type: "maxLength"})
+    if(pattern(e.target.value, errors.pattern.value)) return setIsError({type: "pattern"})
+  }
 
   function handleFocus(){
     setActive(true)
@@ -20,6 +31,10 @@ const InputText = forwardRef(({ className, name, label, value, handleChange}, re
       setActive(false)
     }
   }
+
+  
+
+ 
 
   return (
     <div className={className}>
@@ -45,23 +60,23 @@ const InputText = forwardRef(({ className, name, label, value, handleChange}, re
           name={name}
           value={value}
           placeholder=""
-          onChange={handleChange}
+          onChange={(e) => {handleChange(e); handleErrors(e)}}
           type="text"
           className="bg-transparent outline-none w-full px-4 py-2"
         />
       </label>
     </fieldset>
-    {/* {isError && (
+    {isError && (
       <>
-        <small className="text-red-500 italic pl-4">
-          { isError?.type  === "required" ? isError?.message
-            : isError?.type === "maxLength" ? isError?.message
-            : isError?.type  === "pattern" ? isError?.message
+        <small className= "text-red-500 italic pl-4">
+          { isError.type  === "required" ? errors.required.message
+            : isError.type === "maxLength" ? errors.maxLength.message
+            : isError.type  === "pattern" ? errors.pattern.message
             : null }
         </small>
       </>
       )
-    } */}
+    }
   </div>
   )
 })

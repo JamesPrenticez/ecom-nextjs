@@ -29,25 +29,10 @@ export default function Shipping() {
 
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
+  const contactInfo = useSelector((state) => state.userContactInfo);
 
   const [showLogInForm, setShowLogInForm] = useState(false)
   const [options, setOptions] = useState(defaultOptions)
-  const [contactInfo, setContactInfo] = useState(
-    {
-      firstName: {value: ""},
-      lastName: {value: ""},
-      email: {
-        value: "",
-        errors: {
-          required: { message: "Email is required" },
-          maxLength: { message: "Email is required", value: 64 },
-          pattern1: {message: "", value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i}
-        }
-      },
-      phoneNumber: {value: Number(0)},
-      newsletter: {value: true},
-    }
-  )
 
   const [shippingInfo, setShippingInfo] = useState({
     address: "",
@@ -61,7 +46,7 @@ export default function Shipping() {
   })
 
   const handleChangeContactInfo = (event) => {
-    setContactInfo({ ...contactInfo, [event.target.name]: {...contactInfo[event.target.name], value: event.target.value }});
+    dispatch(setUserContactInfo(({ ...contactInfo, [event.target.name]: event.target.value })))
   };
   
   const handleChangeShippingInfo = (event) => {
@@ -71,16 +56,17 @@ export default function Shipping() {
   const onSubmit = async(e) => {
     e.preventDefault()
 
+    //CHECK ERRORS
+
     if(session){
         //UPDATE existing user in db
-        console.log("UPDATE existing user")
         dispatch(setUserContactInfo(contactInfo))
       } else {
-        // CREATE guest user
-        console.log("CREATE guest user")
+        //CREATE guest user
         dispatch(setUserContactInfo(contactInfo))
-    }
-
+      }
+      
+      //CREATE shipping_details for user
     alert(JSON.stringify(contactInfo))
     alert(JSON.stringify(shippingInfo))
   } 
@@ -139,6 +125,11 @@ export default function Shipping() {
               color="ring-primary-link"
               className="col-span-6"
               value={contactInfo.email.value}
+              errors= {{
+                required: { message: "Email is required" },
+                maxLength: { message: "Max length exceeded", value: 5 },
+                pattern: {message: "pattern match failed", value: /\S+@\S+\.\S+/}
+              }}
               handleChange={handleChangeContactInfo}
             />
 
