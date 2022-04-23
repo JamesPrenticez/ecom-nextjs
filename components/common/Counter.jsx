@@ -16,10 +16,12 @@ function Plus({className}){
   )
 }
 
-export default function Counter({className, item, handleClick}) {
-  const currQty = item.quantity
+export default function Counter({className, item, quantity, handleClick}) {
+  const currQty = quantity
   const min = 1
   const max = item.numInStock
+
+  console.log(item)
 
   return (
     <div className={`${className} flex ml-auto`}>

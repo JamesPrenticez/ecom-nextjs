@@ -10,14 +10,15 @@ import Counter from '../../components/common/Counter'
 import DropDown from '../../components/common/DropDown';
 
 export default function ProductDetailsPage({item}) {
-  const [quantity, setQuantity] = useState(Number(1))
   const [color, setColor] = useState(null)
+  const [quantity, setQuantity] = useState(1)
   const dispatch = useDispatch();
   const router = useRouter()
 
   useEffect(() => {
     if(item.color?.length > 0) setColor(item.color[0])
   }, [])
+
 
   const handleChangeStock = (e, min, max) => {
     e.preventDefault()
@@ -26,6 +27,10 @@ export default function ProductDetailsPage({item}) {
     if(value <= min) value = min
     if(value >= max) value = max
     setQuantity(value)
+  }
+
+  const handleClickQuantity = (item, quantity) => {
+    setQuantity(quantity)
   }
 
   const handleChangeColor = (color) => {
@@ -42,6 +47,8 @@ export default function ProductDetailsPage({item}) {
     //Continue shopping? or checkout now?
     router.push('/cart')
   }
+
+  console.log(item)
 
   return (
     <Layout title={item?.name} description={item?.description}>
@@ -106,10 +113,11 @@ export default function ProductDetailsPage({item}) {
 
                 {/* Quantity */}
                 <h6 className="col-span-2">Quantity:</h6>
-                <Counter 
-                  item={item} 
-                  handleClick={setQuantity}
-                  handleChange={handleChangeStock}
+                <Counter
+                  className="float-right"
+                  item={item}
+                  quantity={quantity}
+                  handleClick={handleClickQuantity} //redux
                 />
 
                 {/* Add to Cart & Buy Now */}

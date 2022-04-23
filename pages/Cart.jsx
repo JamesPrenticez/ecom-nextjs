@@ -97,6 +97,7 @@ export default function Cart() {
                         <Counter
                           className="float-right"
                           item={item} 
+                          quantity={item.quantity}
                           handleClick={handleClickQuantity} //redux
                         />
                       </TableCell>

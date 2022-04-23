@@ -32,10 +32,6 @@ const InputText = forwardRef(({ className, name, label, value, errors, handleCha
     }
   }
 
-  
-
- 
-
   return (
     <div className={className}>
       <fieldset className={`relative bg-transparent border rounded w-full mt-2 transition ease-in-out
@@ -66,7 +62,7 @@ const InputText = forwardRef(({ className, name, label, value, errors, handleCha
         />
       </label>
     </fieldset>
-    {isError && (
+    {/* {isError && (
       <>
         <small className= "text-red-500 italic pl-4">
           { isError.type  === "required" ? errors.required.message
@@ -76,7 +72,7 @@ const InputText = forwardRef(({ className, name, label, value, errors, handleCha
         </small>
       </>
       )
-    }
+    } */}
   </div>
   )
 })

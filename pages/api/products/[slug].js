@@ -39,8 +39,8 @@ export default async function getProducts(req, res){
         description: item.description,
         colors: item.colors,
         price: item.price,
-        num_in_stock: item.num_in_stock,
-        num_reviews: ratingCount,
+        numInStock: item.num_in_stock,
+        numReviews: ratingCount,
         rating: ratingAvg,
       }
       return res.status(200).json(JSON.stringify(result))
