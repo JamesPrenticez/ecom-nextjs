@@ -3,7 +3,7 @@ import { useSession, signIn, signOut } from 'next-auth/react';
 
 import NextImage from 'next/image'
 
-import Stepper from '../../components/checkout/Stepper';
+import Stepper from '../../components/common/Stepper';
 import InputText from '../../components/common/InputText';
 import { GithubIcon } from '../../components/icons/GithubIcon';
 import { GoogleIcon } from '../../components/icons/GoogleIcon';

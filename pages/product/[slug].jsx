@@ -4,6 +4,7 @@ import NextImage from 'next/image'
 import { useRouter } from 'next/dist/client/router'
 import { useDispatch } from "react-redux";
 import { setCartItems } from "../../redux/cart/actions"
+import Carousel from '../../components/common/Carousel';
 import Rating from '@mui/material/Rating';
 import Layout from '../../components/Layout'
 import Counter from '../../components/common/Counter'
@@ -37,6 +38,8 @@ export default function ProductDetailsPage({item}) {
     router.push('/cart')
   }
 
+  const images = "[\"/images/shirts/shirt1/1.avif\", \"/images/shirts/shirt1/2.avif\", \"/images/shirts/shirt1/3.avif\", \"/images/shirts/shirt1/4.avif\", \"/images/shirts/shirt1/5.avif\", \"/images/shirts/shirt1/6.avif\"]"
+  //console.log(JSON.parse(images))
   return (
     <Layout title={item?.name} description={item?.description}>
       <section className="p-6">
@@ -48,13 +51,14 @@ export default function ProductDetailsPage({item}) {
 
           {/* Left */}
           <div className="w-full md:w-1/2">
-            <NextImage
+            {/* <NextImage
               src={item.image}
               alt={item.image}
               width={640}
               height={640}
               layout={"responsive"}
-            />
+            /> */}
+            <Carousel images={JSON.parse(images)} />
           </div>
           
           {/* Right */}
@@ -81,7 +85,7 @@ export default function ProductDetailsPage({item}) {
 
                 {/* Stock */}
                 <h6 className="col-span-2">Stock:</h6>
-                <p>only {item.numInStock} left!</p>
+                <p>Only {item.numInStock} left!</p>
 
                 {/* Color */}
                 {item.colors &&
