@@ -89,7 +89,6 @@ export default function ProductDetailsPage({item}) {
 
                 {/* Color */}
                 {item.colors &&
-
                   <>
                     <h6 className="col-span-2">Color:</h6>
                     <DropDown 

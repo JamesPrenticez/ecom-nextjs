@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import NextImage from 'next/image'
 
 function MagnifyingGlass({x, y, isZoom, image, imgHeight, imgWidth}){
-  const zoomLevel = 3.5
+  const zoomLevel = 2.5
   const magnifieWidth = imgWidth * zoomLevel
   const magnifierHeight = imgHeight * zoomLevel
 
@@ -56,6 +56,10 @@ function Carousel({images}) {
     setXY([x, y])
   }
 
+  const myLoader = ({ src, width, quality }) => {
+    return `http://localhost:3000/${src}?w=${width}&q=${quality || 75}`
+  }
+
   return (
     <div className="">
       <div className="flex justify-center overflow-hidden w-full">
@@ -67,12 +71,15 @@ function Carousel({images}) {
           onMouseMove={handleMouseMove}
         >
           <NextImage
+            loader={myLoader}
             src={images[index]}
             alt={images[index]}
             width={640}
             height={640}
             layout={"responsive"}
             priority
+            placeholder="blur"
+            blurDataURL="/images/default.jpg"
           />
 
           <MagnifyingGlass 
