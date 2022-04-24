@@ -1,8 +1,37 @@
-import { useEffect, useState } from "react"
+import React, {useEffect, useState} from 'react'
+import NextImage from 'next/image'
+
+function MagnifyingGlass({x, y, isZoom, image, imgHeight, imgWidth}){
+  const zoomLevel = 3.5
+  const magnifieWidth = imgWidth * zoomLevel
+  const magnifierHeight = imgHeight * zoomLevel
+
+  //console.log(x, y, isZoom, image, imgHeight, imgWidth)
+
+  return(
+    <div 
+      className={`${isZoom ? "" : "hidden"} absolute pointer-events-none border`}
+      style={{
+        height: `${magnifierHeight}px`,
+        width: `${magnifieWidth}px`,
+        top: `${y - magnifierHeight / 2}px`,
+        left: `${x - magnifieWidth / 2}px`,
+        backgroundImage: `url('${image}')`,
+        backgroundRepeat: "no-repeat",
+        backgroundPositionX: `${-x * zoomLevel + magnifieWidth / 2}px`,
+        backgroundPositionY: `${-y * zoomLevel + magnifierHeight / 2}px`,
+        backgroundSize: `${imgWidth * zoomLevel}px ${imgHeight * zoomLevel}px`,
+      }}
+    >
+    </div>
+  )
+}
 
 function Carousel({images}) {
   const [index, setIndex] = useState(0)
-  //const delay = 4000
+  const [isZoom, setIsZoom] = useState(false)
+  const [[imgWidth, imgHeight], setSize] = useState([0, 0]);
+  const [[x, y], setXY] = useState([0, 0]);
 
   //Reset index when image props change..
   useEffect(()=>{
@@ -11,122 +40,78 @@ function Carousel({images}) {
     }
   }, [images])
 
-  // Automatic sliding 
-  // useEffect(() => {
-  //  const timeout = setTimeout(() => {
-  //     setIndex((prevIndex) => 
-  //       prevIndex === images?.length - 1 ? 0 : prevIndex + 1
-  //       )
-  //   }, delay);
-  //   return () => clearTimeout(timeout)
-  // },[index]);
 
-  const goToPrevSlide = () => {
-    if(index < 1){
-      index = images?.length -1
-    } else {
-      index--
-    }
-    setIndex(index)
+  const handleMouseEnter= (e) => {
+    const ele = e.currentTarget;
+    const { width, height } = ele.getBoundingClientRect();
+    setSize([width, height]);
+    setIsZoom(true)
   }
 
-  const goToNextSlide = () => {
-    if(index === images?.length - 1){
-      index = 0
-    } else {
-      index ++
-    }
-    setIndex(index)
+  const handleMouseMove = (e) => {
+    let ele = e.currentTarget
+    let {top, left} = ele.getBoundingClientRect()
+    let x = e.pageX - left - window.pageXOffset
+    let y = e.pageY - top - window.pageYOffset
+    setXY([x, y])
   }
 
   return (
-    <div className="relative flex justify-center h-full w-full flex-wrap">
-      <div className=" flex justify-center overflow-hidden w-full h-full ">
-        {/* Slideshow */}
-        {/* We want to move the position of slideshow by 0% when index is 0, -100% when index is 1 and by -200% when index is 2 so on so forth. */}
+    <div className="">
+      <div className="flex justify-center overflow-hidden w-full">
+        {/* Main Image */}
         <div
-          className="whitespace-nowrap transistion ease duration-1000 "
-          style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }} //Unfortunatly we can't use string interpolation in combination with tailwind JIT
+          className="relative w-full whitespace-nowrap transistion ease duration-1000"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={() => setIsZoom(false)}
+          onMouseMove={handleMouseMove}
         >
-          {images?.map((image, index) => (
-            <img
-              //onBlurdataURL
-              key={index}
-              className="object-contain w-full h-full inline-block border-none outline-none"
-              src={image}
-            />
-          ))}
+          <NextImage
+            src={images[index]}
+            alt={images[index]}
+            width={640}
+            height={640}
+            layout={"responsive"}
+            priority
+          />
+
+          <MagnifyingGlass 
+            x={x}
+            y={y}
+            isZoom={isZoom}
+            setIsZoom={setIsZoom}
+            image={images[index]}
+            imgHeight={imgHeight}
+            imgWidth={imgWidth}
+          />
         </div>
       </div>
 
-
-        {/* Left Arrow */}
-        <div
-          onClick={() => goToPrevSlide()}
-          className="absolute  left-0 w-16 h-full flex items-center justify-center hover:cursor-pointer hover:bg-gray-500 hover:bg-opacity-20 transistion ease-in-out duration-1000"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-12 w-12"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+      {/* Small Images Below */}
+      <div className="text-center flex space-x-2 w-full py-2">
+        {images?.map((image, index2) => (
+          <div
+            key={index2}
+            onMouseEnter={() => setIndex(index2)}
+            className={`w-[4rem] inline-block rounded-sm hover:cursor-pointer transistion ease duration-500 border-[.15rem] ${
+              index === index2 ? " border-primary-link" : "border-transparent"
+            }`}
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M15 19l-7-7 7-7"
-            />
-          </svg>
-        </div>
-
-        {/* Dots */}
-        <div className="absolute bottom-0 text-center flex">
-          {images?.map((image, index2) => (
-            <div
-              key={index2}
-              onClick={() => setIndex(index2)}
-              className={`inline-block rounded-sm hover:cursor-pointer m-2 transistion ease duration-500 border-2 ${
-                index === index2 ? " border-blue-500" : "border-transparent"
-              }`}
-            >
-              <img
-              //onBlurdataURL
-              key={index}
-              className="object-contain w-[50px] h-[50px] inline-block border-none outline-none rounded-sm"
-              src={image}
-            />
-            </div>
-          ))}
-        </div>
-
-        {/* Right Arrow */}
-        <div
-          onClick={() => goToNextSlide()}
-          className="absolute right-0 w-16 h-full flex items-center justify-center hover:cursor-pointer hover:bg-gray-500 hover:bg-opacity-20 transistion ease-in-out duration-1000"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-12 w-12"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M9 5l7 7-7 7"
-            />
-          </svg>
-        </div>
-
-      
+          <NextImage
+            src={image}
+            alt={image}
+            width={64}
+            height={64}
+            layout={"responsive"}
+          />
+          </div>
+        ))}
+      </div>
     </div>
-  );
+  )
 }
 
 export default Carousel
 
+//Magnifyer from: https://dev.to/anxiny/create-an-image-magnifier-with-react-3fd7
 //From: https://tinloof.com/blog/how-to-build-an-auto-play-slideshow-with-react

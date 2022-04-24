@@ -129,7 +129,7 @@ export default function ProductDetailsPage({item}) {
             </div>
 
             {/* Description */}
-            <p>Description: {item.description}</p>
+            <p>{item.description}</p>
 
             {/* Star Rating */}
             <div className="flex items-center space-x-2">
