@@ -10,7 +10,8 @@ import Counter from '../../components/common/Counter'
 import DropDown from '../../components/common/DropDown';
 
 export default function ProductDetailsPage({item}) {
-  const [color, setColor] = useState(null)
+  const colors = JSON.parse(item.colors)
+  const [color, setColor] = useState("red")
   const [quantity, setQuantity] = useState(1)
   const dispatch = useDispatch();
   const router = useRouter()
@@ -20,23 +21,11 @@ export default function ProductDetailsPage({item}) {
   }, [])
 
 
-  const handleChangeStock = (e, min, max) => {
-    e.preventDefault()
-    let value = e.target.value
-    if(value > min && value < max) return
-    if(value <= min) value = min
-    if(value >= max) value = max
-    setQuantity(value)
-  }
-
   const handleClickQuantity = (item, quantity) => {
     setQuantity(quantity)
   }
 
   const handleChangeColor = (color) => {
-    //This is not a input its just a Div so we can skip the extra steps
-    //e.preventDefault()
-    //setColor(e.target.value)
     setColor(color)
   }
 
@@ -48,8 +37,6 @@ export default function ProductDetailsPage({item}) {
     router.push('/cart')
   }
 
-  console.log(item)
-
   return (
     <Layout title={item?.name} description={item?.description}>
       <section className="p-6">
@@ -58,7 +45,7 @@ export default function ProductDetailsPage({item}) {
         </NextLink>
 
         <div className="flex flex-wrap md:flex-nowrap justify-between mt-3 md:space-x-6">
-          
+
           {/* Left */}
           <div className="w-full md:w-1/2">
             <NextImage
@@ -97,17 +84,18 @@ export default function ProductDetailsPage({item}) {
                 <p>only {item.numInStock} left!</p>
 
                 {/* Color */}
-                {item.color &&
+                {item.colors &&
+
                   <>
                     <h6 className="col-span-2">Color:</h6>
-                    {/* <DropDown
-                      selectClassName="bg-secondary-background text-secondary-text"
-                      optionsClassName="bg-secondary-background text-secondary-text"
-                      itemClassName="hover:bg-primary-background hover:text-primary-text" 
-                      items={item.color}
+                    <DropDown 
+                      selectClassName=""
+                      optionsClassName="bg-white"
+                      itemClassName="hover:bg-primary-link hover:text-secondary-text"
                       value={color}
+                      items={colors.map(color => color)}
                       onChange={handleChangeColor}
-                    /> */}
+                    />
                   </> 
                 }
 

@@ -21,8 +21,6 @@ export default function Counter({className, item, quantity, handleClick}) {
   const min = 1
   const max = item.numInStock
 
-  console.log(item)
-
   return (
     <div className={`${className} flex ml-auto`}>
       <button 
@@ -36,7 +34,7 @@ export default function Counter({className, item, quantity, handleClick}) {
         suppressContentEditableWarning={true}
         type="number"
         value={currQty}
-        className="flex text-center justify-center outline-none py-1 text-[1rem] w-[3rem]" 
+        className="flex text-center justify-center outline-none py-1 px-2 text-[1rem] " 
       >
         {currQty}
       </div>

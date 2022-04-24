@@ -19,9 +19,8 @@ export default function CountrySelector() {
       selectClassName="text-lg"
       optionsClassName="bg-secondary-background text-secondary-text"
       itemClassName="hover:bg-primary-background hover:text-primary-text"
-      items={countries.map(country => country.name)}
       value={currentCountry.name}
-      icons={countries.map((country) => {return ({name: country.name, icon: country.flag})})}
+      items={countries.map(country => country)}
       onChange={handleCountryChange}
     />
   )

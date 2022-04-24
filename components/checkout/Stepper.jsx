@@ -1,6 +1,6 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import ChevronRight from '../icons/ChevronRight';
+import { ChevronRight } from '../icons/Chevron';
 
 const steps = [
   { id: 0, name: "Cart", href: "/cart"},
