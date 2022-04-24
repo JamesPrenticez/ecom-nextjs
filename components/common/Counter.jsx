@@ -1,20 +1,6 @@
 import React from 'react'
-
-function Minus({className}){
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M20 12H4" />
-    </svg>
-  )
-}
-
-function Plus({className}){
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-    </svg>
-  )
-}
+import { Plus } from '../icons/Plus'
+import { Minus } from '../icons/Minus'
 
 export default function Counter({className, item, quantity, handleClick}) {
   const currQty = quantity
@@ -22,28 +8,28 @@ export default function Counter({className, item, quantity, handleClick}) {
   const max = item.numInStock
 
   return (
-    <div className={`${className} flex ml-auto`}>
+    <div className={`${className} flex items-center`}>
       <button 
         disabled={currQty <= min} onClick={() => handleClick(item, currQty - 1)}
-        className="bg-gray-300 p-1 rounded-tl-md rounded-bl-md disabled:cursor-not-allowed"
+        className="flex items-center bg-gray-300 text-white rounded-md h-[1.5rem] w-[1.5rem] p-1 disabled:cursor-not-allowed"
       >
-        <Minus className="h-[1rem] w-[1rem]"/>
+        <Minus className="h-full w-full"/>
       </button>
       <div 
         contentEditable="true"
         suppressContentEditableWarning={true}
         type="number"
         value={currQty}
-        className="flex text-center justify-center outline-none py-1 px-2 text-[1rem] " 
+        className="flex text-center justify-center outline-none py-1 px-3 text-[1rem] " 
       >
         {currQty}
       </div>
       <button 
         disabled={currQty >= max} 
         onClick={() => handleClick(item, currQty + 1)}
-        className="bg-gray-300 p-1 rounded-tr-md rounded-br-md disabled:cursor-not-allowed"
+        className="flex items-center bg-gray-300 text-white rounded-md h-[1.5rem] w-[1.5rem] p-1 disabled:cursor-not-allowed"
       >
-        <Plus className="h-[1rem] w-[1rem]"/>
+        <Plus className="h-full w-full"/>
       </button>
   </div> 
   )

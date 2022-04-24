@@ -11,7 +11,7 @@ import DropDown from '../../components/common/DropDown';
 
 export default function ProductDetailsPage({item}) {
   const colors = JSON.parse(item.colors)
-  const [color, setColor] = useState("red")
+  const [color, setColor] = useState(colors[0].name)
   const [quantity, setQuantity] = useState(1)
   const dispatch = useDispatch();
   const router = useRouter()
