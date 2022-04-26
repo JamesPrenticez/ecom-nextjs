@@ -20,7 +20,10 @@ module.exports = {
 
     extend: {
       minHeight:{
-        screenNav: "calc(100vh - 10rem)", // (nav 4rm) + (footer 4rem) + (main margin top/bottom 2rem)
+        screenNavFoot: "calc(100vh - 10rem)", // (nav 4rm) + (footer 4rem) + (main margin top/bottom 2rem)
+      },
+      height:{
+        screenNav: "calc(100vh - 4rem)", // (nav 4rm) + (footer 4rem) + (main margin top/bottom 2rem)
       },
       colors: {
         "primary-text": "var(--color-primary-text)",

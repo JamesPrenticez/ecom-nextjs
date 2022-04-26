@@ -30,15 +30,16 @@ export default function Layout({title, description, children}) {
       <header className="bg-secondary-background">
         <nav className="flex items-center h-16 w-full max-w-7xl mx-auto pr-4 text-secondary-text">
           {/* Left */}
+          <Hamburger session={session}/>
+
           <NextLink href="/" passHref>
-            <a className="text-2xl bold font-bold hover:text-secondary-hover">
+            <a className="mx-auto md:m-0 text-2xl bold font-bold hover:text-secondary-hover">
               {process.env.NEXT_PUBLIC_COMPANY_NAME}
             </a>
           </NextLink>
           
           
-          {/* Right - Mobile */}
-          <Hamburger session={session}/>
+
 
           {/* Right - Desktop */}
           <div className="hidden md:inline-flex ml-auto space-x-6 items-center">
@@ -102,7 +103,7 @@ export default function Layout({title, description, children}) {
         </nav>
       </header>
 
-      <main className="h-full min-h-screenNav m-[1rem] w-full max-w-7xl mx-auto bg-white border border-gray-200 rounded-sm">
+      <main className="h-full min-h-screenNavFoot m-[1rem] w-full max-w-7xl mx-auto bg-white border border-gray-200 rounded-sm">
         {children}
       </main>
 

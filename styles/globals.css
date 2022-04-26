@@ -66,11 +66,6 @@
       -webkit-appearance: none;
       margin: 0;
     }
-    /*======= Map Styling ============*/
-
-
- 
-    
 }
 
 @layer components{
@@ -82,6 +77,25 @@
         duration-150
         ease-in-out
         select-none
+    }
+
+    /* HamburgerItem */
+    .hamburgerItem {
+        @apply
+        inline-flex
+        justify-between
+        w-full
+        !text-left
+        cursor-pointer
+        p-4
+        text-xl
+        font-bold
+        text-primary-text
+        hover:bg-primary-link
+        hover:text-secondary-text
+        box-border
+        border-b
+        border-gray-300
     }
     
     /* Tooltip */
