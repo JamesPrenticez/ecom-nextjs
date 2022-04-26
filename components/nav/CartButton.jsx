@@ -32,7 +32,7 @@ export default function CartButton() {
       <CartIcon className='text-secondary-text h-[1.25rem] w-[1.5rem]'/>
 
       {cartItems.length > 0 && 
-        <div className='bg-red-500 rounded-full h-[1rem] w-[1rem] text-xs flex items-center justify-center absolute -right-2 -top-2'>{cartItems.length}</div>
+        <div className='bg-primary-danger rounded-full h-[1rem] w-[1rem] text-xs flex items-center justify-center absolute -right-2 -top-2'>{cartItems.length}</div>
       }
     </a>
   </NextLink>

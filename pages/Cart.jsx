@@ -1,6 +1,7 @@
 import React from "react";
 import NextLink from "next/link";
 import NextImage from "next/image";
+import { useImageLoader } from "../components/hooks/useImageLoader"
 import { useDispatch, useSelector } from "react-redux";
 import { setCartItems, deleteCartItem } from "../redux/cart/actions"
 import Layout from "../components/Layout";
@@ -37,7 +38,7 @@ export default function Cart() {
     <Layout title="Shopping Cart" description="Review Order">
 
       {cartItems.length === 0 ? (
-        <div className="bg-red-500 py-6 space-y-6">
+        <div className="bg-primary-danger py-6 space-y-6">
           <h1>Shopping Cart</h1>
           <NextLink href="/" passHref>
             <a>
@@ -70,11 +71,15 @@ export default function Cart() {
                         <NextLink href={`/product/${item.slug}`} passHref>
                           <a >
                             <NextImage
-                              src={item.image}
+                              loader={useImageLoader}
+                              src={item.images[0]}
                               alt={item.name}
                               width={50}
                               height={50}
                               layout={"responsive"}
+                              priority
+                              placeholder="blur"
+                              blurDataURL="/images/default.jpg"
                             />
                           </a>
                         </NextLink>

@@ -3,7 +3,7 @@ import NextLink from 'next/link'
 import NextImage from 'next/image'
 import { useRouter } from 'next/dist/client/router'
 import { useDispatch } from "react-redux";
-import { setCartproducts } from "../../redux/cart/actions"
+import { setCartItems } from "../../redux/cart/actions"
 import Carousel from '../../components/common/Carousel';
 import Rating from '@mui/material/Rating';
 import Layout from '../../components/Layout'
@@ -31,7 +31,7 @@ export default function ProductDetailsPage({product}) {
 
   const handleAddToCart = () => {
     if(product.numInStock <= 0) window.alert("Sorry. Product is out of stock")
-    dispatch(setCartproducts(product, color, quantity))
+    dispatch(setCartItems(product, color, quantity))
     //We want to show a modal here 
     //Continue shopping? or checkout now?
     router.push('/cart')

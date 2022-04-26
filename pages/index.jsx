@@ -19,9 +19,9 @@ export default function Home({products}) {
   return (
     <>
       <Layout title={"Home"}>
-        <section className="p-6">
-          <h1>Products</h1>
-          <Grid container spacing={1} className="mt-3">
+        <section className="p-3">
+          <h1 className="pb-3">Products</h1>
+          <Grid container spacing={1}>
             {products.map((product) => {
               return (
                 <Grid item md={4} key={product.name}>

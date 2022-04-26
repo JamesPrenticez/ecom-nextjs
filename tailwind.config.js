@@ -20,7 +20,7 @@ module.exports = {
 
     extend: {
       fontFamily: {
-        roboto: ['Roboto'],
+        jakarta: ['jakarta'],
       },
       minHeight:{
         screenNav: "calc(100vh - 10rem)", // (nav 4rm) + (footer 4rem) + (main margin top/bottom 2rem)
@@ -33,7 +33,8 @@ module.exports = {
         "primary-background": "var(--color-primary-background)",
         "secondary-background": "var(--color-secondary-background)",
         "primary-link": "var(--color-primary-link)",
-        "primary-action": "var(--color-primary-action)"
+        "primary-action": "var(--color-primary-action)",
+        "primary-danger": "var(--color-primary-danger)"
       },
     },
   },
