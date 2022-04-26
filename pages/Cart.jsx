@@ -6,14 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCartItems, deleteCartItem } from "../redux/cart/actions"
 import Layout from "../components/Layout";
 import { TrashCanIcon } from "../components/icons/common";
-import {
-  TableContainer,
-  Table,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody,
-} from "@mui/material";
 import Counter from "../components/common/Counter";
 
 export default function Cart() {
@@ -50,26 +42,27 @@ export default function Cart() {
         <div className="grid grid-cols-12">
           <div className="col-span-12 md:col-span-9">
             <h1 className="p-3">Shopping Cart</h1>
-            <TableContainer className="overflow-hidden">
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Image</TableCell>
-                    <TableCell>Name</TableCell>
-                    <TableCell align="right">Color</TableCell>
-                    <TableCell align="right">Quantity</TableCell>
-                    <TableCell align="right">Price</TableCell>
-                    <TableCell align="right">Remove</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
+            <div className="overflow-hidden">
+              <table className="w-full">
+                <thead className="border-b">
+                  <tr >
+                    <td>Image</td>
+                    <td>Name</td>
+                    <td align="center">Color</td>
+                          
+                    <td align="center">Quantity</td>
+                    <td align="center">Price</td>
+                    <td align="center">Remove</td>
+                  </tr>
+                </thead>
+                <tbody>
                   {cartItems.map((item) => { 
                     return (
-                    <TableRow key={item.id}>
+                    <tr key={item.id} className="border-b">
                       {/* ---------- Display Image ----------  */}
-                      <TableCell className="bubble">
+                      <td className="bubble">
                         <NextLink href={`/product/${item.slug}`} passHref>
-                          <a >
+                          <a>
                             <NextImage
                               loader={useImageLoader}
                               src={item.images[0]}
@@ -83,45 +76,45 @@ export default function Cart() {
                             />
                           </a>
                         </NextLink>
-                      </TableCell>
+                      </td>
                       {/* ---------- Product Name ----------  */}
-                      <TableCell>
+                      <td>
                         <NextLink href={`/product/${item.slug}`} passHref>
                           <a>
                            <h3 className="hover:text-primary-link hover:underline">{item.name}</h3>
                           </a>
                         </NextLink>
-                      </TableCell>
+                      </td>
                       {/* ---------- Color DropDown ----------  */}
-                      <TableCell align="right">
+                      <td align="center">
                         {item.color}
                         {/* <DropDown></DropDown> */}
-                      </TableCell>
+                      </td>
                       {/* ---------- Quantity Incrementor ----------  */}
-                      <TableCell align="right">
+                      <td align="center">
                         <Counter
-                          className="float-right"
+                          className="justify-center"
                           item={item} 
                           quantity={item.quantity}
                           handleClick={handleClickQuantity} //redux
                         />
-                      </TableCell>
+                      </td>
                       {/* ---------- Price----------  */}
-                      <TableCell align="right">
+                      <td align="center">
                         <p>${item.price}</p>
-                      </TableCell>
+                      </td>
                       {/* ---------- Trash Can / Delete Button ----------  */}
-                      <TableCell align="right">
+                      <td align="center">
                         <button onClick={() => handleClickDelete(item)}>
                           <TrashCanIcon className="h-[1.25rem] ml-auto cursor-pointer bubble"/>
                         </button>
-                      </TableCell>
-                    </TableRow>
+                      </td>
+                    </tr>
 
                   )})}
-                </TableBody>
-              </Table>
-            </TableContainer>
+                </tbody>
+              </table>
+            </div>
           </div>
           <div className="col-span-12 md:col-span-3">
             <div className="w-full h-full border-l border-b p-3 border-gray-200 drop-shadow-md rounded-sm  items-center">

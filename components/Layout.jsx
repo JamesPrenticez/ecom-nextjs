@@ -37,11 +37,8 @@ export default function Layout({title, description, children}) {
               {process.env.NEXT_PUBLIC_COMPANY_NAME}
             </a>
           </NextLink>
-          
-          
 
-
-          {/* Right - Desktop */}
+          {/* Right */}
           <div className="hidden md:inline-flex ml-auto space-x-6 items-center">
             <CountrySelector />
             <CartButton />

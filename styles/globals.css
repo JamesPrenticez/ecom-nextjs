@@ -66,6 +66,11 @@
       -webkit-appearance: none;
       margin: 0;
     }
+
+    td{
+        @apply
+        p-4
+    }
 }
 
 @layer components{
