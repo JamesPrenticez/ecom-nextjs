@@ -5,8 +5,7 @@ import NextImage from 'next/image'
 
 import Stepper from '../../components/common/Stepper';
 import InputText from '../../components/common/InputText';
-import { GithubIcon } from '../../components/icons/GithubIcon';
-import { GoogleIcon } from '../../components/icons/GoogleIcon';
+import { GithubIcon, GoogleIcon } from '../../components/icons/socials';
 
 import { Wrapper, Status } from "@googlemaps/react-wrapper"
 import GoogleAutoComplete from '../../components/map/GoogleAutoComplete';

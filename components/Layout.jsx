@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import Head from 'next/head'
 import NextLink from 'next/link'
-import CountrySelector from './common/CountrySelector'
+import CountrySelector from './nav/CountrySelector'
 import CartButton from './nav/CartButton'
 import { signIn, signOut, useSession } from 'next-auth/react';
 import NextImage from 'next/image'
+import Hamburger from './nav/Hamburger'
 
 export default function Layout({title, description, children}) {
   const {data: session} = useSession();
@@ -34,9 +35,13 @@ export default function Layout({title, description, children}) {
               {process.env.NEXT_PUBLIC_COMPANY_NAME}
             </a>
           </NextLink>
+          
+          
+          {/* Right - Mobile */}
+          <Hamburger session={session}/>
 
-          {/* Right */}
-          <div className="ml-auto space-x-6 inline-flex items-center">
+          {/* Right - Desktop */}
+          <div className="hidden md:inline-flex ml-auto space-x-6 items-center">
             <CountrySelector />
             <CartButton />
 

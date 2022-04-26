@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { ChevronUp, ChevronDown } from "../icons/Chevron";
+import { ChevronUpIcon, ChevronDownIcon } from "../icons/common";
 import { useInitialDimensions } from "../hooks/useInitialDimensions"
 
 function DropDown({
@@ -35,12 +35,12 @@ function DropDown({
           <p className="w-full">{value}</p>
 
           {isOpen ? (
-            <ChevronDown
+            <ChevronDownIcon
               onClick={() => setIsOpen(true)}
               className="h-[1.25rem] w-[1.25rem]"
             />
           ) : (
-            <ChevronUp
+            <ChevronUpIcon
               onClick={() => setIsOpen(false)}
               className="h-[1.25rem] w-[1.25rem]"
             />
@@ -78,7 +78,7 @@ function DropDown({
                     </div>
                   )}
                   <p className="w-full">{item.name}</p>
-                  <ChevronUp className="h-[1.25rem] w-[1.25rem] text-transparent" />
+                  <ChevronUpIcon className="h-[1.25rem] w-[1.25rem] text-transparent" /> {/* Budget placeholder/spacer */}
                 </div>
               </div>
             );

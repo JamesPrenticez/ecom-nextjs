@@ -19,9 +19,6 @@ module.exports = {
     },
 
     extend: {
-      fontFamily: {
-        jakarta: ['jakarta'],
-      },
       minHeight:{
         screenNav: "calc(100vh - 10rem)", // (nav 4rm) + (footer 4rem) + (main margin top/bottom 2rem)
       },

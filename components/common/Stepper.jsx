@@ -1,6 +1,6 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import { ChevronRight } from '../icons/Chevron';
+import { ChevronRightIcon } from '../icons/common';
 
 const steps = [
   { id: 0, name: "Cart", href: "/cart"},
@@ -30,7 +30,7 @@ export default function Stepper({ activeStep = 0 }) {
             >
               {step.name}
             </a>
-            <ChevronRight className={`${step.id === steps.length -1 && "hidden"} h-[.75rem] w-[.75rem] mx-1 `}/>
+            <ChevronRightIcon className={`${step.id === steps.length -1 && "hidden"} h-[.75rem] w-[.75rem] mx-1 `}/>
           </div>
         )
       )}

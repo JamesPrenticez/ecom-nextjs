@@ -5,7 +5,7 @@ import { useImageLoader } from "../components/hooks/useImageLoader"
 import { useDispatch, useSelector } from "react-redux";
 import { setCartItems, deleteCartItem } from "../redux/cart/actions"
 import Layout from "../components/Layout";
-import TrashCan from "../components/icons/TrashCan";
+import { TrashCanIcon } from "../components/icons/common";
 import {
   TableContainer,
   Table,
@@ -112,11 +112,11 @@ export default function Cart() {
                       </TableCell>
                       {/* ---------- Trash Can / Delete Button ----------  */}
                       <TableCell align="right">
-                          <TrashCan 
-                            className="h-[1.25rem] ml-auto cursor-pointer bubble"
-                            item={item}
-                            handleClick={handleClickDelete}
-                          />
+                        <button
+                          onClick={() => handleClickDelete(item)}
+                        >
+                          <TrashCanIcon className="h-[1.25rem] ml-auto cursor-pointer bubble"/>
+                        </button>
                       </TableCell>
                     </TableRow>
 

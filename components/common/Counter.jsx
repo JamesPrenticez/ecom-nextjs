@@ -1,6 +1,5 @@
 import React from 'react'
-import { Plus } from '../icons/Plus'
-import { Minus } from '../icons/Minus'
+import { PlusIcon, MinusIcon } from '../icons/common'
 
 export default function Counter({className, item, quantity, handleClick}) {
   const currQty = quantity
@@ -13,7 +12,7 @@ export default function Counter({className, item, quantity, handleClick}) {
         disabled={currQty <= min} onClick={() => handleClick(item, currQty - 1)}
         className="flex items-center bg-gray-300 text-white rounded-md h-[1.5rem] w-[1.5rem] p-1 disabled:cursor-not-allowed"
       >
-        <Minus className="h-full w-full"/>
+        <MinusIcon className="h-full w-full"/>
       </button>
       <div 
         contentEditable="true"
@@ -29,7 +28,7 @@ export default function Counter({className, item, quantity, handleClick}) {
         onClick={() => handleClick(item, currQty + 1)}
         className="flex items-center bg-gray-300 text-white rounded-md h-[1.5rem] w-[1.5rem] p-1 disabled:cursor-not-allowed"
       >
-        <Plus className="h-full w-full"/>
+        <PlusIcon className="h-full w-full"/>
       </button>
   </div> 
   )

@@ -5,7 +5,6 @@ import {required, maxLength, pattern} from './inputTextErrorHelper'
 const InputText = forwardRef(({ className, name, label, value, errors, handleChange}, ref) => {
   const [active, setActive] = useState(false)
   const [isError, setIsError] = useState({type: ""})
-
   
   useEffect(() => {
     if(!value) return 
