@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { ChevronUp, ChevronDown } from "../icons/Chevron";
+import { useInitialDimensions } from "../hooks/useInitialDimensions"
 
 function DropDown({
   value,
@@ -11,15 +12,20 @@ function DropDown({
 }) {
   const [isOpen, setIsOpen] = useState(false);
   let currentIcon = items.find((item) => item.name == value).icon;
+  
+  const childRef = useRef()
+  const { width, height } = useInitialDimensions(childRef)
+  console.log(width, height)
 
   return (
     <>
       {/* Select */}
       <div
-        className={`${selectClassName} relative select-none cursor-pointer rounded-md bg-green-600`}
+        className={`${selectClassName} select-none cursor-pointer`}
+        style={{width: width}}
       >
         <div
-          className="flex justify-between items-center space-x-2"
+          className="flex justify-between items-center space-x-2 p-2"
           onClick={() => setIsOpen(!isOpen)}
           value={value}
         >
@@ -27,7 +33,7 @@ function DropDown({
             <img className="h-[1rem] w-[1rem]" src={currentIcon} alt={value} />
           </div>
 
-          <p className="grow">{value}</p>
+          <p className="w-full">{value}</p>
 
           {isOpen ? (
             <ChevronDown
@@ -44,6 +50,7 @@ function DropDown({
 
         {/* Options */}
         <div
+          //ref={childRef}
           className={`${
             isOpen ? "block" : "invisible"
           } ${optionsClassName} absolute z-50 mt-1 shadow-md`}
@@ -53,6 +60,7 @@ function DropDown({
           {items.map((item) => {
             return (
               <div
+              ref={childRef}
                 key={item.name}
                 value={item.name}
                 onClick={() => {
@@ -62,7 +70,7 @@ function DropDown({
               >
                 <div className="flex justify-between items-center space-x-2">
                   {item.icon && (
-                    <div className="rounded-full h-[1.5rem] w-[1.5rem] border-none flex items-center justify-center object-cover">
+                    <div className="rounded-full h-[2rem] w-[2rem] border-none flex items-center justify-center object-cover">
                       <img
                         className="h-[1rem] w-[1rem]"
                         src={item.icon}
@@ -71,6 +79,7 @@ function DropDown({
                     </div>
                   )}
                   <p className="w-full">{item.name}</p>
+                  <ChevronUp className="h-[1.25rem] w-[1.25rem] text-transparent" />
                 </div>
               </div>
             );
