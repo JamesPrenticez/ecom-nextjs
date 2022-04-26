@@ -112,9 +112,7 @@ export default function Cart() {
                       </TableCell>
                       {/* ---------- Trash Can / Delete Button ----------  */}
                       <TableCell align="right">
-                        <button
-                          onClick={() => handleClickDelete(item)}
-                        >
+                        <button onClick={() => handleClickDelete(item)}>
                           <TrashCanIcon className="h-[1.25rem] ml-auto cursor-pointer bubble"/>
                         </button>
                       </TableCell>

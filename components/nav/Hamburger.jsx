@@ -6,12 +6,12 @@ import { LoginIcon, LogoutIcon, UserIcon } from "../icons/common"
 
 
 function Hamburger({ session }){
-  const [hamburger, setHamburger] = useState(true)
+  const [hamburger, setHamburger] = useState(false)
   const dropDownMenu = useRef(null);
   
   return (
         <div 
-          className="ml-auto h-20 w-20 flex items-center justify-center cursor-pointer"
+          className="flex md:hidden ml-auto h-20 w-20 items-center justify-center cursor-pointer"
           onClick={() => setHamburger(!hamburger)}
         >
           {/* --------- top ---------*/}

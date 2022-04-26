@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSession, signIn, signOut } from 'next-auth/react';
 
 import NextImage from 'next/image'
+import { useImageLoader } from '../../components/hooks/useImageLoader'
 
 import Stepper from '../../components/common/Stepper';
 import InputText from '../../components/common/InputText';
@@ -28,7 +29,7 @@ export default function Shipping() {
 
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
-  const contactInfo = useSelector((state) => state.userContactInfo);
+  const userContactInfo = useSelector((state) => state.userContactInfo);
 
   const [showLogInForm, setShowLogInForm] = useState(false)
   const [options, setOptions] = useState(defaultOptions)
@@ -45,7 +46,7 @@ export default function Shipping() {
   })
 
   const handleChangeContactInfo = (event) => {
-    dispatch(setUserContactInfo(({ ...contactInfo, [event.target.name]: event.target.value })))
+    dispatch(setUserContactInfo(({ ...userContactInfo, [event.target.name]: event.target.value })))
   };
   
   const handleChangeShippingInfo = (event) => {
@@ -123,7 +124,7 @@ export default function Shipping() {
               label="Email Address"
               color="ring-primary-link"
               className="col-span-6"
-              value={contactInfo.email.value}
+              value={userContactInfo.email}
               errors= {{
                 required: { message: "Email is required" },
                 maxLength: { message: "Max length exceeded", value: 5 },
@@ -138,7 +139,7 @@ export default function Shipping() {
               label="First Name"
               color="ring-primary-link"
               className="col-span-3"
-              value={contactInfo.firstName.value}
+              value={userContactInfo.firstName}
               handleChange={handleChangeContactInfo}
             />
 
@@ -148,7 +149,7 @@ export default function Shipping() {
               label="Last Name"
               color="ring-primary-link"
               className="col-span-3"
-              value={contactInfo.lastName.value}
+              value={userContactInfo.lastName}
               handleChange={handleChangeContactInfo}
             />
           </>
@@ -185,8 +186,8 @@ export default function Shipping() {
               type="checkbox"
               name="newsletter"
               className="accent-primary-link text-secondary-text h-4 w-4"
-              defaultChecked={contactInfo.newsletter.value}
-              onClick={(e) => setContactInfo({ ...contactInfo, [e.target.name]: e.target.value })}
+              defaultChecked={userContactInfo.newsletter}
+              onClick={(e) => setUserContactInfo({ ...userContactInfo, [e.target.name]: e.target.value })}
             />
             <small>Email me with new and offers</small>
           </label>
@@ -290,11 +291,15 @@ export default function Shipping() {
                   <div className="w-16 relative">
                     <NextImage
                       className="rounded-lg"
-                      src={item.image}
+                      loader={useImageLoader}
+                      src={item.images[0]}
                       alt={item.name}
                       width={50}
                       height={50}
                       layout={"responsive"}
+                      priority
+                      placeholder="blur"
+                      blurDataURL="/images/default.jpg"
                     />
                     {/* Quantity Badge */}
                     <div className='bg-gray-500 text-secondary-text rounded-full h-[1rem] w-[1rem] text-xs flex items-center justify-center absolute -right-2 -top-2'>
