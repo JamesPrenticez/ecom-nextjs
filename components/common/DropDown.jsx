@@ -11,21 +11,20 @@ function DropDown({
   itemClassName,
 }) {
   const [isOpen, setIsOpen] = useState(false);
-  let currentIcon = items.find((item) => item.name == value).icon;
+  let currentIcon = items.find((item) => item.name == value)?.icon;
   
   const childRef = useRef()
   const { width, height } = useInitialDimensions(childRef)
-  console.log(width, height)
 
   return (
     <>
       {/* Select */}
       <div
-        className={`${selectClassName} select-none cursor-pointer`}
+        className={`${selectClassName} select-none cursor-pointer border rounded-md`}
         style={{width: width}}
       >
         <div
-          className="flex justify-between items-center space-x-2 p-2"
+          className="flex justify-between items-center space-x-2 p-1"
           onClick={() => setIsOpen(!isOpen)}
           value={value}
         >
@@ -56,7 +55,7 @@ function DropDown({
           } ${optionsClassName} absolute z-50 mt-1 shadow-md`}
           onMouseLeave={() => setIsOpen(false)}
         >
-          {/* Option Items*/}
+          {/* Item*/}
           {items.map((item) => {
             return (
               <div
@@ -66,7 +65,7 @@ function DropDown({
                 onClick={() => {
                   onChange(item.name), setIsOpen(false);
                 }}
-                className={`${itemClassName} p-2`}
+                className={`${itemClassName} p-1`}
               >
                 <div className="flex justify-between items-center space-x-2">
                   {item.icon && (

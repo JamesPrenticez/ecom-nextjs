@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import NextImage from 'next/image'
+import { useImageLoader } from '../hooks/useImageLoader'
 
 function MagnifyingGlass({x, y, isZoom, image, imgHeight, imgWidth}){
   const zoomLevel = 2.5
@@ -56,10 +57,6 @@ function Carousel({images}) {
     setXY([x, y])
   }
 
-  const myLoader = ({ src, width, quality }) => {
-    return `http://localhost:3000/${src}?w=${width}&q=${quality || 75}`
-  }
-
   return (
     <div className="">
       <div className="flex justify-center overflow-hidden w-full">
@@ -71,7 +68,7 @@ function Carousel({images}) {
           onMouseMove={handleMouseMove}
         >
           <NextImage
-            loader={myLoader}
+            loader={useImageLoader}
             src={images[index]}
             alt={images[index]}
             width={640}

@@ -12,7 +12,7 @@ const prisma = new PrismaClient()
 
 export default async function getProducts(req, res){
   if(req.method === 'GET'){
-    const products = await prisma.product.findMany({
+    await prisma.product.findMany({
       where: {
         published: true
       },
@@ -20,11 +20,11 @@ export default async function getProducts(req, res){
         id: true,
         name: true,
         slug: true,
-        image: true,
+        images: true,
         price: true,
       }
-    }).then(products => {
-      return res.status(200).json(JSON.stringify(products))
+    }).then(item => {
+      return res.status(200).json(JSON.stringify(item))
     })
   }
 }
