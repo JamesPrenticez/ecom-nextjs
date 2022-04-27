@@ -1,7 +1,7 @@
 import React, {useEffect, useRef} from 'react'
-import { googleMapMarker } from './googleMapsHelpers'
+import { googleMapMarker } from '../helpers/googleMapsHelpers'
 
-export default function GoogleMaps({ options, address, setOptions}) {
+export default function GoogleMaps({ mapOptions, shippingInfo, setMapOptions}) {
   const mapRef = useRef()
   let map
 
@@ -12,7 +12,7 @@ export default function GoogleMaps({ options, address, setOptions}) {
         //Handle Success
         (userLocation) => {
           // Re-write options with our new user location
-          setOptions({...options,
+          setMapOptions({...mapOptions,
             center: {
               lat: userLocation.coords.latitude,
               lng: userLocation.coords.longitude
@@ -27,13 +27,15 @@ export default function GoogleMaps({ options, address, setOptions}) {
     }
   }, [])
 
+  //Drop a marker on the map if street name exists
   useEffect(() => {
-    map = new window.google.maps.Map(mapRef.current, options)
-    if(address){ //need to get address if using geolocation and update this object
-      let location = options.center
-      googleMapMarker(location, address, map)
+    //console.log(shippingInfo)
+    map = new window.google.maps.Map(mapRef.current, mapOptions)
+    if(shippingInfo.street_name){ //need to get address/shippingInfo if using geolocation and update this object
+      let location = mapOptions.center
+      googleMapMarker(location, shippingInfo, map)
     }
-  }, [options])
+  }, [mapOptions])
 
   return <div id="map" className="h-[28rem] w-full map" ref={mapRef} />
 }

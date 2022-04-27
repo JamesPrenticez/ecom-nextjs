@@ -1,5 +1,5 @@
 import React, { forwardRef, useEffect, useState } from 'react'
-import {required, maxLength, pattern} from './inputTextErrorHelper'
+import {required, maxLength, pattern} from '../helpers/inputTextErrorHelper'
 
 //const InputText = React.forwardRef((props, ref) => {
 const InputText = forwardRef(({ className, name, label, value, errors, handleChange}, ref) => {
@@ -12,7 +12,7 @@ const InputText = forwardRef(({ className, name, label, value, errors, handleCha
   }, [value])
   
   function handleErrors(e){
-    console.log(e.target.value)
+    //console.log(e.target.value)
     if(!errors) return
     //if(required(value)) return setIsError({type: "required"})
     //if(maxLength(e.target.value, errors.maxLength.value)) return setIsError({type: "maxLength"})

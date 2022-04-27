@@ -10,13 +10,14 @@ import { GithubIcon, GoogleIcon } from '../../components/icons/socials';
 
 import { Wrapper, Status } from "@googlemaps/react-wrapper"
 import GoogleAutoComplete from '../../components/map/GoogleAutoComplete';
-//import GoogleMaps from '../../components/map/GoogleMaps';
+import GoogleMaps from '../../components/map/GoogleMaps';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { setUserContactInfo } from '../../redux/user_contact_info/actions'
 
+// Google Map/Places 
 const myApiKey = process.env.NEXT_PUBLIC_GOOGLE_API_KEY //this is currently public!
-let defaultOptions = {
+let defaultMapOptions = {
   center: {lat: 36.1699421, lng: -115.1398149}, // Las Vegas
   zoom: 11,
   disableDefaultUI: true, // remove controls
@@ -32,7 +33,7 @@ export default function Shipping() {
   const userContactInfo = useSelector((state) => state.userContactInfo);
 
   const [showLogInForm, setShowLogInForm] = useState(false)
-  const [options, setOptions] = useState(defaultOptions)
+  const [mapOptions, setMapOptions] = useState(defaultMapOptions)
 
   const [shippingInfo, setShippingInfo] = useState({
     address: "",
@@ -81,8 +82,8 @@ export default function Shipping() {
         return (
         <>
           {/* NEED TO FIX SETADDRESS */}
-          <GoogleAutoComplete options={options} setOptions={setOptions} handleChange={handleChangeShippingInfo} shippingInfo={shippingInfo} setShippingInfo={setShippingInfo}/>
-          {/* <GoogleMaps options={options} address={address} setOptions={setOptions}/> */}
+          <GoogleAutoComplete mapOptions={mapOptions} setMapOptions={setMapOptions} handleChange={handleChangeShippingInfo} shippingInfo={shippingInfo} setShippingInfo={setShippingInfo}/>
+          <GoogleMaps mapOptions={mapOptions} shippingInfo={shippingInfo} setMapOptions={setMapOptions}/>
         </>
         )
     }
