@@ -5,7 +5,7 @@ import { useImageLoader } from "../components/hooks/useImageLoader"
 import { useDispatch, useSelector } from "react-redux";
 import { setCartItems, deleteCartItem } from "../redux/cart/actions"
 import Layout from "../components/Layout";
-import { TrashCanIcon } from "../components/icons/common";
+import { SecureIcon, TrashCanIcon } from "../components/icons/common";
 import Counter from "../components/common/Counter";
 
 export default function Cart() {
@@ -52,7 +52,7 @@ export default function Cart() {
                           
                     <td align="center">Quantity</td>
                     <td align="center">Price</td>
-                    <td align="center">Remove</td>
+                    <td align="center">Sub Total</td>
                   </tr>
                 </thead>
                 <tbody>
@@ -77,13 +77,19 @@ export default function Cart() {
                           </a>
                         </NextLink>
                       </td>
-                      {/* ---------- Product Name ----------  */}
+                      {/* ---------- Product Name / Remove ----------  */}
                       <td>
                         <NextLink href={`/product/${item.slug}`} passHref>
                           <a>
-                           <h3 className="hover:text-primary-link hover:underline">{item.name}</h3>
+                           <h3 className="hover:text-primary-link">{item.name}</h3>
                           </a>
                         </NextLink>
+                        <button
+                          className="flex items-center cursor-pointer pt-2 hover:text-primary-danger"
+                          onClick={() => handleClickDelete(item)}>
+                          <TrashCanIcon className="h-[1.25rem] pr-1 "/>
+                          Remove
+                        </button>
                       </td>
                       {/* ---------- Color DropDown ----------  */}
                       <td align="center">
@@ -103,11 +109,9 @@ export default function Cart() {
                       <td align="center">
                         <p>${item.price}</p>
                       </td>
-                      {/* ---------- Trash Can / Delete Button ----------  */}
+                      {/* ---------- Sub Total ----------  */}
                       <td align="center">
-                        <button onClick={() => handleClickDelete(item)}>
-                          <TrashCanIcon className="h-[1.25rem] ml-auto cursor-pointer bubble"/>
-                        </button>
+                        <p>${item.price * item.quantity}</p>
                       </td>
                     </tr>
 
@@ -119,28 +123,28 @@ export default function Cart() {
           <div className="col-span-12 md:col-span-3">
             <div className="w-full h-full border-l border-b p-3 border-gray-200 drop-shadow-md rounded-sm  items-center">
               <div className="h-full w-full p-3 bg-white shadow-lg">
-                <ul>
-                  <li>
+                <div>
+                  <div>
                     <h5>({cartItems.reduce((a, b) => a + b.quantity, 0)} item)</h5>
-                  </li>
-                  <li>
+                  </div>
+                  <div>
                     <h5>SUBTOTAL: {currentCountry.symbol}{subtotal}</h5>
-                  </li>
-                  <li>
+                  </div>
+                  <div>
                     <h5>TAX: {currentCountry.symbol}{tax}</h5>
-                  </li>
-                  <li>
+                  </div>
+                  <div>
                     <h4>TOTAL: {currentCountry.symbol}{total} <small>({currentCountry.abbr})</small></h4>
-                  </li>
-                  <li>
-
-                  <NextLink href={"/checkout/shipping_details"} passHref>
-                    <a className="text-center p-3 w-[90%] bg-primary-action rounded-md text-white mx-auto">
-                        CHECKOUT
-                    </a>
-                  </NextLink>
-                  </li>
-                </ul>
+                  </div>
+                  <div>
+                  <div className="flex items-center justify-center space-x-2 p-3 text-center bg-primary-action rounded-md text-white hover:bg-primary-action-hover cursor-pointer font-semibold">
+                    <NextLink href={"/checkout/shipping_details"} passHref>
+                      <a>CHECKOUT</a>
+                    </NextLink>
+                    <SecureIcon className="h-[1.25rem]" />
+                  </div>
+                </div>
+              </div>
               </div>
             </div>
 

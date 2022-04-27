@@ -34,6 +34,7 @@ module.exports = {
         "secondary-background": "var(--color-secondary-background)",
         "primary-link": "var(--color-primary-link)",
         "primary-action": "var(--color-primary-action)",
+        "primary-action-hover": "var(--color-primary-action-hover)",
         "primary-danger": "var(--color-primary-danger)"
       },
     },

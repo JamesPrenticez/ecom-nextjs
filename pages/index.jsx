@@ -4,57 +4,45 @@ import NextImage from "next/image";
 import Layout from "../components/Layout";
 import { useImageLoader } from '../components/hooks/useImageLoader'
 
-import {
-  Button,
-  Card,
-  CardActionArea,
-  CardActions,
-  CardContent,
-  CardMedia,
-  Grid,
-  Typography,
-} from "@mui/material";
-
 export default function Home({products}) {
   return (
     <>
       <Layout title={"Home"}>
         <section className="p-3">
           <h1 className="pb-3">Products</h1>
-          <Grid container spacing={1}>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
             {products.map((product) => {
               return (
-                <Grid item md={4} key={product.name}>
-                  <Card className="h-full">
-                    <NextLink href={`/product/${product.slug}`} passHref>
-                      <CardActionArea>
-                        <NextImage
-                          loader={useImageLoader}
-                          src={product.images[0]}
-                          alt={product.images[0]}
-                          width={640}
-                          height={640}
-                          layout={"responsive"}
-                          priority
-                          placeholder="blur"
-                          blurDataURL="/images/default.jpg"
-                        />
-                        <CardContent>
-                          <Typography>{product.name}</Typography>
-                        </CardContent>
-                      </CardActionArea>
-                    </NextLink>
-                      <CardActions>
-                        <Typography>${product.price}</Typography>
-                        <Button size="small" color="primary">
-                          Add to cart
-                        </Button>
-                      </CardActions>
-                  </Card>
-                </Grid>
+              <NextLink key={product.name} href={`/product/${product.slug}`} passHref>
+                <div className="bg-white border-2 border-white shadow-md rounded-md cursor-pointer">
+                  <div className="">
+                    <NextImage
+                      loader={useImageLoader}
+                      src={product.images[0]}
+                      alt={product.images[0]}
+                      width={640}
+                      height={640}
+                      layout={"responsive"}
+                      priority
+                      placeholder="blur"
+                      blurDataURL="/images/default.jpg"
+                    />
+                    <div className="p-3">
+                      <p>{product.name}</p>
+                      <p className="font-semibold">${product.price}.00</p>
+                    </div>
+                  </div>
+                    
+                  {/* <div>
+                    <button className="bg-primary-link text-secondary-text p-3 rounded-md">
+                      Add to cart
+                    </button>
+                  </div> */}
+                </div>
+              </NextLink>
               )}
             )}
-          </Grid>
+          </div>
         </section>
       </Layout>
     </>

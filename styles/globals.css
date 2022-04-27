@@ -10,7 +10,8 @@
     --color-primary-background: #f9fafb; /* bg-gray-50*/
     --color-secondary-background: #203040;
     --color-primary-link: #2563EB;
-    --color-primary-action: #22c55e;
+    --color-primary-action: #22c55e; /* bg-green-500*/
+    --color-primary-action-hover: #24bd5d; /* bg-green-500*/
     --color-primary-danger: #DE2600;
 }
 
