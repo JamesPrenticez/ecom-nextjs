@@ -5,7 +5,6 @@ import { useRouter } from 'next/dist/client/router'
 import { useDispatch } from "react-redux";
 import { setCartItems } from "../../redux/cart/actions"
 import Carousel from '../../components/common/Carousel';
-import Rating from '@mui/material/Rating';
 import Layout from '../../components/Layout'
 import Counter from '../../components/common/Counter'
 import DropDown from '../../components/common/DropDown';
@@ -122,12 +121,12 @@ export default function ProductDetailsPage({product}) {
 
             {/* Star Rating */}
             <div className="flex products-center space-x-2">
-              <Rating
+              {/* <Rating
                 precision={0.1}
                 name="read-only"
                 value={product.rating}
                 readOnly
-              />
+              /> */}
               <p>{product.rating}/5</p>
               <small>({product.numReviews} reviews)</small>
             </div>

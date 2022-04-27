@@ -37,6 +37,27 @@ module.exports = {
         "primary-action-hover": "var(--color-primary-action-hover)",
         "primary-danger": "var(--color-primary-danger)"
       },
+      animation: {
+        wiggle: 'wiggle 1s ease-in-out infinite',
+        ripple: 'ripple 1s ease-out',
+      },
+      keyframes:{
+        wiggle: {
+          '0%, 100%': { transform: 'rotate(-3deg)' },
+          '50%': { transform: 'rotate(3deg)' },
+        },
+        ripple:{
+            'from': {
+              opacity: '0.25',
+              transform: 'scale(0.5)'
+            },
+          
+            'to': {
+              opacity: '0',
+              transform: 'scale(4)'
+            }
+          }
+        }
     },
   },
   variants: {
