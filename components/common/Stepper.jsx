@@ -4,7 +4,7 @@ import { ChevronRightIcon } from '../icons/common';
 
 const steps = [
   { id: 0, name: "Cart", href: "/cart"},
-  { id: 1, name: "Shipping Details", href: "/checkout/shipping_details"},
+  { id: 1, name: "Order Details", href: "/checkout/shipping_details"},
   { id: 2, name: "Payment Method", href: "/checkout/payment"},
   { id: 3, name: "Confirm Order", href: "/checkout/confirmation"},
 ]

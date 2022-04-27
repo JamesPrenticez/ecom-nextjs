@@ -1,17 +1,19 @@
 import React, {useRef, useState, useEffect} from 'react'
 import { addressFormatter,  } from '../helpers/googleMapsHelpers'
 import InputText from '../common/InputText'
+import { useDispatch } from 'react-redux';
 
-export default function GoogleAutoComplete({ mapOptions, setMapOptions, handleChange, shippingInfo, setShippingInfo,}) {
+export default function GoogleAutoComplete({ mapOptions, setMapOptions, handleChange, userShippingInfo, setUserShippingInfo,}) {
   const [autoComplete, setAutoComplete] = useState(undefined)
   const inputRef = useRef()
+  const dispatch = useDispatch();
   
   const handleChangePlace = () => {
     let infoObj = autoComplete.getPlace()
     let location = infoObj.geometry.location
     let address_components = infoObj.address_components
     let formattedAddress = addressFormatter(address_components)
-    setShippingInfo({...formattedAddress, address: formattedAddress.street_number + " " +  formattedAddress.street_name})
+    dispatch(setUserShippingInfo({...formattedAddress, address: formattedAddress.street_number + " " +  formattedAddress.street_name}))
     setMapOptions({
       ...mapOptions,
       center: location,
@@ -36,7 +38,7 @@ export default function GoogleAutoComplete({ mapOptions, setMapOptions, handleCh
 
   }, [inputRef, autoComplete])
 
-  
+  console.log(userShippingInfo)  
 
   return (
     <InputText
@@ -45,7 +47,7 @@ export default function GoogleAutoComplete({ mapOptions, setMapOptions, handleCh
       label="Street Address"
       color="ring-primary-link"
       className="col-span-2"
-      value={shippingInfo.address}
+      value={userShippingInfo.address}
       handleChange={handleChange}
     />
   )

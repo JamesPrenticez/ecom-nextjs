@@ -138,7 +138,7 @@ export default function Cart() {
                   </div>
                   <div>
                   <div className="flex items-center justify-center space-x-2 p-3 text-center bg-primary-action rounded-md text-white hover:bg-primary-action-hover cursor-pointer font-semibold">
-                    <NextLink href={"/checkout/shipping_details"} passHref>
+                    <NextLink href={"/checkout/order_details"} passHref>
                       <a>CHECKOUT</a>
                     </NextLink>
                     <SecureIcon className="h-[1.25rem]" />

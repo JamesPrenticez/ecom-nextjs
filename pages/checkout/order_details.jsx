@@ -10,10 +10,11 @@ import { GithubIcon, GoogleIcon } from '../../components/icons/socials';
 
 import { Wrapper, Status } from "@googlemaps/react-wrapper"
 import GoogleAutoComplete from '../../components/map/GoogleAutoComplete';
-import GoogleMaps from '../../components/map/GoogleMaps';
+// import GoogleMaps from '../../components/map/GoogleMaps';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { setUserContactInfo } from '../../redux/user_contact_info/actions'
+import { setUserShippingInfo } from '../../redux/user_shipping_info/actions'
 
 // Google Map/Places 
 const myApiKey = process.env.NEXT_PUBLIC_GOOGLE_API_KEY //this is currently public!
@@ -27,31 +28,24 @@ let defaultMapOptions = {
 
 export default function Shipping() {
   const { data: session } = useSession()
+  const [showLogInForm, setShowLogInForm] = useState(false)
 
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
   const userContactInfo = useSelector((state) => state.userContactInfo);
+  const userShippingInfo = useSelector((state) => state.userShippingInfo);
 
-  const [showLogInForm, setShowLogInForm] = useState(false)
+  console.log(userContactInfo)
+  console.log(userShippingInfo)
+
   const [mapOptions, setMapOptions] = useState(defaultMapOptions)
-
-  const [shippingInfo, setShippingInfo] = useState({
-    address: "",
-    street_number: "",
-    street_name: "",
-    suburb: "",
-    city: "",
-    state:"",
-    country: "",
-    postal_code: ""
-  })
 
   const handleChangeContactInfo = (event) => {
     dispatch(setUserContactInfo(({ ...userContactInfo, [event.target.name]: event.target.value })))
   };
   
-  const handleChangeShippingInfo = (event) => {
-    setShippingInfo({ ...shippingInfo, [event.target.name]: event.target.value });
+  const handleChangeUserShippingInfo = (event) => {
+    dispatch(setUserShippingInfo({ ...userShippingInfo, [event.target.name]: event.target.value }))
   };
 
   const onSubmit = async(e) => {
@@ -68,8 +62,8 @@ export default function Shipping() {
       }
       
       //CREATE shipping_details for user
-    alert(JSON.stringify(contactInfo))
-    alert(JSON.stringify(shippingInfo))
+    alert(JSON.stringify(userContactInfo))
+    alert(JSON.stringify(userShippingInfo))
   } 
 
   const render = (status) => {
@@ -81,9 +75,8 @@ export default function Shipping() {
       case Status.SUCCESS:
         return (
         <>
-          {/* NEED TO FIX SETADDRESS */}
-          <GoogleAutoComplete mapOptions={mapOptions} setMapOptions={setMapOptions} handleChange={handleChangeShippingInfo} shippingInfo={shippingInfo} setShippingInfo={setShippingInfo}/>
-          <GoogleMaps mapOptions={mapOptions} shippingInfo={shippingInfo} setMapOptions={setMapOptions}/>
+          <GoogleAutoComplete mapOptions={mapOptions} setMapOptions={setMapOptions} handleChange={handleChangeUserShippingInfo} userShippingInfo={userShippingInfo} setUserShippingInfo={setUserShippingInfo}/>
+          {/* <GoogleMaps mapOptions={mapOptions} shippingInfo={shippingInfo} setMapOptions={setMapOptions}/> */}
         </>
         )
     }
@@ -229,8 +222,8 @@ export default function Shipping() {
           label="Suburb"
           color="ring-primary-link"
           className="col-span-3"
-          value={shippingInfo.suburb}
-          handleChange={handleChangeShippingInfo}
+          value={userShippingInfo.suburb}
+          handleChange={handleChangeUserShippingInfo}
         />
 
         {/* ---------- city ---------- */}
@@ -239,8 +232,8 @@ export default function Shipping() {
           label="City"
           color="ring-primary-link"
           className="col-span-3"
-          value={shippingInfo.city}
-          handleChange={handleChangeShippingInfo}
+          value={userShippingInfo.city}
+          handleChange={handleChangeUserShippingInfo}
         />
 
         {/* ---------- country ---------- */}
@@ -249,8 +242,8 @@ export default function Shipping() {
           label="Country"
           color="ring-primary-link"
           className="col-span-3"
-          value={shippingInfo.country}
-          handleChange={handleChangeShippingInfo}
+          value={userShippingInfo.country}
+          handleChange={handleChangeUserShippingInfo}
         />
 
         {/* ---------- post code ---------- */}
@@ -259,8 +252,8 @@ export default function Shipping() {
           label="Post Code"
           color="ring-primary-link"
           className="col-span-3"
-          value={shippingInfo.postal_code}
-          handleChange={handleChangeShippingInfo}
+          value={userShippingInfo.postal_code}
+          handleChange={handleChangeUserShippingInfo}
         />
 
         {/* ---------- Continue Shopping Button ---------- */}
