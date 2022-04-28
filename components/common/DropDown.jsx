@@ -24,7 +24,7 @@ function DropDown({
         style={{width: width}}
       >
         <div
-          className="flex justify-between items-center space-x-2"
+          className="flex no-wrap justify-between items-center space-x-1 px-1"
           onClick={() => setIsOpen(!isOpen)}
           value={value}
         >

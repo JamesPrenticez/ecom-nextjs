@@ -14,6 +14,7 @@ export default class MyDocument extends Document {
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <body className="font-sans bg-primaryBackground selection:bg-primary-link selection:text-white overflow-y-scroll">
+
           <Main />
           <NextScript />
         </body>

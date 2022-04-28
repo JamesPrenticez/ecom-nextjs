@@ -6,6 +6,7 @@ import { useImageLoader } from '../components/hooks/useImageLoader'
 import RippleEffect from "../components/common/RippleEffect";
 
 export default function Home({products}) {
+  console.log("%cOh hello there!", "color:green; background-color:yellow; font-size: 64px")
   return (
     <>
       <Layout title={"Home"}>

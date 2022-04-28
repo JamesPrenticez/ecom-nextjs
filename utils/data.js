@@ -18,7 +18,7 @@ export const data = {
       name: 'United Kingdom',
       abbr: 'GBP',
       symbol: '£',
-      shippingCost: 6.99,
+      shippingCost: 2.99,
       icon: '/images/flags/united-kingdom.svg',
     },
     {

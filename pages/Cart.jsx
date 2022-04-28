@@ -14,7 +14,8 @@ export default function Cart() {
   const currentCountry = useSelector((state) => state.currentCountry);
   const dispatch = useDispatch();
 
-  let subtotal = cartItems.reduce((a, b) => a + b.quantity * b.price, 0)
+  let numOfItems = cartItems.reduce((a, b) => a + b.quantity, 0)
+  let subtotal = cartItems.reduce((a, b) => a + b.quantity * b.price, 0) + currentCountry.shippingCost
   let total = subtotal
 
   const handleClickQuantity = (item, quantity) => {
@@ -39,8 +40,8 @@ export default function Cart() {
           </NextLink>
         </div>
       ) : (
-        <div className="grid grid-cols-12">
-          <div className="col-span-12 md:col-span-8">
+        <div className="grid grid-cols-12 space-y-6 lg:space-y-0">
+          <div className="col-span-12 lg:col-span-8">
             <h1 className="p-3">Shopping Cart</h1>
             <div className="overflow-hidden">
               <table className="w-full">
@@ -120,36 +121,36 @@ export default function Cart() {
               </table>
             </div>
           </div>
-          <div className="col-span-12 md:col-span-4">
-            <div className="w-full h-full border-l border-b p-3 border-gray-200 drop-shadow-md rounded-sm  items-center">
-              <div className="h-full w-full p-3 bg-white shadow-lg">
-                <div>
+          <div className="col-span-12 lg:col-span-4">
+            <div className="w-full h-full border-l border-b border-gray-200 rounded-sm items-center">
+              <div className="h-full w-full p-3 bg-white lg:shadow-md">
+                <div> 
                   <div>
-                    <h5>({cartItems.reduce((a, b) => a + b.quantity, 0)} item)</h5>
+                    <h2>Order Summary </h2>
                   </div>
-                  <div>
-                    <h5>SUBTOTAL: {currentCountry.symbol}{subtotal}</h5>
+                  <div className="flex items-center justify-between border-b border-gray-300 py-3">
+                    <h5>SUBTOTAL <small className="ml-auto">({numOfItems} {numOfItems === 1 ? "item" : "items"})</small>:</h5>
+                    <h5>{currentCountry.symbol}{subtotal}</h5>
                   </div>
-                  <div className="flex items-center">
-                    <h5>SHIPS TO:</h5>
-                    <CurrentCountry className="text-sm px-1"/> 
+                  <div className="flex items-center justify-between border-b border-gray-300 py-3">
+                    <h5 className="flex">SHIPS TO: &nbsp; <CurrentCountry className="text-sm"/></h5>
                     <h5 className="ml-auto">
                       <small className="font-light mr-1">from</small>
                       {currentCountry.symbol}
                       {currentCountry.shippingCost}
-                      <small className="ml-1">({currentCountry.abbr})</small>
                     </h5>
                   </div>
-                  <div>
-                    <h4>TOTAL: {currentCountry.symbol}{total} <small>({currentCountry.abbr})</small></h4>
+                  <div className="flex items-center justify-between border-b border-gray-300 py-3">
+                    <h5>TOTAL:</h5>
+                    <h5>{currentCountry.symbol}{total} <small>({currentCountry.abbr})</small></h5>
                   </div>
-                  <div>
-                  <div className="flex items-center justify-center space-x-2 p-3 text-center bg-primary-action rounded-md text-white hover:bg-primary-action-hover cursor-pointer font-semibold">
-                    <NextLink href={"/checkout/order_details"} passHref>
-                      <a>CHECKOUT</a>
-                    </NextLink>
-                    <SecureIcon className="h-[1.25rem]" />
-                  </div>
+                  <div className="flex items-center justify-between py-3 ">
+                    <div className="flex items-center justify-center space-x-2 p-3 w-full text-center bg-primary-action rounded-md text-white hover:bg-primary-action-hover cursor-pointer font-semibold">
+                      <NextLink href={"/checkout/order_details"} passHref>
+                        <a>CHECKOUT</a>
+                      </NextLink>
+                      <SecureIcon className="h-[1.25rem]" />
+                    </div>
                 </div>
               </div>
               </div>
