@@ -2,7 +2,6 @@ let initialState = {
   name: 'United States',
   abbr: 'USD',
   symbol: '$',
-  tax: 0.15,
   flag: '/images/flags/united-states.svg'
 }
 

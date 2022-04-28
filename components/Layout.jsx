@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import Head from 'next/head'
 import NextLink from 'next/link'
-import CountrySelector from './nav/CountrySelector'
 import CartButton from './nav/CartButton'
 import { signIn, signOut, useSession } from 'next-auth/react';
 import NextImage from 'next/image'
@@ -40,7 +39,6 @@ export default function Layout({title, description, children}) {
 
           {/* Right */}
           <div className="hidden md:inline-flex ml-auto space-x-6 items-center">
-            <CountrySelector />
             <CartButton />
 
             {!session ? (

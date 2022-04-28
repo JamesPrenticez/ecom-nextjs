@@ -38,8 +38,6 @@ export default function GoogleAutoComplete({ mapOptions, setMapOptions, handleCh
 
   }, [inputRef, autoComplete])
 
-  console.log(userShippingInfo)  
-
   return (
     <InputText
       ref={inputRef}

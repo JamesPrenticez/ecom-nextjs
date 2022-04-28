@@ -1,10 +1,10 @@
 import React from 'react'
-import DropDown from '../common/DropDown'
+import DropDown from './common/DropDown'
 import { useSelector, useDispatch } from "react-redux";
-import { updateCurrentCountry } from "../../redux/currentCountry/actions"
-import { data } from '../../utils/data'
+import { updateCurrentCountry } from "../redux/currentCountry/actions"
+import { data } from '../utils/data'
 
-export default function CountrySelector() {
+export default function CountrySelector({className}) {
   const currentCountry = useSelector((state) => state.currentCountry)
   const dispatch = useDispatch();
   const countries = data.countries
@@ -16,9 +16,9 @@ export default function CountrySelector() {
 
   return (
     <DropDown 
-      selectClassName="text-lg"
-      optionsClassName="bg-secondary-background text-secondary-text"
-      itemClassName="hover:bg-primary-background hover:text-primary-text"
+      selectClassName={`${className}`}
+      optionsClassName="bg-white text-primary-text"
+      itemClassName="hover:bg-primary-link hover:text-secondary-text"
       value={currentCountry.name}
       items={countries.map(country => country)}
       onChange={handleCountryChange}

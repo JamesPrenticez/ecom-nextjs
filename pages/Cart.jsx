@@ -7,6 +7,7 @@ import { setCartItems, deleteCartItem } from "../redux/cart/actions"
 import Layout from "../components/Layout";
 import { SecureIcon, TrashCanIcon } from "../components/icons/common";
 import Counter from "../components/common/Counter";
+import CurrentCountry from "../components/CountrySelector"
 
 export default function Cart() {
   const cartItems = useSelector((state) => state.cart.cartItems);
@@ -14,8 +15,7 @@ export default function Cart() {
   const dispatch = useDispatch();
 
   let subtotal = cartItems.reduce((a, b) => a + b.quantity * b.price, 0)
-  let tax = subtotal * currentCountry.tax
-  let total = subtotal + tax
+  let total = subtotal
 
   const handleClickQuantity = (item, quantity) => {
     let color = item.color
@@ -40,7 +40,7 @@ export default function Cart() {
         </div>
       ) : (
         <div className="grid grid-cols-12">
-          <div className="col-span-12 md:col-span-9">
+          <div className="col-span-12 md:col-span-8">
             <h1 className="p-3">Shopping Cart</h1>
             <div className="overflow-hidden">
               <table className="w-full">
@@ -120,7 +120,7 @@ export default function Cart() {
               </table>
             </div>
           </div>
-          <div className="col-span-12 md:col-span-3">
+          <div className="col-span-12 md:col-span-4">
             <div className="w-full h-full border-l border-b p-3 border-gray-200 drop-shadow-md rounded-sm  items-center">
               <div className="h-full w-full p-3 bg-white shadow-lg">
                 <div>
@@ -130,8 +130,15 @@ export default function Cart() {
                   <div>
                     <h5>SUBTOTAL: {currentCountry.symbol}{subtotal}</h5>
                   </div>
-                  <div>
-                    <h5>TAX: {currentCountry.symbol}{tax}</h5>
+                  <div className="flex items-center">
+                    <h5>SHIPS TO:</h5>
+                    <CurrentCountry className="text-sm px-1"/> 
+                    <h5 className="ml-auto">
+                      <small className="font-light mr-1">from</small>
+                      {currentCountry.symbol}
+                      {currentCountry.shippingCost}
+                      <small className="ml-1">({currentCountry.abbr})</small>
+                    </h5>
                   </div>
                   <div>
                     <h4>TOTAL: {currentCountry.symbol}{total} <small>({currentCountry.abbr})</small></h4>

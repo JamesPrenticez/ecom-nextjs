@@ -35,9 +35,6 @@ export default function Shipping() {
   const userContactInfo = useSelector((state) => state.userContactInfo);
   const userShippingInfo = useSelector((state) => state.userShippingInfo);
 
-  console.log(userContactInfo)
-  console.log(userShippingInfo)
-
   const [mapOptions, setMapOptions] = useState(defaultMapOptions)
 
   const handleChangeContactInfo = (event) => {
@@ -52,7 +49,6 @@ export default function Shipping() {
     e.preventDefault()
 
     //CHECK ERRORS
-
     if(session){
         //UPDATE existing user in db
         dispatch(setUserContactInfo(contactInfo))

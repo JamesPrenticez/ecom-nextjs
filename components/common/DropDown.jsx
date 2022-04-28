@@ -24,11 +24,11 @@ function DropDown({
         style={{width: width}}
       >
         <div
-          className="flex justify-between items-center space-x-2 p-1"
+          className="flex justify-between items-center space-x-2"
           onClick={() => setIsOpen(!isOpen)}
           value={value}
         >
-          <div className="rounded-full h-[2rem] w-[2rem] border-none flex items-center justify-center object-cover">
+          <div className="rounded-full h-[1.5rem] w-[1.5rem] border-none flex items-center justify-center object-cover">
             <img className="h-[1rem] w-[1rem]" src={currentIcon} alt={value} />
           </div>
 
@@ -49,7 +49,6 @@ function DropDown({
 
         {/* Options */}
         <div
-          //ref={childRef}
           className={`${
             isOpen ? "block" : "invisible"
           } ${optionsClassName} absolute z-50 mt-1 shadow-md`}
@@ -59,13 +58,13 @@ function DropDown({
           {items.map((item) => {
             return (
               <div
-              ref={childRef}
+                ref={childRef}
                 key={item.name}
                 value={item.name}
                 onClick={() => {
                   onChange(item.name), setIsOpen(false);
                 }}
-                className={`${itemClassName} p-1`}
+                className={`${itemClassName}`}
               >
                 <div className="flex justify-between items-center space-x-2">
                   {item.icon && (
@@ -77,8 +76,7 @@ function DropDown({
                       />
                     </div>
                   )}
-                  <p className="w-full">{item.name}</p>
-                  <ChevronUpIcon className="h-[1.25rem] w-[1.25rem] text-transparent" /> {/* Budget placeholder/spacer */}
+                  <p className="w-full pr-[1.25rem]">{item.name}</p>
                 </div>
               </div>
             );
