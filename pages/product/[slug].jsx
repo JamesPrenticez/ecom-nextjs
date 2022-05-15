@@ -10,7 +10,7 @@ import Counter from '../../components/common/Counter'
 import DropDown from '../../components/common/DropDown';
 
 export default function ProductDetailsPage({product}) {
-  const [color, setColor] = useState(product.colors[0].name)
+  const [color, setColor] = useState(product.colors[0]?.name)
   const [quantity, setQuantity] = useState(1)
   const dispatch = useDispatch();
   const router = useRouter()
@@ -77,7 +77,7 @@ export default function ProductDetailsPage({product}) {
                 <p>Only {product.numInStock} left!</p>
 
                 {/* Color */}
-                {product.colors &&
+                {product.colors.length > 0 &&
                   <>
                     <h6 className="col-span-2">Color:</h6>
                     <DropDown 

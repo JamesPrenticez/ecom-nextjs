@@ -3,25 +3,6 @@
 (Lacoste)[https://global.lacoste.com/en/lacoste/men/clothing/shirts/?page=2]
 
 ## Packages
-- Material UI
-  - (Typography)[]
-  - (Button)[]
-  - (App Bar)[https://mui.com/material-ui/react-app-bar/]
-  - (Toolbar)[https://mui.com/material-ui/api/toolbar/]
-  - (Container)[https://mui.com/material-ui/react-container/]
-  - (Grid)[https://mui.com/material-ui/react-grid/]
-  - (Card)[https://mui.com/material-ui/react-card/#main-content]
-  - (CardActionArea)[https://mui.com/material-ui/api/card-action-area/#main-content]
-  - (CardMedia)[https://mui.com/material-ui/api/card-media/#main-content]
-  - (CardContent)[]
-  - (CardActions)[]
-  - (TableContainer)[]
-  - (Table)[]
-  - (TableHead)[]
-  - (TableRow)[]
-  - (TableCell)[]
-  - (TableBody)[]
-
 - Tailwind
 
 - redux
@@ -51,18 +32,18 @@
   - ``` node prisma/seeds/clean.js ```
   - ``` npx prisma db seed ```
 
+### STRIPE
+(Tutorial)[https://www.youtube.com/watch?v=4mOkFXyxfsU&t=9505s]
+
+### POLISH
+react-hot-toast
+canvas-confetti
+
 
 [o] Maybe upgrade to axios VS fetch?
-[o] Change the way you are passing data to dropdown?
 [o] Use next Image in dropdown flags-?
-[x] Fix cartItems: state.cart.cart.cartItems in "cartButton"
 [o] handleAddToCart show a modal with "continue shopping or checkout now"
-[x] Need to handle 0 in stock?
-[o] componitize quantity incrementor for product and cart pages
 [o] style Cart is empty. Go Shopping! [https://www.google.com/search?q=empty+cart+page+design&sxsrf=APq-WBsCynwegJZuZckBm2NT_9_bxGBcOg:1649841902338&source=lnms&tbm=isch&sa=X&ved=2ahUKEwi42JiE3JD3AhUlRWwGHfIZCd4Q_AUoAXoECAEQAw&biw=1920&bih=937&dpr=1]
 [o] Add tax for each country
-[o] need to fix drop down to work with  color
 [o] spend some time on getting form validation really robust
-[o] need to get address based on user geo location
-
 [o] need to extend next auth to include a firstName and lastName PapaReact will have the answers - we can also improve on how we are handling JWT https://github.com/JamesPrenticez/spotify_clone/blob/master/pages/api/auth/%5B...nextauth%5D.js

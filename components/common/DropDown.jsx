@@ -24,15 +24,15 @@ function DropDown({
         style={{width: width}}
       >
         <div
-          className="flex no-wrap justify-between items-center space-x-1 px-1"
+          className="flex justify-between items-center space-x-2 px-[0.1rem]"
           onClick={() => setIsOpen(!isOpen)}
           value={value}
         >
-          <div className="rounded-full h-[1.5rem] w-[1.5rem] border-none flex items-center justify-center object-cover">
+          <div className="h-[2rem] w-[2rem] border-none flex items-center justify-center object-cover">
             <img className="h-[1rem] w-[1rem]" src={currentIcon} alt={value} />
           </div>
 
-          <p className="w-full">{value}</p>
+          <p className="w-full whitespace-nowrap">{value}</p>
 
           {isOpen ? (
             <ChevronDownIcon
@@ -68,7 +68,7 @@ function DropDown({
               >
                 <div className="flex justify-between items-center space-x-2">
                   {item.icon && (
-                    <div className="rounded-full h-[2rem] w-[2rem] border-none flex items-center justify-center object-cover">
+                    <div className="h-[2rem] w-[2rem] border-none flex items-center justify-center object-cover">
                       <img
                         className="h-[1rem] w-[1rem]"
                         src={item.icon}
@@ -76,7 +76,7 @@ function DropDown({
                       />
                     </div>
                   )}
-                  <p className="w-full pr-[1.25rem]">{item.name}</p>
+                  <p className="w-full pr-[1rem]">{item.name}</p>
                 </div>
               </div>
             );

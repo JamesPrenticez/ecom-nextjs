@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSession, signIn, signOut } from 'next-auth/react';
 
 import NextImage from 'next/image'
+import { useRouter } from 'next/router'
 import { useImageLoader } from '../../components/hooks/useImageLoader'
 
 import Stepper from '../../components/common/Stepper';
@@ -27,6 +28,7 @@ let defaultMapOptions = {
 }
 
 export default function Shipping() {
+  const router = useRouter()
   const { data: session } = useSession()
   const [showLogInForm, setShowLogInForm] = useState(false)
 
@@ -54,12 +56,15 @@ export default function Shipping() {
         dispatch(setUserContactInfo(contactInfo))
       } else {
         //CREATE guest user
-        dispatch(setUserContactInfo(contactInfo))
+        alert("you havnt entered your details")
+        //dispatch(setUserContactInfo(contactInfo))
       }
       
       //CREATE shipping_details for user
     alert(JSON.stringify(userContactInfo))
     alert(JSON.stringify(userShippingInfo))
+
+    router.push("/checkout/order_payment")
   } 
 
   const render = (status) => {
@@ -298,7 +303,7 @@ export default function Shipping() {
                   </div>
        
                   <h3 className="font-normal grow">{item.name}</h3>
-                  <p className="font-bold">${item.price} </p>
+                  <p className="font-bold">${item.price * item.quantity} </p>
 
               </div>
             )

@@ -15,8 +15,8 @@ export default function Cart() {
   const dispatch = useDispatch();
 
   let numOfItems = cartItems.reduce((a, b) => a + b.quantity, 0)
-  let subtotal = cartItems.reduce((a, b) => a + b.quantity * b.price, 0) + currentCountry.shippingCost
-  let total = subtotal
+  let subtotal = cartItems.reduce((a, b) => a + b.quantity * b.price, 0) 
+  let total = subtotal + currentCountry.shippingCost
 
   const handleClickQuantity = (item, quantity) => {
     let color = item.color
@@ -133,7 +133,7 @@ export default function Cart() {
                     <h5>{currentCountry.symbol}{subtotal}</h5>
                   </div>
                   <div className="flex items-center justify-between border-b border-gray-300 py-3">
-                    <h5 className="flex">SHIPS TO: &nbsp; <CurrentCountry className="text-sm"/></h5>
+                    <h5 className="flex items-center">SHIPS TO: &nbsp; <CurrentCountry className="text-sm"/></h5>
                     <h5 className="ml-auto">
                       <small className="font-light mr-1">from</small>
                       {currentCountry.symbol}
