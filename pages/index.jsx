@@ -4,6 +4,7 @@ import NextImage from "next/image";
 import Layout from "../components/Layout";
 import { useImageLoader } from '../components/hooks/useImageLoader'
 import RippleEffect from "../components/common/RippleEffect";
+import { toast } from "../components/hooks/useToaster";
 
 export default function Home({products}) {
   console.log("%cOh hello there!", "color:green; background-color:yellow; font-size: 64px")
@@ -12,7 +13,10 @@ export default function Home({products}) {
       <Layout title={"Home"}>
         <section className="p-3">
           <h1 className="pb-3">Products</h1>
-
+          {toast.standard("testing")}
+          <button onClick={() => {}}>
+            TOAST MACHINE
+          </button>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
             {products.map((product) => {
               return (

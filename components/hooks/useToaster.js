@@ -1,13 +1,24 @@
 import React, { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux";
+import { setToastList, deleteToastItem } from "../../redux/toaster/actions"
 
-export const useToaster = () => {
+//const toastList = useSelector((state) => state.toastList);
 
-  useEffect(() => {
+const createToast = (type, message) => {
+  // useDispatch(() => setToastList({
+  //   id: Date.now(),
+  //   type,
+  //   message,
+  // }))
 
-    return () => {
-      
-    }
-  }, [])
+  return "id"
+}
 
-  return ;
-};
+const toast = (message) => createToast('blank')("message")
+
+toast.error = createToast('error');
+toast.success = createToast('success');
+toast.loading = createToast('loading');
+toast.standard = createToast('standard');
+
+export { toast }

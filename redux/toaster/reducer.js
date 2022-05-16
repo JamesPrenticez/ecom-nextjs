@@ -1,6 +1,6 @@
 const intialState = []
 
-export default function toaster(state=intialState, action){
+export default function toastList(state=intialState, action){
   switch(action.type) {
     case "SET_TOAST_LIST":
       return action.payload
