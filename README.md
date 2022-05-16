@@ -36,7 +36,7 @@
 (Tutorial)[https://www.youtube.com/watch?v=4mOkFXyxfsU&t=9505s]
 
 ### POLISH
-react-hot-toast
+(react-hot-toast)[https://github.com/timolins/react-hot-toast]
 canvas-confetti
 
 

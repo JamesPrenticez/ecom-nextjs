@@ -8,10 +8,28 @@ import getStripe from '../../components/helpers/getStripe'
 
 export default function OrderPayment() {
   const cartItems = useSelector((state) => state.cart.cartItems);
+  const userContactInfo = useSelector((state) => state.userContactInfo);
+  const userShippingInfo = useSelector((state) => state.userShippingInfo);
 
   const handleCheckout = () => {
     const stripe = await getStripe()
-    const response = await fetch('')
+    const response = await fetch('/api/stripe0', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        cartItems: cartItems
+        //Do we need to pass userContactInfo & userShippingInfo?
+        //userContactInfo: userContactInfo,
+        //userShippingInfo: userShippingInfo
+      })
+    })
+    
+    if(response.statusCode === 500) return 
+
+    const data = await response.json()
+    
   }
 
   return (

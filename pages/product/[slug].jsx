@@ -31,8 +31,9 @@ export default function ProductDetailsPage({product}) {
   const handleAddToCart = () => {
     if(product.numInStock <= 0) window.alert("Sorry. Product is out of stock")
     dispatch(setCartItems(product, color, quantity))
-    //We want to show a modal here 
+    //Do we want to show a modal here 
     //Continue shopping? or checkout now?
+    <Toast >
     router.push('/cart')
   }
 

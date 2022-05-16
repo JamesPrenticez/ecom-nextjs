@@ -4,6 +4,7 @@ import { useStore } from '../redux/store'
 import { Provider } from 'react-redux'
 import { persistStore } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'
+import Toaster from "../components/common/Toaster";
 
 export default function App({ Component, pageProps }) {
   const store = useStore(pageProps.initialReduxState)
@@ -15,6 +16,7 @@ export default function App({ Component, pageProps }) {
     <SessionProvider session={pageProps.session}>
       <Provider store={store}>
         <PersistGate loading={<div>loading</div>} persistor={persistor}>
+          <Toaster />
           <Component {...pageProps} />
         </PersistGate>
       </Provider>

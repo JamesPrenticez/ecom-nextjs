@@ -4,6 +4,7 @@ import NextImage from "next/image";
 import { useImageLoader } from "../components/hooks/useImageLoader"
 import { useDispatch, useSelector } from "react-redux";
 import { setCartItems, deleteCartItem } from "../redux/cart/actions"
+
 import Layout from "../components/Layout";
 import { SecureIcon, TrashCanIcon } from "../components/icons/common";
 import Counter from "../components/common/Counter";
