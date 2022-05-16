@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react'
 import NextLink from 'next/link'
-import NextImage from 'next/image'
 import { useRouter } from 'next/dist/client/router'
 import { useDispatch } from "react-redux";
 import { setCartItems } from "../../redux/cart/actions"
@@ -8,6 +7,7 @@ import Carousel from '../../components/common/Carousel';
 import Layout from '../../components/Layout'
 import Counter from '../../components/common/Counter'
 import DropDown from '../../components/common/DropDown';
+import toast from "react-hot-toast";
 
 export default function ProductDetailsPage({product}) {
   const [color, setColor] = useState(product.colors[0]?.name)
@@ -33,7 +33,7 @@ export default function ProductDetailsPage({product}) {
     dispatch(setCartItems(product, color, quantity))
     //Do we want to show a modal here 
     //Continue shopping? or checkout now?
-    <Toast >
+    toast.success(`${product.name} has been added to cart!`)
     router.push('/cart')
   }
 
