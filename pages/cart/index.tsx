@@ -1,16 +1,16 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useImageLoader } from "../components/hooks/useImageLoader"
+import { imageLoader } from "../../components/hooks/useImageLoader"
 import { useDispatch, useSelector } from "react-redux";
-import { setCartItems, deleteCartItem } from "../redux/cart/actions"
+import { setCartItems, deleteCartItem } from "../../redux/cart/actions"
 
-import Layout from "../components/Layout";
-import { SecureIcon, TrashCanIcon } from "../components/icons/common";
-import Counter from "../components/common/Counter";
-import CurrentCountry from "../components/CountrySelector"
+import Layout from "../../components/Layout";
+import { SecureIcon, TrashCanIcon } from "../../components/icons/common";
+import Counter from "../../components/common/Counter";
+import CurrentCountry from "../../components/CountrySelector"
 
-export default function Cart() {
+function Cart() {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const currentCountry = useSelector((state) => state.currentCountry);
   const dispatch = useDispatch();
@@ -63,9 +63,8 @@ export default function Cart() {
                       <td className="bubble">
                         <Link href={`/product/${item.slug}`}>
                           <Image
-                            loader={useImageLoader}
-                            // src={item.images[0]}
-                            src="/default.jpg"
+                            loader={imageLoader}
+                            src={item.images[0]}
                             alt={item.name}
                             width={50}
                             height={50}
@@ -159,3 +158,5 @@ export default function Cart() {
     </Layout>
   );
 }
+
+export default Cart;
