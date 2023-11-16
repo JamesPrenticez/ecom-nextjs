@@ -32,22 +32,16 @@ function Hamburger({ session }){
       <div className={`md:hidden bg-gray-600 h-screenNav w-full fixed top-[4rem] -left-full z-50 ${hamburger ? 'transform transition duration-700 ease-in-out translate-x-full' : 'transform transition duration-700 ease-in-out -translate-x-full'}`}> 
         <div className="bg-primary-background h-screenNav"> 
         
-        {}
-          <Link href={`/user/${session?.user.email}`} passHref>
-            <a className="hamburgerItem">
-              Cart
-              <CartIcon className="h-7" />
-            </a>
+          <Link href={`/user/${session?.user.email}`} className="hamburgerItem">
+            <p>Cart</p>
+            <CartIcon className="h-7" />
           </Link>
-
 
         {session ?
         <>
-          <Link href={`/user/${session?.user.email}`} passHref>
-            <a className="hamburgerItem">
-              Settings
-              <UserIcon className="h-7" />
-            </a>
+          <Link href={`/user/${session?.user.email}`} className="hamburgerItem">
+            Settings
+            <UserIcon className="h-7" />
           </Link>
 
           <div 

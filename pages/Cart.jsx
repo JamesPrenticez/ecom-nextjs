@@ -1,6 +1,6 @@
 import React from "react";
-import NextLink from "next/link";
-import NextImage from "next/image";
+import Link from "next/link";
+import Image from "next/image";
 import { useImageLoader } from "../components/hooks/useImageLoader"
 import { useDispatch, useSelector } from "react-redux";
 import { setCartItems, deleteCartItem } from "../redux/cart/actions"
@@ -34,11 +34,9 @@ export default function Cart() {
       {cartItems.length === 0 ? (
         <div className="bg-primary-danger py-6 space-y-6">
           <h1>Shopping Cart</h1>
-          <NextLink href="/" passHref>
-            <a>
-              <h2 className="hover:text-primary-link">Cart is empty. Go Shopping!</h2>
-            </a>
-          </NextLink>
+          <Link href="/">
+            <h2 className="hover:text-primary-link">Cart is empty. Go Shopping!</h2>
+          </Link>
         </div>
       ) : (
         <div className="grid grid-cols-12 space-y-6 lg:space-y-0">
@@ -63,29 +61,26 @@ export default function Cart() {
                     <tr key={item.id} className="border-b">
                       {/* ---------- Display Image ----------  */}
                       <td className="bubble">
-                        <NextLink href={`/product/${item.slug}`} passHref>
-                          <a>
-                            <NextImage
-                              loader={useImageLoader}
-                              src={item.images[0]}
-                              alt={item.name}
-                              width={50}
-                              height={50}
-                              layout={"responsive"}
-                              priority
-                              placeholder="blur"
-                              blurDataURL="/images/default.jpg"
-                            />
-                          </a>
-                        </NextLink>
+                        <Link href={`/product/${item.slug}`}>
+                          <Image
+                            loader={useImageLoader}
+                            // src={item.images[0]}
+                            src="/default.jpg"
+                            alt={item.name}
+                            width={50}
+                            height={50}
+                            layout={"responsive"}
+                            priority
+                            placeholder="blur"
+                            blurDataURL="/images/default.jpg"
+                          />
+                        </Link>
                       </td>
                       {/* ---------- Product Name / Remove ----------  */}
                       <td>
-                        <NextLink href={`/product/${item.slug}`} passHref>
-                          <a>
-                           <h3 className="hover:text-primary-link">{item.name}</h3>
-                          </a>
-                        </NextLink>
+                        <Link href={`/product/${item.slug}`}>
+                          <h3 className="hover:text-primary-link">{item.name}</h3>
+                        </Link>
                         <button
                           className="flex items-center cursor-pointer pt-2 hover:text-primary-danger"
                           onClick={() => handleClickDelete(item)}>
@@ -147,9 +142,9 @@ export default function Cart() {
                   </div>
                   <div className="flex items-center justify-between py-3 ">
                     <div className="flex items-center justify-center space-x-2 p-3 w-full text-center bg-primary-action rounded-md text-white hover:bg-primary-action-hover cursor-pointer font-semibold">
-                      <NextLink href={"/checkout/order_details"} passHref>
-                        <a>CHECKOUT</a>
-                      </NextLink>
+                      <Link href={"/checkout/order_details"}>
+                        CHECKOUT
+                      </Link>
                       <SecureIcon className="h-[1.25rem]" />
                     </div>
                 </div>

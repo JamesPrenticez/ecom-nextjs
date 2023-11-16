@@ -1,12 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, type ReactNode } from 'react'
 import Head from 'next/head'
-import NextLink from 'next/link'
+import Link from 'next/link'
 import CartButton from './nav/CartButton'
 import { signIn, signOut, useSession } from 'next-auth/react';
-import NextImage from 'next/image'
+import Image from 'next/image'
 import Hamburger from './nav/Hamburger'
 
-export default function Layout({title, description, children}) {
+interface Props {
+  title: string;
+  description?: string;
+  children: ReactNode;
+}
+
+export default function Layout({title, description, children}: Props) {
   const {data: session} = useSession();
   const [isOpen, setIsOpen] = useState(false)
 
@@ -31,11 +37,9 @@ export default function Layout({title, description, children}) {
           {/* Left */}
           <Hamburger session={session}/>
 
-          <NextLink href="/" passHref>
-            <a className="mx-auto md:m-0 text-2xl bold font-bold hover:text-secondary-hover">
-              {process.env.NEXT_PUBLIC_COMPANY_NAME}
-            </a>
-          </NextLink>
+          <Link href="/" passHref className="mx-auto md:m-0 text-2xl bold font-bold hover:text-secondary-hover">
+            {process.env.NEXT_PUBLIC_COMPANY_NAME}
+          </Link>
 
           {/* Right */}
           <div className="hidden md:inline-flex ml-auto space-x-6 items-center">
@@ -44,7 +48,7 @@ export default function Layout({title, description, children}) {
             {!session ? (
               <a
                 className="text-lg hover:text-text-secondary-hover flex items-center cursor-pointer transform transition-all hover:scale-110 duration-150 ease-in-out select-none"
-                onClick={signIn}
+                onClick={() => signIn}
               >
                 Login
               </a>
@@ -60,7 +64,7 @@ export default function Layout({title, description, children}) {
                   className="h-[2.5rem] w-[2.5rem] bg-red-500 rounded-full object-cover hover:cursor-pointer overflow-hidden bubble"
                   
                 >
-                  <NextImage
+                  <Image
                     src={session?.user.image}
                     alt={session?.user.image}
                     width={25}
@@ -87,7 +91,7 @@ export default function Layout({title, description, children}) {
                   </div>
                   <div
                     className="p-4 hover:bg-primary-background hover:text-primary-text rounded-bl-md rounded-br-md"
-                    onClick={signOut}
+                    onClick={() => signOut}
                   >
                     <p>Sign Out</p>
                   </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSession, signIn, signOut } from 'next-auth/react';
 
-import NextImage from 'next/image'
+import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useImageLoader } from '../../components/hooks/useImageLoader'
 
@@ -284,10 +284,11 @@ export default function Shipping() {
             return (
                 <div key={item.id} className="flex items-center space-x-2">
                   <div className="w-16 relative">
-                    <NextImage
+                    <Image
                       className="rounded-lg"
                       loader={useImageLoader}
-                      src={item.images[0]}
+                      // src={item.images[0]}
+                      src="/default.jpg"
                       alt={item.name}
                       width={50}
                       height={50}

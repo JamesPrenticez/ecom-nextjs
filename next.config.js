@@ -7,6 +7,9 @@ const nextConfig = {
       "avatars.githubusercontent.com"
     ],
   },
+  compiler: {
+    removeConsole: false,
+  },
 }
 
 module.exports = nextConfig

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import NextLink from 'next/link'
+import Link from 'next/link'
 import { useRouter } from 'next/dist/client/router'
 import { useDispatch } from "react-redux";
 import { setCartItems } from "../../redux/cart/actions"
@@ -8,6 +8,11 @@ import Layout from '../../components/Layout'
 import Counter from '../../components/common/Counter'
 import DropDown from '../../components/common/DropDown';
 import toast from "react-hot-toast";
+import { IProduct } from '../../models/products/IProduct';
+
+interface Props {
+  product: IProduct;
+}
 
 export default function ProductDetailsPage({product}) {
   const [color, setColor] = useState(product.colors[0]?.name)
@@ -17,7 +22,7 @@ export default function ProductDetailsPage({product}) {
 
   useEffect(() => {
     if(product.color?.length > 0) setColor(product.color[0])
-  }, [])
+  }, [product.color])
 
 
   const handleClickQuantity = (product, quantity) => {
@@ -40,9 +45,9 @@ export default function ProductDetailsPage({product}) {
   return (
     <Layout title={product?.name} description={product?.description}>
       <section className="p-6">
-        <NextLink href="/" passHref>
-          <a className="text-primary-link">Back to products</a>
-        </NextLink>
+        <Link href="/" className="text-primary-link">
+          Back to products
+        </Link>
 
         <div className="flex flex-wrap md:flex-nowrap justify-between mt-3 md:space-x-6">
 
@@ -75,10 +80,15 @@ export default function ProductDetailsPage({product}) {
 
                 {/* Stock */}
                 <h6 className="col-span-2">Stock:</h6>
-                <p>Only {product.numInStock} left!</p>
+                {product.numInStock > 0 ? (
+                    <p>Only {product.numInStock} left!</p>
+                  ) : (
+                    <p>Out of stock!</p>
+                  )
+                }                
 
                 {/* Color */}
-                {product.colors.length > 0 &&
+                {product.colors &&
                   <>
                     <h6 className="col-span-2">Color:</h6>
                     <DropDown 
@@ -158,16 +168,10 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async (context) => {
   let { params } = context
   const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products/${params.slug}`)
-  const result = await response.json()
+  const product = await response.json()
 
-  if(!result){
+  if(!product){
     return { notFound: true }
-  }
-
-  let product = {
-    ...result,
-    colors: JSON.parse(result.colors),
-    images: JSON.parse(result.images)
   }
 
   return {

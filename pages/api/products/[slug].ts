@@ -1,7 +1,8 @@
-const { PrismaClient } = require('@prisma/client')
+import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
-export default async function getProducts(req, res){
+// here
+export default async function getProduct(req, res){
   let reqQuerySlug = req.query.slug
   if(req.method === 'GET'){
     await prisma.product.findUnique({
@@ -27,23 +28,26 @@ export default async function getProducts(req, res){
         }
       }
     }).then(item => {
-      let ratingCount = item.product_reviews.length
-      let ratingAvg = Math.round((item.product_reviews.map(review => review.rating).reduce((a,b) => a + b, 0) / ratingCount) * 10) / 10
+      const ratingCount = item.product_reviews.length
+      const ratingAvg = Math.round((item.product_reviews.map(review => review.rating).reduce((a,b) => a + b, 0) / ratingCount) * 10) / 10
+      const colorsParsed =  JSON.parse(item.colors)
+      const imagesParsed = JSON.parse(item.images)
+
       let result = {
         id: item.id,
         name: item.name,
         slug: item.slug,
         category: item.category,
-        images: item.images,
+        images: imagesParsed,
         brand: item.brand,
         description: item.description,
-        colors: item.colors,
+        colors: colorsParsed,
         price: item.price,
         numInStock: item.num_in_stock,
         numReviews: ratingCount,
         rating: ratingAvg,
       }
-      return res.status(200).json(JSON.stringify(result))
+      return res.status(200).json(result)
     })
   }
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import NextImage from 'next/image'
+import Image from 'next/image'
 import { useImageLoader } from '../../components/hooks/useImageLoader'
 import { useSelector } from 'react-redux';
 import Stepper from '../../components/common/Stepper'
@@ -11,7 +11,7 @@ export default function OrderPayment() {
   const userContactInfo = useSelector((state) => state.userContactInfo);
   const userShippingInfo = useSelector((state) => state.userShippingInfo);
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     const stripe = await getStripe()
     const response = await fetch('/api/stripe0', {
       method: 'POST',
@@ -54,10 +54,11 @@ export default function OrderPayment() {
             return (
               <div key={item.id} className="flex items-center space-x-2">
                 <div className="w-16 relative">
-                  <NextImage
+                  <Image
                     className="rounded-lg"
                     loader={useImageLoader}
-                    src={item.images[0]}
+                    // src={item.images[0]}
+                    src="/default.jpg"
                     alt={item.name}
                     width={50}
                     height={50}
