@@ -5,7 +5,7 @@ import { imageLoader } from "../../components/hooks/useImageLoader"
 import { useDispatch, useSelector } from "react-redux";
 import { setCartItems, deleteCartItem } from "../../redux/cart/actions"
 
-import Layout from "../../components/Layout";
+import Layout from "../../components/Layout/Layout";
 import { SecureIcon, TrashCanIcon } from "../../components/icons/common";
 import Counter from "../../components/common/Counter";
 import CurrentCountry from "../../components/CountrySelector"

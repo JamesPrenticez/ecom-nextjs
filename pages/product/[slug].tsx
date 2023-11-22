@@ -4,11 +4,11 @@ import { useRouter } from 'next/dist/client/router'
 import { useDispatch } from "react-redux";
 import { setCartItems } from "../../redux/cart/actions"
 import Carousel from '../../components/common/Carousel';
-import Layout from '../../components/Layout'
+import Layout from '../../components/Layout/Layout'
 import Counter from '../../components/common/Counter'
 import DropDown from '../../components/common/DropDown';
 import toast from "react-hot-toast";
-import { IProduct } from '../../models/products/IProduct';
+import { IProduct } from '../../models/product/IProduct';
 
 interface Props {
   product: IProduct;

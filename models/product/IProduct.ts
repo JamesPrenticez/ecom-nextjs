@@ -4,5 +4,4 @@ export interface IProduct {
   slug: string,
   images: string, // odd?
   price: 150,
-  
 }

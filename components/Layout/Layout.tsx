@@ -1,10 +1,10 @@
 import React, { useState, type ReactNode } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
-import CartButton from './nav/CartButton'
+import CartButton from '../nav/CartButton'
 import { signIn, signOut, useSession } from 'next-auth/react';
 import Image from 'next/image'
-import Hamburger from './nav/Hamburger'
+import Hamburger from '../nav/Hamburger'
 
 interface Props {
   title: string;

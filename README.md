@@ -32,6 +32,10 @@
   - ``` node prisma/seeds/clean.js ```
   - ``` npx prisma db seed ```
 
+### REDUX
+- SSR with RTK Query [https://redux-toolkit.js.org/rtk-query/usage/server-side-rendering#server-side-rendering-with-nextjs]
+- [https://codesandbox.io/p/sandbox/github/urhot/nextjs-rtk-query-ssr/tree/master?file=%2Fsrc%2Fpages%2Findex.tsx%3A1%2C1]
+
 ### STRIPE
 (Tutorial)[https://www.youtube.com/watch?v=4mOkFXyxfsU&t=9505s]
 

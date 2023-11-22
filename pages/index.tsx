@@ -1,11 +1,12 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import Layout from "../components/Layout";
+import Layout from "../components/Layout/Layout";
 import { imageLoader } from '../components/hooks/useImageLoader'
 import RippleEffect from "../components/common/RippleEffect";
-import { type IProduct } from "../models/products/IProduct";
+import { type IProduct } from "../models/product/IProduct";
 import { GetStaticProps } from "next";
+import { axiosInstance } from "../redux1/services/axiosInstance";
 
 interface Props {
   products: IProduct[];
@@ -55,22 +56,25 @@ export default function Home({products}: Props) {
   );
 }
 
-export const getStaticProps: GetStaticProps  = async () => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`, {
+export const getStaticProps: GetStaticProps = async () => {
+  // We dont need to hold products in state.. they dont change and they are statically fetched here
+  const response = await axiosInstance.get('products', { 
     method: 'GET',
     headers: {
-      'Content-Type': 'text/json',
-    }
+      "Content-Type": "text/json",
+    },
   });
-    
-  const products: IProduct[] = await response.json()
+  
+  const products: IProduct[] = response.data;
 
   if(!products){
     return { notFound: true }
   }
 
   return {
-    props: { products },
-    revalidate: 120, // after 2mins
-  }
+    props: {
+      products,
+      // revalidate: 120, // after 2mins
+    },
+  };
 }

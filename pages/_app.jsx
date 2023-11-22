@@ -1,25 +1,21 @@
 import '../styles/globals.css'
 import { SessionProvider } from 'next-auth/react';
-import { useStore } from '../redux/store'
-import { Provider } from 'react-redux'
-import { persistStore } from 'redux-persist'
-import { PersistGate } from 'redux-persist/integration/react'
+import { Provider as ReduxProvider } from 'react-redux'
+import { PersistGate as ReduxPersistGate } from "redux-persist/integration/react";
 import { Toaster } from 'react-hot-toast';
 
+import { persistor, store } from "../redux1/store";
+
 export default function App({ Component, pageProps }) {
-  const store = useStore(pageProps.initialReduxState)
-  const persistor = persistStore(store, {}, function () {
-    persistor.persist()
-  })
 
   return (
     <SessionProvider session={pageProps.session}>
-      <Provider store={store}>
-        <PersistGate loading={<div>loading</div>} persistor={persistor}>
+      <ReduxProvider store={store}>
+        <ReduxPersistGate loading={<div>loading...</div>} persistor={persistor}>
           <Toaster />
           <Component {...pageProps} />
-        </PersistGate>
-      </Provider>
+        </ReduxPersistGate>
+      </ReduxProvider>
     </SessionProvider>
   )
 }
