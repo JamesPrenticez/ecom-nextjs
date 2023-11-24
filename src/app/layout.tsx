@@ -1,17 +1,19 @@
 
 import type { ReactNode } from "react"
 import type { Metadata,  } from "next"
-import { M_PLUS_2, Inter } from "next/font/google"
+import { Nunito, Inter } from "next/font/google"
 import "./globals.css"
 import { cn } from "@/lib/utils"
-import { PROJECT_DESCRIPTION, PROJECT_NAME } from "@/constants/settings"
+import { project } from "@/constants/settings"
+import Navbar from "@/components/layout/Navbar"
 
-const m2 = M_PLUS_2({ subsets: ["latin"] })
+
+const nunito = Nunito({ subsets: ["latin"] })
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: PROJECT_NAME,
-  description: PROJECT_DESCRIPTION,
+  title: project.name,
+  description: project.description,
 }
 
 export default function RootLayout({
@@ -21,8 +23,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="h-full">
-      <body className={cn("relative h-full font-sans antialiased", inter.className)}>
+      <body className={cn("relative h-full antialiased", nunito.className)}>
         <main className="relative flex flex-col min-h-screen">
+          <Navbar />
           <div className="flex-grow flex-1">
             {children}
           </div>

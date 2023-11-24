@@ -9,32 +9,39 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  a:focus-visible, button:focus-visible {
+    @apply !ring-blue-400/80 !rounded-sm !ring-4 !border-none !outline-none !ring-offset-sky-400 !ring-offset-2
+  }
 }
 
 /* We use HSL here so that we can apply tailwind opacity/80 */
+/* https://easyretro.io/tools/hsl-to-hex/ */
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 224 71.4% 4.1%;
-    --card: 0 0% 100%;
-    --card-foreground: 224 71.4% 4.1%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 224 71.4% 4.1%;
-    --primary: 262.1 83.3% 57.8%;
+    --background: 0 0% 100%; /* #000000 */
+    --foreground: 224 71.4% 4.1%; /*#030712 */
+    --card: 0 0% 100%; /* #FFFFFF */
+    --card-foreground: 224 71.4% 4.1%; /* #030712 */
+    --popover: 0 0% 100%; /* #000000 */
+    --popover-foreground: 224 71.4% 4.1%; /* #030712 */
+    --primary: 262.1 83.3% 57.8%; /* #7C3AED */
     --primary-foreground: 210 20% 98%; /* #f9fafb */
-    --secondary: 220 14.3% 95.9%;
-    --secondary-foreground: 220.9 39.3% 11%;
-    --muted: 220 14.3% 95.9%;
-    --muted-foreground: 220 8.9% 46.1%;
-    --accent: 220 14.3% 95.9%;
-    --accent-foreground: 220.9 39.3% 11%;
+    --secondary: 220 14.3% 95.9%; /* #F3F4F6 */
+    --secondary-foreground: 220.9 39.3% 11%; /* #111827 */
+    --muted: 220 14.3% 95.9%; /* #F3F4F6 */
+    --muted-foreground: 220 8.9% 46.1%; /* #6B7280 */
+    --accent: 220 14.3% 95.9%; /* #F3F4F6 */
+    --accent-foreground: 220.9 39.3% 11%; /* #111827 */
     --success: 142.1 70.6% 45.3%; /* #22c55e */
     --success-foreground: 210 20% 98%; /* #f9fafb */
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 20% 98%;
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 262.1 83.3% 57.8%;
+    --danger: 0 84.2% 60.2%; /* #EF4444 */
+    --danger-foreground: 210 20% 98%; /* #f9fafb */
+    --destructive: 0 84.2% 60.2%; /* #EF4444 */
+    --destructive-foreground: 210 20% 98%; /* #f9fafb */
+    --border: 220 13% 91%; /* #E5E7EB */
+    --input: 220 13% 91%; /* #E5E7EB */
+    --ring: 262.1 83.3% 57.8%; /* #7C3AED */
     --radius: 0.5rem;
   }
  
@@ -53,6 +60,8 @@
     --muted-foreground: 217.9 10.6% 64.9%;
     --accent: 215 27.9% 16.9%;
     --accent-foreground: 210 20% 98%;
+    --success: 142.1 70.6% 45.3%; /* #22c55e */
+    --success-foreground: 210 20% 98%; /* #f9fafb */
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 20% 98%;
     --border: 215 27.9% 16.9%;

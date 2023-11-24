@@ -6,7 +6,7 @@ interface Props {
 
 const TransparentTextEffect = ({text}: Props) => {
   return (
-    <h1 className="text-8xl font-bold inline-block bg-white mix-blend-screen p-4 m-4 uppercase">
+    <h1 className="text-6xl sm:text-8xl font-bold inline-block bg-white mix-blend-screen p-4 m-4 uppercase select-none">
       {text}
     </h1>
   )
