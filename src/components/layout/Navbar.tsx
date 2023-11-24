@@ -7,11 +7,11 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { navigationPages } from "@/constants/settings"
-import { CartIcon, CrossIcon, HamburgerIcon, UserIcon } from '../icons/commonIcons';
-import { ShoppingBag, ShoppingCartIcon, User2Icon } from 'lucide-react';
+import { ShoppingCartIcon, CrossIcon, HamburgerIcon } from '../icons/commonIcons';
 import { Button } from '../ui/button';
-import { NewZealandFlagIcon } from '../icons/countryIcons';
-import Image from 'next/image';
+import { NewZealandFlagIcon } from '../icons/countryIcons'; // TODO hook to locale data
+import { User2Icon } from 'lucide-react';
+import Cart from '../cart/Cart';
 
 function Navbar() {
 
@@ -83,7 +83,8 @@ function NavigationIconItems(){
  
         
       {/* <LocationButton /> */}
-      <CartButton />
+      {/* <CartButton /> */}
+      <Cart />
       {/* <UserButton /> */}
     </div>
   )
@@ -100,12 +101,12 @@ function CartButton(){
       className="
         px-4 h-[4rem] flex items-center justify-center
         text-foreground hover:text-foreground/70 font-medium uppercase 
-        border-2 border-transparent hover:border-primary rounded-sm
-        [&>div]:transform [&>div]:transition-all [&>div]:hover:scale-110 [&>div]:duration-300 [&>div]:ease-in-out
+        border-2 border-transparent hover:border-blue-500/70 rounded-sm
+        group
       "
     >
-      <div className="relative">
-        <CartIcon 
+      <div className="relative group-hover:scale-110 transform transition-all duration-300 ease-in-out">
+        <ShoppingCartIcon 
           className="text-foreground -translate-x-[2px]"
           width={28}
           height={28}
