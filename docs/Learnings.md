@@ -6,5 +6,11 @@ Preferences > Emmet Balance Outward > add shortcut key > CTRL + M
 Clean up and sort imports
 SHIFT + ALT + O
 
+*/**.ts === glob pattern FYI [https://en.wikipedia.org/wiki/Glob_(programming)]
+
 Shad UI
 npx shadcn-ui@latest init
+
+cross-env allows us to work with env in express and next js
+
+@payloadcms/db-mongodb <- we can change to postgres
