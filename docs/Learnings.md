@@ -14,3 +14,7 @@ npx shadcn-ui@latest init
 cross-env allows us to work with env in express and next js
 
 @payloadcms/db-mongodb <- we can change to postgres
+
+### tRPC
+[https://trpc.io/]
+npm i @trpc/client @trpc/next @trpc/react-query @trpc/server @tanstack/react-query
