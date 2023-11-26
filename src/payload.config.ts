@@ -4,14 +4,21 @@ import { slateEditor } from "@payloadcms/richtext-slate";
 import { buildConfig } from "payload/config";
 import { project } from "./constants/settings";
 import path from "path";
+import { Users } from "./collections/users";
+import dotenv from "dotenv"
+
+dotenv.config({
+  path: path.resolve(__dirname, "../.env")
+})
 
 export default buildConfig({
   serverURL: process.env.NEXT_PUBLIC_SERVER_URL || "",
-  collections: [],
+  collections: [Users],
   routes: {
     admin: "/sell",
   },
   admin: {
+    user: "users",
     bundler: webpackBundler(), // this is just for the cms... nextjs still bundles on its own
     meta: {
       titleSuffix: `- ${project.name}`,
