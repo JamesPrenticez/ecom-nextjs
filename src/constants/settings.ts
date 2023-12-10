@@ -3,6 +3,11 @@ export const project = {
   // name: "Saltique",
   // name: "Seabourne",
   description: "he Best Online Shopping Experience!",
+
+  email: {
+    fromName: "Seaquent",
+    fromAddress: "onboarding@resend.dev", // only works when sending to jamesprenticez@gmail.com for spam protection purposes
+  }
 };
 
 export const hero = {

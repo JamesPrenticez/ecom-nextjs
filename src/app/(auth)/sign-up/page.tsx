@@ -12,7 +12,7 @@ import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 import { useForm } from "react-hook-form"
 
-const Page = () => {
+const SignUpPage = () => {
 
   const {
     register,
@@ -22,10 +22,13 @@ const Page = () => {
     resolver: zodResolver(AuthCredentialsValidationSchema)
   })
 
-  // const { data } = trpc.anyApiRoute.useQuery()
+  const { 
+    mutate: mutateCreateUser,
+    mutate: isLoadingCreateUser
+  } = trpc.auth.createPayloadUser.useMutation({})
 
   const onSubmit = ({email, password}: TAuthCredentialsValidationSchema) => {
-    // send data to server
+    mutateCreateUser({ email, password })
   }
 
   return (
@@ -69,6 +72,7 @@ const Page = () => {
               <div className="grid gap-1 py-2">
                 <Label htmlFor="email">Password</Label>
                 <Input 
+                  type="password"
                   placeholder="password"
                   className={cn({
                     "focus-visible:ring-red-500": errors.password
@@ -91,4 +95,4 @@ const Page = () => {
   )
 }
 
-export default Page
+export default SignUpPage;

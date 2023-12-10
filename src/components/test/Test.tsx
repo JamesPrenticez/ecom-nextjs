@@ -11,6 +11,12 @@ const Test = () => {
       <Button asChild variant="link">
         <Link href="/sell">sell</Link>
       </Button>
+      <Button asChild variant="link">
+        <Link href="/verify-email?to=test@email.com">sent email</Link>
+      </Button>
+      <Button asChild variant="link">
+        <Link href="/verify-email?to=test@email.com&token=asdf">verified email</Link>
+      </Button>
     </div>
   )
 }
