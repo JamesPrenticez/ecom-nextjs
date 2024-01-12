@@ -15,6 +15,18 @@ export const Users: CollectionConfig = {
   },
   fields: [
     {
+      name: 'firstName',
+      type: 'text', 
+    },
+    {
+      name: 'lastName',
+      type: 'text', 
+    },
+    {
+      name: 'img',
+      type: 'text', 
+    },
+    {
       name: "role",
       required: true,
       defaultValue: "user",
@@ -26,6 +38,6 @@ export const Users: CollectionConfig = {
         { label: "Admin", value: "admin"},
         { label: "User", value: "user"}
       ]
-    }
+    },
   ]
 }

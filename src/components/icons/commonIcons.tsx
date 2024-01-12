@@ -71,3 +71,15 @@ export const SignOutIcon = (props: SVGProps<SVGSVGElement>): ReactElement => {
     </svg>
   )
 }
+
+export const TriangleRoundedIcon = (props: SVGProps<SVGSVGElement>): ReactElement => {
+  return (
+    <svg fill="none" viewBox="0 0 60.666 55.214" stroke="currentColor" strokeWidth={2} height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <path 
+      d="M275.649,287.65,255.41,322.7a9.58,9.58,0,0,0,8.3,14.37h40.478a9.58,9.58,0,0,0,8.3-14.37L292.241,287.65A9.579,9.579,0,0,0,275.649,287.65Z" 
+      transform="translate(-253.612 -282.36)"
+      strokeMiterlimit={10}
+    />
+    </svg>
+  )
+}

@@ -6,6 +6,9 @@ const Test = () => {
   return (
     <div className="flex flex-col items-start justify-center">
       <Button asChild variant="link">
+        <Link href="/sign-in">Sign In</Link>
+      </Button>
+      <Button asChild variant="link">
         <Link href="/sign-up">sign-up</Link>
       </Button>
       <Button asChild variant="link">
