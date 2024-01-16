@@ -1,5 +1,6 @@
-import { type ReactNode } from "react";
+import React, { type ReactNode } from "react";
 import { Grid2X2Icon, InfoIcon } from "lucide-react";
+import { INavigationItem } from "@/models";
 
 export const project = {
   name: "Seaquent",
@@ -18,7 +19,7 @@ export const hero = {
   subtitle: "30% Off Sitewide!*"
 }
 
-export const navigationPages: {name: string, slug: string, icon: ReactNode}[] = [
-  { name: "products", slug: "/products", icon: <Grid2X2Icon />},
-  { name: "about", slug: "/about", icon: <InfoIcon /> },
+export const navigationItems: INavigationItem[] = [
+  { name: "products", slug: "/products", icon: <Grid2X2Icon />, requiresAuth: false },
+  { name: "about", slug: "/about", icon: <InfoIcon />,  requiresAuth: false },
 ];

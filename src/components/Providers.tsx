@@ -1,5 +1,5 @@
 "use client"
-import { PropsWithChildren, useState } from 'react'
+import { PropsWithChildren, useState, createContext, useContext } from 'react'
 import {
   QueryClient,
   QueryClientProvider,
@@ -26,10 +26,10 @@ const Providers = ({children}: PropsWithChildren) => {
     })
   )
 
+
+
   return (
-    <trpc.Provider
-      client={trpcClient}
-      queryClient={queryClient}>
+    <trpc.Provider client={trpcClient} queryClient={queryClient}>
       <QueryClientProvider client={queryClient}>
         {children}
       </QueryClientProvider>
@@ -38,3 +38,32 @@ const Providers = ({children}: PropsWithChildren) => {
 }
 
 export default Providers;
+
+interface RightMenuContext {
+  isRightMenuOpen: boolean;
+  toggleRightMenu: () => void;
+}
+
+const RightMenuContext = createContext<RightMenuContext | undefined>(undefined);
+
+export const useRightMenu = () => {
+  const context = useContext(RightMenuContext);
+  if (context === undefined) {
+    throw new Error('useRightMenu must be used within a RightMenuProvider');
+  }
+  return context;
+};
+
+export const RightMenuProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
+  const [isRightMenuOpen, setIsRightMenuOpen] = useState(false);
+
+  const toggleRightMenu = (): void => {
+    setIsRightMenuOpen(prevState => !prevState);
+  };
+
+  return (
+    <RightMenuContext.Provider value={{ isRightMenuOpen, toggleRightMenu }}>
+      {children}
+    </RightMenuContext.Provider>
+  );
+};
