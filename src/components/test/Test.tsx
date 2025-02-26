@@ -6,6 +6,9 @@ const Test = () => {
   return (
     <div className="flex flex-col items-start justify-center">
       <Button asChild variant="link">
+        <Link href="/test">test</Link>
+      </Button>
+      <Button asChild variant="link">
         <Link href="/sign-in">Sign In</Link>
       </Button>
       <Button asChild variant="link">
@@ -20,6 +23,7 @@ const Test = () => {
       <Button asChild variant="link">
         <Link href="/verify-email?to=test@email.com&token=asdf">verified email</Link>
       </Button>
+
     </div>
   )
 }

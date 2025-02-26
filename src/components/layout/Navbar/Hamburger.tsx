@@ -5,7 +5,7 @@ import { useRightMenu } from "@/components/Providers";
 
 function Hamburger(){
   const { isRightMenuOpen, toggleRightMenu } = useRightMenu()
-  const baseClass = "bg-black group-hover:bg-primary block h-[0.2rem] rounded-full transform transition-all duration-200 ease-in-out";
+  const baseClass = "bg-black group-hover:bg-primary block h-[3px] rounded-full transform transition-all duration-200 ease-in-out";
 
   return (
     <button 

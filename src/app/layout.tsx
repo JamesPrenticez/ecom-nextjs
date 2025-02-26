@@ -32,11 +32,9 @@ export default function RootLayout({
             <RightMenuProvider>
               <Navbar />
             </RightMenuProvider>
-            <main className="h-screen-4rem md:h-screen-5rem overflow-y-auto flex flex-col bg-muted relative"> 
-              <div className="flex-grow flex-1">
-                {children}
-                <Footer />
-              </div>
+            <main className="h-screen-4rem md:h-screen-5rem overflow-y-auto flex flex-col bg-gray-100 relative"> 
+              {children}
+              <Footer />
             </main>
           </Providers>
         <Toaster position="top-center" richColors/>

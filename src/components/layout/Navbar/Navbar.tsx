@@ -14,28 +14,20 @@ async function Navbar() {
   // console.log(user)
 
   return (
-    <div className="bg-white ">
-      <MaxWidthWrapper>
-        <header className="flex items-center h-[4rem] px-2 sm:px-4">
-          <LogoAndName />
+    <header className="flex h-[4rem] md:h-[5rem] items-center px-2 sm:px-4 bg-primary-foreground border-b-[1px] border-muted box-border">
+      <LogoAndName />
 
-          <div className="flex ml-auto">
+      <div className="flex ml-auto">
+        {user ? (
+          <Avatar user={user} />
+          ): (
+          <SignInButton />
+        )}
+        <Hamburger/>
+      </div>
 
-            {user ? (
-              <Avatar user={user} />
-              ): (
-              <SignInButton />
-            )}
-
-            <Hamburger/>
-     
-          </div>
-        </header>
-
-        <RightMenu {...{user}}/>
-
-      </MaxWidthWrapper>
-    </div>
+      <RightMenu {...{user}}/>
+    </header>
   )
 }
 
